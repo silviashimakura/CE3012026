@@ -1,0 +1,108 @@
+---
+title: "Atividade prática"
+subtitle: "Análise exploratória de dados com R"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\
+
+---
+
+Os comandos a seguir importam as respostas do questionário para o R, armazenm em um objeto nomeado como "respostas" e modifica os nomes das colunas. Os comentários no código indicam quais eram as perguntas originais.
+
+```{r, eval=FALSE}
+
+respostas <- read.csv("https://raw.githubusercontent.com/lineu96/CE3012024/master/praticas-R/questionario.csv", 
+                      sep = ',', 
+                      encoding = 'UTF-8', 
+                      header = T)
+
+names(respostas) <- 
+  c('data_hora', # Carimbo de data/hora
+    'escolaridade', # Qual é o seu grau de escolaridade?
+    'ano_ensino_medio', # Em que ano você finalizou o ensino médio?
+    'ensino_medio1', # Você cursou o ensino médio em escola pública ou particular?
+    'ensino_medio2', # Você cursou ensino médio tradicional ou profissionalizante?
+    'programacao_sn', # Você tem/teve contato com alguma linguagem de programação?
+    'programacao_list', # Quais linguagens de programação você já usou?
+    'software_sn', # Já utilizou algum software com funcionalidades estatísticas?
+    'software_list', # Qual(is) software(s) com funcionalidades estatísticas você usa ou já usou?
+    'importancia_estatistica', # Qual a importância que você atribui à Estatística? 
+    'expectativa_pos_graduacao', # Qual a sua principal expectativa após a conclusão da graduação?
+    'sexo', # Qual o seu sexo?
+    'altura', # Qual a sua altura?
+    'peso', # Qual o seu peso?
+    'nascimento', # Qual a data do seu nascimento?
+    'emprego', # Qual das seguintes categorias descreve melhor sua situação de emprego?
+    'residencia', # Com quem você mora?
+    'irmaos', # Quantos irmãos você tem?
+    'origem', # Qual a sua origem?
+    'transporte', # Qual seu meio de transporte predominante que utilizava ou utilizaria para Universidade em atividades presenciais?
+    'tempo_ies', # Em média, quanto tempo você demora para chegar a Universidade?
+    'pet', # Possui animal de estimação?
+    'instrumento', # Toca algum instrumento musical?
+    'atv_fisica_reg', # Você pratica atividade física regularmente?
+    'atv_fisica_n', # Quantas vezes por semana você se exercita?
+    'atv_fisica_qual', # Qual atividade você pratica?
+    'kiki_bouba', # Observe as figuras abaixo. Uma delas se chama "Bouba" e a outra "Kiki". Quem é quem?
+    'quadrados' # Quantos quadrados há na figura?
+  )    
+```
+
+---
+
+Considerando os dados, proceda uma análise exploratória usando o R para responder as questões:
+
+ 1. Quantas respostas há no questionário? Quantas pergutas foram feitas?
+
+ 1. Qual o percentual de indivíduos em cada possível grau de escolaridade?
+
+ 1. Os respondentes do questionário vieram de escola pública ou particular?
+
+ 1. O que podemos dizer a respeito do contato com liinguagens de programação? E sobre softwares com funcionalidades estatísticas?
+
+ 1. Quantos indivíduos são do sexo masculino? E do sexo feminino?
+
+ 1. Considerando faixas de valores de tamanho 5, partindo de 150 até 190, construa uma tabela de frequências para as alturas dos indivíduos. Qual é a faixa modal? Quantos indivíduos estão nessa faixa e qual o percentual associado a essa frequência?
+
+ 1. O que podemos concluir a respeito da simetria da distribuição de peso e altura?
+
+ 1. Obtenha as medidas de posição central, relativa e de dispersão para peso e altura.
+
+ 1. Quem varia mais? Peso ou altura? Utiliza a medida de comparação adequada e justifique.
+
+ 1. Obtenha os índices de massa corporal dos respondentes (peso/(altura^2)).
+
+ 1. Qual o número médio de irmãos dos respondentes? E o desvio padrão associado a essa medida?
+
+ 1. Quantos indivíduos não são de Curitiba?
+
+ 1. Qual é o percentual de indivíduos sedentários?
+
+ 1. Em uma das questões do questionário os respondentes receberam duas figuras: uma com formas pontiagudas e outra com formas mais arredondadas. Na questão os alunos associaram o nome Kiki a uma figura e Bouba à outra. Se não houver relação entre a figura e o nome sugerido, a proporção observada de cada nome deve ser 0,5. Existe evidência suficiente nos dados que permite afirmar que há relação entre a forma da figura e o nome sugerido?
+
+ 1. Na questão associada ao número de quadrados na figura, a resposta correta era 40. Quantos alunos acertaram? Isso corresponde a que percentual?
+
+ 1. O que podemos dizer a respeito da expectativa após a graduação dos indivíduos que não trabalham?
+
+ 1. Existe evidência de diferença entre as alturas dos respondentes do sexo masculino e feminino? Como você chegou a essa conclusão?
+
+ 1. Existe evidência de associação entre altura e peso? Como você chegou a essa conclusão?
+
+ 1. Qual seria a melhor forma de analisar as respostas das questões:
+    - Quais linguagens de programação você já usou?
+    - Qual(is) software(s) com funcionalidades estatísticas você usa ou já usou?
+    - Possui animal de estimação?
+    - Qual atividade você pratica?
+    - Toca algum instrumento musical?
+
+ 1. Conduza outras análises que julgar necessário para responder questões de interesse.
+
+
+\
+
+\

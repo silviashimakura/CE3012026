@@ -1,0 +1,276 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  12pt,
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[left=2cm,right=2cm,top=0.5cm,bottom=1.5cm]{geometry}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{hyphenat}
+\usepackage{float}
+\usepackage{placeins}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{natbib}
+\usepackage{arydshln}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{fancyhdr}
+\usepackage{multirow}
+\usepackage{comment}
+\newcommand{\R}{{\normalfont\textsf{R}}{}}
+\includecomment{solucao}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={CE301 - Estatística Básica - Prova 4},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{CE301 - Estatística Básica - Prova 4}
+\author{}
+\date{\vspace{-2.5em}1o. Semestre 2025}
+
+\begin{document}
+\maketitle
+
+\noindent \textbf{Nome:} \underline{\hspace{16cm}}\\
+
+\textbf{Data:} \underline{\hspace{1cm}/\hspace{1cm}/\hspace{1cm}}
+\hspace{0.5cm} \textbf{GRR:} \underline{\hspace{3cm}} \hspace{0.5cm}
+\textbf{Assinatura:} \underline{\hspace{5cm}}
+
+\vspace{0.5cm}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\tightlist
+\item
+  Uma refinaria recebe navios transportando petróleo bruto.
+  Historicamente, a quantidade de carga por navio segue distribuição
+  normal com média \(\mu=30000\) toneladas, mas o desvio-padrão
+  populacional \(\sigma\) é desconhecido.
+\end{enumerate}
+
+Você coleta uma amostra aleatória simples de \(n=25\) navios, e obtém
+uma média amostral de \(\bar{x}=28000\) toneladas e um desvio-padrão
+amostral de \(s=4200\) toneladas.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  Liste e justifique brevemente as condições necessárias para aplicar
+  testes de média e variância nesses dados (independência, normalidade,
+  tamanho da amostra, uso de \(t\) ou qui-quadrado). (0,5 ponto)
+\item
+  Construa o intervalo de confiança de 95\% para \(\mu\). Qual
+  distribuição foi usada? Interprete o resultado no contexto da
+  refinaria. (0,5 ponto)
+\item
+  A refinaria suspeita que a média atual é menor que a histórica de
+  30000 t.
+
+  \begin{itemize}
+  \item[i)] Formule a hipótese nula e a alternativa? (0,5 ponto)
+  \item[ii)] Calcule o valor da estatística de teste, a região crítica e o p-valor? (2,0 pontos)
+  \item[iii)] Qual é a conclusão do teste com nível de significância de 5\%? Interpretação prática. (0,5 ponto)
+  \end{itemize}
+\item
+  Obtenha um intervalo de confiança de 95\% para \(\sigma^2\). Quais
+  parâmetros foram usados (graus de liberdade, distribuição)?
+  Interprete. (0,5 ponto)
+\item
+  Calcule o tamanho de amostra necessário para que a margem de erro
+  máxima para estimar \(\mu\) seja 500 toneladas, com 99\% de confiança.
+  Use como estimativa substituta \(s = 4200\) t. Interprete esse
+  resultado. (0,5 ponto)
+\end{enumerate}
+
+\begin{solucao}
+\hrulefill
+
+\textbf{Solução}
+\begin{itemize}
+\item[a)] Suposições:
+\begin{itemize}
+\item Amostra aleatória $\rightarrow$ independência
+\item População aproximadamente normal (ou $n$ moderado) $\rightarrow$ uso de **t** e **qui-quadrado**
+\end{itemize}
+
+\item[b)] IC 95\% para $\mu$: aproximadamente [\ensuremath{2.6266\times 10^{4}}; \ensuremath{2.9734\times 10^{4}}] toneladas. 
+
+\textbf{Interpretação}: Há 95\% de confiança de que este intervalo cobre a verdadeira média.
+
+\item[c)] Teste unilateral $H_0: \mu=30000$ vs $H_1:\mu<30000$
+
+\begin{itemize}
+\item Estatística de teste: $t_{calc}=$ -2.3809524
+\item $RC=\{t_{calc}\leq$ -2.064$\}$
+\item p-valor=0.0127759 $< 0,05 \rightarrow $ Rejeitamos $H_0$.  
+\end{itemize}
+
+\textbf{Conclusão}: Há evidência suficiente de que a média atual é menor que 30000 t.
+
+
+\item[d)] IC 95\% para $\sigma^2$: [\ensuremath{1.0754984\times 10^{7}}; \ensuremath{3.4138769\times 10^{7}}] ton$^2$
+
+\textbf{Interpretação}: Há 95\% de confiança de que este intervalo cobre a verdadeira variância das cargas.
+
+\item[e)] \textbf{Tamanho amostral} p/ $ME = 500$ (99\% conf.): 469 navios. 
+
+\textbf{Interpretação}: Para uma estimativa tão precisa, seria necessário uma amostra bem maior.
+
+
+\end{itemize}
+
+\end{solucao}
+
+\hrulefill
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Uma fábrica visa que no máximo 2\% das peças produzidas sejam
+  defeituosas (\(p\leq 0,02\)). Em um lote recente, foi sorteada uma
+  amostra aleatória simples de \(n = 500\) peças e observou-se 12 peças
+  defeituosas.
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  Identifique o parâmetro de interesse. Informe a estimativa pontual.
+  (0,5 ponto)
+\item
+  Calcule o erro padrão da proporção estimada. Verifique as condições
+  para aplicar a aproximação normal (\(np_0\geq 5\) e
+  \(n(1-p_0)\geq 5\)). (0,5 ponto)
+\item
+  Monte o intervalo de confiança otimista de 95\% para a proporção
+  populacional de peças defeituosas. Interprete o resultado em relação
+  ao padrão da fábrica. (1,0 ponto)
+\item
+  Estabeleça \(H_0\) e \(H_1\) para testar se \(p>0,02\). Calcule a
+  estatística de teste e a região crítica. Decisão a um nível de
+  significância \(\alpha=5\)\%. Há evidência de que a taxa de defeitos
+  excede o limite desejado? (2,0 pontos)
+\item
+  Especifique o p-valor calculado e explique seu significado no contexto
+  decisional. (0,5 ponto)
+\item
+  Quer-se reduzir a margem de erro para metade da atual (considerando o
+  intervalo de confiança prévio) com 95\% de confiança. Utilize valor
+  otimista \(p=0,02\) (maximiza precisão). Calcule o novo \(n\).
+  Explique como interpretar esse tamanho conforme investimento em
+  controle de qualidade. (0,5 ponto)
+\end{enumerate}
+
+\begin{solucao}
+\hrulefill
+
+\textbf{Solução}
+
+\begin{enumerate}
+\item[a)] Parâmetro e estimativa
+\begin{itemize}
+\item Parâmetro: proporção populacional $p$
+\item Estimativa pontual: $\hat{p} = 0.024$
+\end{itemize}
+
+\item[b)] Erro padrão e condições
+\begin{align*}
+se &= 0.0068446\\
+np_0 &= 10\geq 5\\
+nq_0 &= 490\geq 5\\
+& \mbox{condições atendidas}
+\end{align*}
+
+\item[c)] IC 95\% para proporção
+\begin{align*}
+\mbox{Intervalo= } & [0.0106;0.0374]\\
+\mbox{Interpretação: }& \mbox{A verdadeira taxa de defeitos é coberta pelo IC com uma confiança de 95}\%. 
+\end{align*}
+
+\item[d)] Teste unilateral $H_0:p=0,02$ vs $H_1:p>0,02$
+\begin{align*}
+\mbox{Estatística de teste: }& z=0.58\\
+\mbox{p-valor: }& 0.2795  > 0.05 \rightarrow \mbox{não rejeita} H_0\\
+\mbox{Conclusão: }& \mbox{ sem evidência de que a proporção excede 2}\%.
+\end{align*}
+
+\item[e)] Valor-p = 0.2795. 
+\begin{align*}
+\mbox{Interpretação: }& \mbox{ Sob } H_0, \mbox{há } 27.9\% \mbox{de chance de observar } \hat p \mbox{ tão alto ou maior;} \\
+&\mbox{Não é suficiente para rejeitar.}
+\end{align*}
+
+\item[f)] Tamanho amostral p/ metade do erro (95\%)
+
+Resultado: 1674 peças. 
+
+Interpretação: aumentaria a amostra para reduzir o erro pela metade.
+
+\end{enumerate}
+\end{solucao}
+
+\hrulefill
+
+\end{document}

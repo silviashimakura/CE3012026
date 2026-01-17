@@ -1,0 +1,176 @@
+---
+title: "CE301 - Estatística Básica - Prova 1"
+date: "1o. Semestre 2025"
+geometry: "left=2cm,right=2cm,top=0.5cm,bottom=2cm"
+output:
+  pdf_document:
+    keep_tex: true
+header-includes:
+- \usepackage[utf8]{inputenc}
+- \usepackage[T1]{fontenc}
+- \usepackage[portuguese]{babel}
+- \usepackage{hyphenat}
+- \usepackage{float}
+- \usepackage{placeins}
+- \usepackage{mathtools}
+- \usepackage{amsmath}
+- \usepackage{natbib}
+- \usepackage{arydshln}
+- \usepackage{multirow}
+- \usepackage{booktabs}
+- \usepackage{caption}
+- \usepackage{fancyhdr}
+- \usepackage{multirow}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+require(psych)
+require(knitr)
+require(mvtnorm)
+require(ggplot2)
+```
+
+\noindent
+\textbf{Nome:} \underline{\hspace{16cm}}\
+
+\textbf{Data:} \underline{\hspace{1cm}/\hspace{1cm}/\hspace{1cm}} \hspace{0.5cm} 
+\textbf{GRR:} \underline{\hspace{3cm}} \hspace{0.5cm}
+\textbf{Assinatura:} \underline{\hspace{5cm}}
+
+\vspace{1cm}
+
+```{r,echo=FALSE}
+set.seed(9565677)
+```
+
+
+```{r,echo=FALSE}
+happy<-read.csv2("happy.csv", sep=";", header=TRUE)
+ind <- sample(nrow(happy),size=10,replace = FALSE)
+dados <- happy[ind,]
+```
+
+Um questionário foi aplicado a uma amostra de 10 alunos de um curso de MBA de uma universidade americana, fornecendo as seguintes informações: **love** (1: sem relacionamento estável, 2: relacionamento estável, 3: sentimento profundo de pertencimento e cuidado), **sex** (1: atividade sexual satisfatória, 0: não), **work** (escala de 5 pontos em que 1: sem trabalho, 3: trabalho ok, 5: amo meu trabalho), **money** (renda familiar em milhares de dólares) e **happy** (felicidade numa escala de 10 pontos em que 10 é o mais feliz). Os dados da amostra estão descritos na Tabela 1.
+```{r,echo=FALSE}
+knitr::kable(dados, caption = "Dados da amostra", booktabs = TRUE, digits = 2,row.names=FALSE)
+
+```
+Com base nos dados, responda as questões de 1 a 11.
+
+Nas respostas use pelo menos 2 casas decimais.
+
+Nos gráficos atente-se para a legenda e escalas.
+
+\begin{center}
+\underline{\hspace{10cm}}
+\end{center}
+
+1) Quais são os tipos de variáveis coletadas? Classifique-as em qualitativa nominal, qualitativa ordinal, quantitativa discreta e quantitativa contínua. (0,5 ponto)
+
+- happy: quantitativa contínua
+
+- money: quantitativa contínua
+
+- sex: qualitativa nominal
+
+- love: qualitativa ordinal
+
+- work: quantitativa continua/qualitativa ordinal
+
+2) Considere que exista um cadastro de alunos alocados em 5 turmas. Primeiramente foi selecionada uma turma por meio de um sorteio em que todas as turmas tinham a mesma probabilidade de fazer parte da amostra. Após o sorteio da turma, uma amostra aleatória de alunos da turma sorteada foi selecionada em que todos os elementos tinham a mesma probabilidade de serem selecionados. Qual o tipo de amostragem utilizada? Este plano de amostragem corresponde a um método probabilístico ou não probabilístico? Justifique sua resposta. (0,5 ponto)   
+
+Amostragem por conglomerados: método probabilístico.
+
+
+3) Monte uma tabela de frequências para a variável **work**. Use frequências absolutas e relativas. Qual seria o gráfico mais adequado para representar esta tabela? (0,5 ponto)
+
+```{r,echo=FALSE}
+tabela <- table(dados$work)
+tabela <- cbind(tabela,tabela/10)
+knitr::kable(tabela,col.names=c("work","f","fr"))
+```
+
+
+4) Monte uma tabela de frequências para a variável **money**. Use faixas de tamanho 20, partindo de 0 até 100. Qual é a faixa modal? (0,5 ponto)
+
+```{r,echo=FALSE}
+hist(dados$money)
+
+```
+
+
+5) Obtenha média e desvio-padrão das variáveis **money** e **happy**. (1 ponto)
+
+```{r,echo=TRUE}
+mean(dados$money)
+mean(dados$happy)
+```
+
+
+6) As variáveis **happy** e **money** estão em diferentes escalas, qual delas apresenta maior variabilidade? Utiliza uma medida de comparação adequada. (1 ponto)
+```{r}
+sd(dados$happy)/mean(dados$happy)
+sd(dados$money)/mean(dados$money)
+```
+
+
+7) Com base na tabela do item (4), esboce o histograma da variável **money**. O que você conclui a respeito da simetria? (1 ponto)
+
+8) Obtenha as quantidades necessárias e esboce o box-plot da variável **happy**. Coloque nos eixos os valores utilizados para o esboço. O que você conclui a respeito da simetria e da presença de valores atípicos? (1 ponto)
+```{r}
+boxplot(dados$happy)
+summary(dados$happy)
+```
+
+
+9) Monte uma tabela de dupla entrada usando frequências absolutas para **love** e **sex**. O que você conclui? (1 ponto)
+```{r}
+require(Epi)
+stat.table(index=list(love,sex),list(N=count(),percent(love,sex)),data=dados)
+```
+
+
+10) Avalie os gráficos abaixo. O que você conclui a respeito da relação entre as variáveis **happy** e **money**? (1 ponto)
+
+```{r,echo=FALSE,fig.width=10,fig.height=5}
+par(mfrow=c(1,2))
+boxplot(happy~sex, data=dados,
+        main="", xlab="sex", ylab="happy")
+plot(dados$money,dados$happy,  pch=19, 
+     main="", ylab="happy", xlab="money",xlim=c(0,max(dados$money)), ylim=c(0,10))
+#abline(lm(dados$happy~dados$money), col="red", lwd=2)
+```
+
+11) Obtenha uma medida de associação entre **sex** e **love**. O que você conclui? (1 ponto)
+
+```{r}
+chisq.test(table(dados$love,dados$sex))
+```
+
+12) Responda de forma sucinta: (1 ponto)
+  a) Qual a diferença entre amostragem casual simples e amostragem sistemática?
+  b) Por que é melhor evitar o gráfico de setores?
+  c) Uma medida de tendência central é suficiente para representar uma variável? Explique.
+  d) O que é um ponto atípico ou outlier?
+  e) O que o coeficiente de correlação expressa? Comente suas características.
+
+\begin{center}
+\underline{\hspace{10cm}}
+\end{center}
+
+\begin{center}
+$\bar y= \frac{\sum_{i=1}^n y_i}{n}$ \hspace{2cm} $\bar y= \frac{\sum_{i=1}^k f_i \cdot y_i}{\sum_{i=1}^k f_i}$ \hspace{2cm} $A=max(y)-min(y)$
+
+$DAM_{média}=\frac{1}{n}\sum_{i=1}^n|y_i-\bar y|$ \hspace{2cm} $DAM_{mediana}=\frac{1}{n}\sum_{i=1}^n|y_i-md|$
+
+$s^2=Var(y)=\frac{\sum_{i=1}^n(y_i-\bar y)^2}{n-1}=\frac{1}{n-1}\left(\sum_{i=1}^ny_i^2-\frac{\left(\sum_{i=1}y_i\right)^2}{n}\right)$ \hspace{2cm} $s=\sqrt{s^2}$
+
+$CV=100 \cdot \frac{s}{\bar y}$ \hspace{1cm} $z=\frac{y_i-\bar y}{s}$ \hspace{1cm} $H=-\sum_{i=1}^Sf_i \cdot ln(fi)$ \hspace{1cm} $Q=\sum_{i=1}^r\sum_{j=1}^s \frac{(o_{ij}-e_{ij})^2}{e_{ij}}$
+
+$Cov(y_1,y_2)=\frac{\sum_{i=1}^n(y_{1i}-\bar y_1)(y_{2i}-\bar y_2)}{n-1}$ \hspace{2cm} $r=\frac{\sum_{i=1}^n (y_{1i}-\bar y_1)(y_{2i}-\bar y_2)}{\sqrt{\sum_{i=1}^n(y1i-\bar y_1)^2} \cdot \sqrt{\sum_{i=1}^n (y_{2i}-\bar y_2)^2}}=\frac{Cov(y_1,y_2)}{\sqrt{Var(y_1)} \cdot \sqrt{Var(y_2)}}$
+
+\underline{\hspace{10cm}}
+
+\end{center}
+

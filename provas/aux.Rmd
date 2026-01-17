@@ -1,0 +1,153 @@
+---
+title: "Gabarito e Solução — Inferência Estatística"
+author: "Assistente"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_depth: 3
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+# 1. Carga de óleo — média e variância
+
+```{r}
+n1 <- 40
+xbar1 <- 28500
+s1 <- 4200
+```
+
+## 1a. Suposições
+
+* Amostra aleatória → independência
+* População aproximadamente normal (ou n moderado) → uso de **t** e **qui-quadrado**
+
+## 1b. IC 95% para μ
+
+```{r}
+alpha <- 0.05
+tcrit1 <- qt(1-alpha/2, df = n1 - 1)
+me1 <- tcrit1 * s1 / sqrt(n1)
+ic_mu <- xbar1 + c(-me1, +me1)
+ic_mu
+```
+
+**Resultado**: aproximadamente **\[27220; 29780]** toneladas. Interpretação: há 95 % de confiança de que a média real esteja nesse intervalo.
+
+## 1c. Teste unilateral H₀: μ = 30000 vs H₁: μ < 30000
+
+```{r}
+tstat1 <- (xbar1 - 30000) / (s1 / sqrt(n1))
+pval1 <- pt(tstat1, df = n1 - 1)
+tstat1; pval1
+```
+
+* Estatística: \~ –2.26
+* p‑valor: \~ 0.015 < 0.05 → rejeita H₀
+  **Conclusão**: há evidência de que a média atual é menor que 30 000 t.
+
+## 1d. IC 95% para σ²
+
+```{r}
+chi_lo <- qchisq(0.975, df = n1 - 1)
+chi_hi <- qchisq(0.025, df = n1 - 1)
+ic_var <- (n1 - 1) * s1^2 / c(chi_lo, chi_hi)
+ic_var
+```
+
+Estimativa: σ² ∈ \[13.21 × 10⁶; 22.57 × 10⁶] (ton²). Interpretação: 95% de confiança nesse intervalo para a variância.
+
+## 1e. Tamanho amostral p/ ME = 500 (99 % conf.)
+
+```{r}
+E <- 500
+z99 <- qnorm(0.995)
+n_req1 <- (z99 * s1 / E)^2
+ceiling(n_req1)
+```
+
+Resultado: \~ **2703** navios. Interpretação: para estimativa tão precisa, seria necessária uma amostra bem maior.
+
+---
+
+# 2. Peças automotivas — proporção de defeitos
+
+```{r}
+n2 <- 500
+p_hat2 <- 12 / 500
+p0 <- 0.02
+```
+
+## 2a. Parâmetro e estimativa
+
+* **Parâmetro**: proporção populacional $p$
+* **Estimativa pontual**: $\hat{p} = 0.024$
+
+## 2b. Erro padrão & condições
+
+```{r}
+se2 <- sqrt(p_hat2 * (1 - p_hat2) / n2)
+np0 <- n2 * p0
+nq0 <- n2 * (1 - p0)
+c(se2 = se2, np0 = np0, n_q0 = nq0)
+```
+
+* Erro padrão ≈ 0.0070
+* np₀ = 10 ≥ 10 e n(1−p₀) = 490 ≥ 10 → condição atendida
+
+## 2c. IC 95% para proporção
+
+```{r}
+z95 <- qnorm(0.975)
+ic_p <- p_hat2 + c(-1, 1) * z95 * se2
+ic_p
+```
+
+Intervalo: **\[0.0137; 0.0343]**. Interpretação: a taxa de defeitos real está entre \~1.4 % e 3.4 %.
+
+## 2d. Teste unilateral H₀: p = 0.02 vs H₁: p > 0.02
+
+```{r}
+zstat2 <- (p_hat2 - p0) / se2
+pval2 <- 1 - pnorm(zstat2)
+zstat2; pval2
+```
+
+* Estatística: \~1.414
+* p‑valor ≈ 0.078 > 0.05 → **não rejeita H₀**
+  Conclusão: sem evidência de que a proporção excede 2 %.
+
+## 2e. Valor-p
+
+Valor-p = 0.078. Interpretação: sob H₀, há \~7.8 % de chance de observar p̂ tão alto ou maior; não é suficiente para rejeitar.
+
+## 2f. Tamanho amostral p/ metade do erro (95 %)
+
+```{r}
+E_old <- z95 * se2
+E_new <- E_old / 2
+n_new <- (z95^2 * p0 * (1 - p0)) / E_new^2
+ceiling(n_new)
+```
+
+Resultado: \~ **1922** peças. Interpretação: aumentaria a amostra para reduzir o erro pela metade.
+
+---
+
+# 📋 Resumo
+
+| Questão | Item            | Resultado                         |
+| ------- | --------------- | --------------------------------- |
+| 1b      | IC μ            | \[27220; 29780]                   |
+| 1c      | Teste média     | t ≈ –2.26, p ≈ 0.015 → rejeita    |
+| 1d      | IC σ²           | \[13.2 ×10⁶; 22.6 ×10⁶]           |
+| 1e      | n requerida     | \~2703                            |
+| 2b      | SE              | \~0.0070                          |
+| 2c      | IC p            | \[0.0137; 0.0343]                 |
+| 2d      | Teste proporção | z ≈ 1.41, p ≈ 0.078 → não rejeita |
+| 2f      | n requerida     | \~1922                            |
+
+---

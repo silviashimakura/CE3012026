@@ -1,0 +1,405 @@
+---
+title: "CE301 - Estatística Básica - Prova 3"
+date: "1o. Semestre 2025"
+geometry: "left=2cm,right=2cm,top=0.5cm,bottom=1.5cm"
+output:
+  pdf_document:
+    keep_tex: true
+fontsize: 12pt
+header-includes:
+- \usepackage[utf8]{inputenc}
+- \usepackage[T1]{fontenc}
+- \usepackage[portuguese]{babel}
+- \usepackage{hyphenat}
+- \usepackage{float}
+- \usepackage{placeins}
+- \usepackage{mathtools}
+- \usepackage{amsmath}
+- \usepackage{natbib}
+- \usepackage{arydshln}
+- \usepackage{multirow}
+- \usepackage{booktabs}
+- \usepackage{caption}
+- \usepackage{fancyhdr}
+- \usepackage{multirow}
+- \usepackage{comment}
+- \newcommand{\R}{{\normalfont\textsf{R}}{}}
+#- \excludecomment{solucao}
+- \includecomment{solucao}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+require(psych)
+require(knitr)
+require(mvtnorm)
+require(ggplot2)
+```
+
+\noindent
+\textbf{Nome:} \underline{\hspace{16cm}}\
+
+\textbf{Data:} \underline{\hspace{1cm}/\hspace{1cm}/\hspace{1cm}} \hspace{0.5cm} 
+\textbf{GRR:} \underline{\hspace{3cm}} \hspace{0.5cm}
+\textbf{Assinatura:} \underline{\hspace{5cm}}
+
+\vspace{0.5cm}
+
+1) Registros de um laboratório mostram que 1 a cada 20 amostras de um determinado material são perdidas por contaminação. Responda cada um dos seguintes itens declarando a variável aleatória e sua distribuição. Indique sem precisar fazer os cálculos como você obteria a resposta para cada item.
+
+a) Se forem feitas 15 análises, qual a probabilidade de que no máximo uma seja contaminada? (0,5 ponto)
+
+b) Em um teste para avaliar a contaminação, análises serão feitas sequencialmente até que a primeira contaminada seja encontrada. Qual a probabilidade de que o número de análises feitas até encontrar a primeira contaminada não chegue a 5? (0,5 ponto)
+
+c) O teste anterior foi repetido, porém até que a terceira análise mostrasse contaminação. Em um particular ensaio foram feitas 10 análises até que a terceira mostrasse contaminação. Qual a probabilidade desta ocorrência? (0,5 ponto)
+
+d) Um lote contendo 40 amostras das quais 15 eram contaminadas foi enviado para teste em outro laboratório, no qual 12 amostras foram selecionadas (sem reposição) ao acaso para testes. Qual a probabilidade de encontrar 2 ou mais amostras contaminadas entre as selecionadas? (0,5 ponto)
+
+e) Considere agora que o laboratório faz um grande número de análises por mês e registra uma média mensal de 2,5 casos de contaminação. Qual a probabilidade de que em um determinado mês não se registre nenhuma contaminação? (0,5 ponto)
+
+\begin{solucao}
+\hrulefill
+
+\textbf{Solução}
+\begin{itemize}
+\item[a)] Y: número de amostras contaminadas em 15 análises. $Y\sim B(15, 0.05)$. $P(Y \leq 1) = P(Y=0) + P(Y=1)= \binom{15}{0}0.05^0 0.95^{15}+\binom{15}{1}0.05^1 0.95^{15-1}=`r round(dbinom(0,15,0.05),3)`+`r round(dbinom(1,15,0.05),3)`=`r round(pbinom(1,15,0.05),3)`$
+\item[b)] $Y$ é número de análises até encontrar a primeira amostra contaminada. $Y\sim Geom(0.05), y \in \{0,1,2,...\}$. $P(Y+1<5)=P(Y<4)=P(Y\leq 3)=P(Y=0) + P(Y=1) + P(Y=2) + P(Y=3) = 0.05 + 0.95 \cdot 0.05 + 0.95^2 \cdot 0.05 + 0.95^3 \cdot 0.05=`r round(pgeom(3,0.05),3)`$
+\item[c)] $Y, y \in \{0,1,2,...\}$ é o número de amostras não contaminadas analisadas até encontrar a terceira amostra contaminada. $Y\sim BN(3, 0.05)$. $P(Y=7)=\binom{7+3-1}{3-1}0.05^3 0.95^{7}=`r round(dnbinom(7,3,0.05),3)`$
+\item[d)] Seja $Y$ o número de amostras contaminadas entre as 12 selecionadas. $Y\sim HG(15, 25, 12)$, onde 15 é o número de amostras contaminadas no lote, 25 é o número de amostras não contaminadas no lote e 12 é o número de amostras selecionadas. $P(Y \geq 2) = 1-P(Y<2)=1-P(Y=0)-P(Y=1)= 1-\frac{\binom{15}{0}\binom{25}{12-0}}{\binom{15+25}{12}}-\frac{\binom{15}{1}\binom{25}{12-1}}{\binom{15+25}{12}}=`r round(1-phyper(1,15,25,12),3)`$
+\item[e)] Seja $Y$ o número de casos de contaminação em um mês. $Y\sim Poisson(2.5)$. $P(Y=0)=e^{-2.5} \frac{2.5^0}{0!}=e^{-2.5}=`r round(dpois(0,2.5),3)`$
+\end{itemize}
+
+\end{solucao}
+
+\hrulefill
+
+2) O peso de um tênis de corrida sofisticado é normalmente distribuído com média de 340 g e desvio padrão de 14 g.
+
+a) Qual a probabilidade de um tênis pesar mais que 374g? (0,5 ponto)
+
+b) Qual a probabilidade de um tênis pesar entre 329g e 359g? (0,5 ponto)
+
+c) Quanto deveria ser o desvio padrão para que 99,9% dos tênis tenham peso inferior a 368g? (0,5 ponto)
+
+d) Se o desvio padrão se mantiver em 14g, quanto deveria ser a média para que 99,9% dos tênis tenham menos que 368g? (0,5 ponto)
+
+\begin{solucao}
+\hrulefill
+
+\textbf{Solução}
+\begin{align*}
+Y &: \mbox{peso de um tênis de corrida (em gramas)} \\
+\mbox{Distribuição} &: Y \sim N(340, 14^2) \\
+\end{align*}
+\begin{enumerate}
+\item[a)] 
+\begin{align*}
+P(Y > 374) &= P\left(Z > \frac{374 - 340}{14}\right) = P(Z > 2.43) = 1 - P(Z \leq 2.43) = 1 - 0.9925 = `r round(1-0.9925,3)`
+\end{align*}
+\item[b)] 
+\begin{align*}
+P(329 < Y < 359) &= P\left(\frac{329 - 340}{14} < Z < \frac{359 - 340}{14}\right) = P(-0.79 < Z < 1.36)\\
+&= P(Z < 1.36) - P(Z < -0.79) = 0.9147 - 0.2148 = `r round(0.9147-0.2148,3)`
+\end{align*}
+\item[c)] 
+\begin{align*}
+P(Y < 368) &= 0.999\\
+&\Rightarrow P\left(Z < \frac{368 - \mu}{\sigma}\right) = 0.999\\
+&\Rightarrow \frac{368 - \mu}{\sigma} = 3.09\\
+&\Rightarrow \sigma = \frac{368 - \mu}{3.09}=\frac{368-340}{3.09}=`r round((368-340)/3.09,3)`
+\end{align*}
+\item[d)] 
+\begin{align*}
+P(Y < 368) &= 0.999\\
+&\Rightarrow P\left(Z < \frac{368 - \mu}{14}\right) = 0.999\\
+&\Rightarrow \frac{368 - \mu}{14} = 3.09\\
+&\Rightarrow \mu = 368 - 3.09 \cdot 14\\
+&\Rightarrow \mu = 368 - 43.26 =`r round(368-3.09*14,3)`
+\end{align*}
+\end{enumerate}
+\end{solucao}
+\hrulefill
+
+3) Um teste de aptidão feito por pilotos de aeronaves em treinamento inicial requer que uma série de operações seja realizada em uma rápida sucessão. Suponha que o tempo necessário para completar o teste seja distribuído de acordo com o modelo normal, com média de 90 minutos e desvio padrão de 20 minutos. 
+
+a) Para passar no teste, o candidato deve completá-lo em menos de 80 minutos. Se 65 candidatos realizarem o teste, qual é o número esperado de aprovados? (0,5 ponto)
+
+b) Se os 5% melhores candidatos são alocados para aeronaves maiores, quão rápido deve ter sido o candidato para que obtenha essa posição? (0,5 ponto)
+
+c) Se forem sorteados ao acaso 5 candidatos, qual a probabilidade de pelo menos 2 serem aprovados? (0,5 ponto)
+
+\begin{solucao}
+
+\textbf{Solução}
+
+  a) Seja $Y$ o tempo necessário para completar o teste, então $Y \sim N(90, 20^2)$.
+\begin{align*}
+p=P(Y < 80) &= P\left(Z < \frac{80 - 90}{20}\right) = P(Z < -0.5) = 0.3085\\
+\mbox{Número esperado de candidatos que passam} &= 65 \cdot P(Y < 80) = 65 \cdot 0.3085 = `r round(65*0.3085,2)`
+\end{align*}
+
+  b) Para encontrar o tempo que corresponde aos 5\% melhores candidatos, precisamos encontrar o valor de $z$ tal que $P(Z < z) = 0.05$. Consultando a tabela da normal padrão, encontramos $z \approx -1.645$.
+\begin{align*}
+P(Y < t) &= 0.05\\
+\frac{t - 90}{20} &= -1.645\\
+t &= 90 - 1.645 \cdot 20 = 90 - 32.9 = `r round(90 - 1.645 * 20,2)`
+\end{align*}
+
+  c) Seja $X$ o número de candidatos aprovados entre os 5 sorteados. $X \sim B(5, p)$, onde $p=P(Y < 80) = 0.3085$.
+\begin{align*}
+P(X \geq 2) &= 1 - P(X < 2) = 1 - (P(X = 0) + P(X = 1))\\
+&= 1 - \binom{5}{0} p^0 (1-p)^5 - \binom{5}{1} p^1 (1-p)^4\\
+&= 1 - 1 \cdot (0.3085)^0 \cdot (0.6915)^5 - 5 \cdot (0.3085)^1 \cdot (0.6915)^4\\
+&= 1 - 0.1685 - 0.3522\\
+&= 1 - 0.5207 \\
+&= `r round(1 - 0.5207,3)`
+\end{align*}
+
+\end{solucao}
+\hrulefill
+
+4) Considere uma variável aleatória definida no intervalo [0,1], com função densidade de probabilidade dada por:
+
+$$f(y) = \left\{\begin{matrix}
+\frac{2}{10}c, \text{ se } 0 \leq y < \frac{1}{2} \\
+\frac{8}{10}c, \text{ se } \frac{1}{2} \leq y \leq 1 \\
+0, \text{caso contrario}
+\end{matrix}\right.$$
+
+a) Determine o valor da constante c. (0,5 ponto)
+
+b) Calcule P(Y > 0,8). (0,5 ponto)
+
+c) Calcule P(0,25 < Y < 0,75). (0,5 ponto)
+
+d) Encontre os quartis da distribuição de Y. (0,5 ponto)
+
+e) Calcule $P(Y < 3/4 | Y \geq 1/3)$. (0,5 ponto)
+
+\begin{solucao}
+\hrulefill
+
+\textbf{Solução}
+
+a)
+\begin{center}
+\begin{align*}
+\int_0^{1/2} \frac{2}{10}c \, dy + \int_{1/2}^{1} \frac{8}{10}c \, dy &= 1\\
+\frac{2}{10}c \cdot \frac{1}{2} + \frac{8}{10}c \cdot \frac{1}{2} &= 1\\
+\frac{1}{10}c + \frac{4}{10}c &= 1\\
+\frac{5}{10}c &= 1\\
+c &= 2
+\end{align*}
+\end{center}
+
+b)
+\begin{center}
+\begin{align*}
+P(Y > 0.8) &= \int_{0.8}^{1} \frac{8}{10}c \, dy\\
+&= \frac{8}{10}c \cdot (1 - 0.8)\\
+&= \frac{8}{10} \cdot 2 \cdot 0.2\\
+&= `r round(8/10*2*0.2,3)`
+\end{align*}
+\end{center}
+
+c)
+\begin{center}
+\begin{align*}
+P(0.25 < Y < 0.75) &= \int_{0.25}^{0.5} \frac{2}{10}c \, dy + \int_{0.5}^{0.75} \frac{8}{10}c \, dy\\
+&= \frac{2}{10}c \cdot (0.5 - 0.25) + \frac{8}{10}c \cdot (0.75 - 0.5)\\
+&= \frac{2}{10} \cdot 2 \cdot 0.25 + \frac{8}{10} \cdot 2 \cdot 0.25\\
+&= `r round(2/10*2*0.25+8/10*2*0.25,3)`
+\end{align*}
+\end{center}
+
+d) Os quartis são os valores que dividem a distribuição em quatro partes iguais. Para encontrar o primeiro quartil (Q1), segundo quartil (Q2, que é a mediana) e terceiro quartil (Q3), precisamos resolver as seguintes integrais:
+\begin{center}
+\begin{align*}
+P(Y < Q1) &= 0.25\\
+\frac{(Q1-0.5)}{0.05} &=\frac{1-0.5}{0.8} \\
+Q1&=\frac{(1-0.5)\cdot 0.05}{0.8}+0.5\\
+Q1 &= `r round(0.5+(0.05*(1-0.5)/0.8),3)`
+\end{align*}
+\end{center}
+
+\begin{center}
+\begin{align*}
+P(Y < Q2) &= 0.5\\
+\frac{(Q2-0.5)}{0.3} &=\frac{1-0.5}{0.8} \\
+Q2 &= \frac{(1-0.5)\cdot 0.3}{0.8}+0.5\\
+Q2 &= `r round(0.5+(0.3*(1-0.5)/0.8),3)`
+\end{align*}
+\end{center}
+
+\begin{center}
+\begin{align*}
+P(Y < Q3) &= 0.75\\
+\frac{(Q3-0.5)}{0.55} &=\frac{1-0.5}{0.8} \\
+Q3 &= \frac{(1-0.5)\cdot 0.55}{0.8}+0.5\\
+Q3 &= `r round(0.5+(0.55*(1-0.5)/0.8),3)`
+\end{align*}
+\end{center}
+
+e)
+\begin{center}
+\begin{align*}
+P(Y < 3/4 | Y \geq 1/3) &= \frac{P(Y < 3/4, Y \geq 1/3)}{P(Y \geq 1/3)}\\
+&= \frac{P(1/3 < Y < 3/4)}{P(Y \geq 1/3)}\\
+&= \frac{\int_{1/3}^{3/4} f(y) \, dy}{\int_{1/3}^{1} f(y) \, dy}\\
+&= \frac{\int_{1/3}^{1/2} \frac{2}{10}c \, dy + \int_{1/2}^{3/4} \frac{8}{10}c \, dy}{\int_{1/3}^{1/2} \frac{2}{10}c \, dy + \int_{1/2}^{1} \frac{8}{10}c \, dy}\\
+&= \frac{\frac{2}{10} \cdot 2 \cdot (1/6) + \frac{8}{10} \cdot 2 \cdot (1/4)}{\frac{2}{10} \cdot 2 \cdot (1/6) + \frac{8}{10} \cdot 2 \cdot (1/2)}\\
+&= \frac{\frac{2}{30} + \frac{16}{40}}{\frac{2}{30} + \frac{8}{10}}\\
+&= \frac{\frac{2}{30} + \frac{12}{30}}{\frac{2}{30} + \frac{24}{30}}\\
+&= \frac{14}{26} = `r round(14/26,3)`
+\end{align*}
+\end{center}
+
+\end{solucao}
+\hrulefill
+
+5) Responda de forma sucinta:
+  a) Explique o que caracteriza a distribuição binomial e cite dois exemplos de fenômenos que podem ser modelados por ela. Interprete os conceitos de esperança e variância no contexto dos exemplos citados. (0,5 ponto)
+
+\begin{solucao}
+\hrulefill
+
+\textbf{Solução}
+
+A distribuição binomial modela o número de sucessos em n tentativas independentes, com apenas dois possíveis resultados (sucesso ou fracasso), e uma mesma probabilidade p de sucesso em cada tentativa.  
+
+Exemplos:  
+\begin{itemize}
+\item Número de caras ao lançar uma moeda 10 vezes. Esperança: número médio de caras; variância: medida da variação no número de caras.
+\item Número de peças defeituosas em um lote de 20 peças com 5\% de defeito. Esperança: número médio de peças defeituosas; variância: medida da variação no número de defeitos.
+\end{itemize}
+
+\hrulefill
+\end{solucao}
+  b) Descreva a distribuição normal e explique o que significa dizer que ela é _simétrica_.  (0,5 ponto)
+
+\begin{solucao}
+\hrulefill
+
+\textbf{Solução}
+
+A distribuição normal, ou gaussiana, é uma distribuição contínua caracterizada pela curva em forma de sino, centrada na média $\mu$ e com desvio padrão $\sigma$ que determina a dispersão.  
+Ela é \textit{simétrica} porque os valores estão distribuídos igualmente em torno da média; ou seja, a probabilidade de observar um valor acima da média é igual à de observar um valor equivalente abaixo dela.
+
+\hrulefill
+\end{solucao}
+  c) O que é uma função de probabilidade e uma função de densidade de probabilidade? Diferencie-as.  (0,5 ponto)
+
+\begin{solucao}
+\hrulefill
+
+\textbf{Solução}
+
+\begin{itemize}
+\item \textbf{Função de probabilidade (FP):} utilizada para variáveis aleatórias discretas; atribui a cada valor a probabilidade associada.  
+\item \textbf{Função de densidade de probabilidade (FDP):} usada para variáveis contínuas; não fornece probabilidades diretamente, mas a área sob a curva entre dois valores representa a probabilidade do evento.
+\end{itemize}
+\end{solucao}
+
+\hrulefill
+
+\newpage
+
+
+<!--   d) Explique a diferença entre função de distribuição acumulada (FDA) e função de densidade de probabilidade (FDP). (0,5 ponto) --> 
+
+<!-- \hrulefill --> 
+<!-- **Solução** -->
+
+<!-- - A **FDP** expressa a densidade de probabilidade em cada ponto para variáveis contínuas.   -->
+<!-- - A **FDA** fornece a probabilidade acumulada até um determinado ponto, ou seja, $P(X \leq x)$.   -->
+<!-- Assim, a FDA é obtida integrando a FDP. -->
+
+<!-- \hrulefill -->
+
+<!--   e) Por que a soma das probabilidades de todos os valores possíveis de uma variável aleatória discreta deve ser igual a 1? (0,5 ponto) -->
+
+<!-- \hrulefill -->
+<!-- **Solução** -->
+
+<!-- Porque a variável aleatória discreta abrange todos os resultados possíveis de um experimento, e como a probabilidade de algum resultado ocorrer é certa, a soma total das probabilidades deve ser igual a 1, respeitando a definição de espaço amostral completo. -->
+
+<!-- \hrulefill -->
+
+<!--   f) O que é a esperança matemática (ou valor esperado) de uma variável aleatória? Explique sua importância. (0,5 ponto) -->
+
+<!-- \hrulefill -->
+<!-- **Solução** -->
+
+<!-- É a média ponderada dos valores que a variável aleatória pode assumir, cada um multiplicado pela respectiva probabilidade. Representa o valor "médio" que se espera ao repetir o experimento inúmeras vezes.   -->
+<!-- É importante para sintetizar informações sobre a distribuição e realizar previsões. -->
+
+<!-- \hrulefill -->
+
+<!--   g) Explique o conceito de variância de uma variável aleatória e sua relação com o desvio padrão. (0,5 ponto) -->
+
+<!-- \hrulefill -->
+<!-- **Solução** -->
+
+<!-- A variância é uma medida da dispersão dos valores de uma variável aleatória em relação à sua média (valor esperado). É calculada como a média dos quadrados dos desvios em relação à média. -->
+
+<!-- O **desvio padrão** é a raiz quadrada da variância e representa a dispersão na mesma unidade da variável, facilitando a interpretação. -->
+
+
+<!-- \hrulefill -->
+
+\begin{table}
+\small
+\centering
+\caption{Distribuições de Probabilidade}
+\label{tab:distribuicoes}
+\begin{tabular}{l|c|c|c}
+\hline
+Distribuição & F.P./F.D.P.& E(Y)& Var(Y) \\
+\hline
+Uniforme Discreta & $P(Y=y)=\frac{1}{n}$& $\frac{n+1}{2}$ & $\frac{(n^2-1)}{12}$ \\
+$y\in\{1,2,...,n\}$ & & & \\
+\hline
+
+Binomial & $P(Y=y)=\binom{n}{y}p^y(1-p)^{n-y}$ & $np$ & $np(1-p)$ \\
+$y\in\{0,1,...,n\}$ & & & \\
+\hline
+         
+Poisson & $P(Y=y)=\frac{\lambda^y e^{-\lambda}}{y!}$ & $\lambda$ & $\lambda$ \\
+$y \in\{0,1,2,...\}$ & & & \\
+\hline
+
+Geométrica & $P(Y=y)=p(1-p)^y$ & $\frac{1-p}{p}$ & $\frac{1-p}{p^2}$ \\
+$y\in\{0,1,2,...\}$ & & & \\
+\hline
+
+Binomial Negativa & $P(Y=y)=\binom{y+r-1}{r-1}p^r(1-p)^y$ & $\frac{r(1-p)}{p}$ & $\frac{r(1-p)}{p^2}$ \\
+$y \in\{0,1,2,...\}$ & & & \\
+\hline
+
+Hipergeométrica & $P(Y=y)=\frac{\binom{m}{y}\binom{n}{r-y}}{\binom{m+n}{r}}$ & $rp$ & $rp(1-p) \left(\frac{m+n-r}{m+n-1}\right)$ \\
+$y\in\{0,1,...,r\}$ & &$p=m/(m+n)$ & \\
+\hline
+
+Uniforme Contínua & $f(y)=\frac{1}{b-a}$& $\frac{a+b}{2}$ & $\frac{(b-a)^2}{12}$ \\
+$a\leq y \leq b$ & & & \\
+\hline
+
+Exponencial & $f(y)=\alpha e^{-\alpha y}$ & $\frac{1}{\alpha}$ & $\frac{1}{\alpha^2}$ \\
+$y\geq 0$ & & & \\
+\hline
+
+Normal & $f(y)=\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(y-\mu)^2}{2\sigma^2}}$ & $\mu$ & $\sigma^2$ \\
+$y \in \mathbb{R}$ & & & \\
+\hline
+\end{tabular}
+\end{table}
+
+
+\begin{center}
+$E(Y)=\sum_y y \times P(Y=y)$ \hspace{2cm} $Var(y)=\sum_y (y-\mu)^2 \times P(Y=y)$ 
+
+$E(Y)=\int_{-\infty}^{+\infty} yf(y)dy$ \hspace{2cm} $Var(y)=\int_{-\infty}^{+\infty}(y-\mu)^2f(y)dy$ 
+
+\end{center}
+
+

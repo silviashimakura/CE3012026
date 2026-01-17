@@ -1,0 +1,862 @@
+---
+title: "Estatística básica"
+author: "|\n| 2025/01 - Estatística e Ciência de Dados\n"
+subtitle: |
+  | Prof. Dra. Silvia Emiko Shimakura
+  | Prof. Dra. Amanda Merian Freitas Mendes
+  | Prof. Dr. Paulo Justiniano Ribeiro Junior
+output:
+  html_document:
+    highlight: espresso
+    fig_width: 7
+    fig_height: 6
+    fig_caption: true
+    fig_align: center
+  pdf_document: default
+---
+
+---
+
+# Notas e frequência
+
+<!-- Busque sua situação digitando seu GRR na caixa "Search". -->
+
+\
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+### Medidas de posição
+
+posicao <- function(vetor){
+  table <- data.frame(n = sum(!is.na(vetor)),
+                      Minimo = quantile(vetor, na.rm = T)[1],
+                      Quartil_1 = quantile(vetor, na.rm = T)[2],
+                      Media = mean(vetor, na.rm = T),
+                      Mediana = quantile(vetor, na.rm = T)[3],
+                      Quartil_3 = quantile(vetor, na.rm = T)[4],
+                      Maximo = quantile(vetor, na.rm = T)[5])
+  
+  row.names(table) <- NULL
+  
+  names(table) <- c('n', 'Mínimo', 'Q1', 'Média', 'Mediana', 'Q3', 'Máximo')
+  
+  table  
+}
+
+#----------------------------------------------------------------------
+
+### Medidas de dispersao
+
+dispersao <- function(vetor){
+  table <- data.frame(Amplitude = diff(range(vetor, na.rm = T)),
+                      Variancia = var(vetor, na.rm = T),
+                      Desvio_padrao = sd(vetor, na.rm = T)#,
+                      #Coef_variacao = 100*sd(vetor)/mean(vetor)
+  )
+  
+  names(table) <- c('Amplitude', 'Variância', 'Desvio padrão')
+  
+  table
+}
+
+#----------------------------------------------------------------------
+
+notas <- readxl::read_xls('notas-chamada.xls')
+
+notas$`PROVA 1` <- as.numeric(notas$`PROVA 1`)
+notas$`PROVA 2` <- as.numeric(notas$`PROVA 2`)
+notas$`PROVA 3` <- as.numeric(notas$`PROVA 3`)
+notas$`PROVA 4` <- round(as.numeric(notas$`PROVA 4`),1)
+notas$`REMOTA 1` <- round(as.numeric(notas$`REMOTA 1`),1)
+notas$`REMOTA 2` <- round(as.numeric(notas$`REMOTA 2`),1)
+notas$`REMOTA 3` <- round(as.numeric(notas$`REMOTA 3`),1)
+notas$`REMOTA 4` <- round(as.numeric(notas$`REMOTA 4`),1)
+#notas$`REMOTA 5` <- round(as.numeric(notas$`REMOTA 5`),1)
+# notas$`TRABALHO 1` <- as.numeric(notas$`TRABALHO 1`)
+# notas$`TRABALHO 2` <- as.numeric(notas$`TRABALHO 2`)
+
+notas$`MÉDIA REMOTAS` <- rowSums(notas[,c('REMOTA 1', 
+                                          'REMOTA 2',
+                                          'REMOTA 3', 
+                                          'REMOTA 4'#,
+                                          #'REMOTA 5'#, 
+                                          # 'TRABALHO 1',
+                                          # 'TRABALHO 2'
+                                          )],na.rm = T) /4
+
+soma_parciais <- rowSums(notas[,c('PROVA 1', 'PROVA 2',
+                                  'PROVA 3', 'PROVA 4',
+                                  'MÉDIA REMOTAS')], 
+                         na.rm = T)
+
+menor_parcial <- pmin(
+  ifelse(is.na(notas$`PROVA 1`),0, notas$`PROVA 1`), 
+  ifelse(is.na(notas$`PROVA 2`),0, notas$`PROVA 2`), 
+  ifelse(is.na(notas$`PROVA 3`),0, notas$`PROVA 3`), 
+  ifelse(is.na(notas$`PROVA 4`),0, notas$`PROVA 4`), 
+  notas$`MÉDIA REMOTAS`,
+  na.rm = T)
+
+#pre_exame <- round((soma_parciais-menor_parcial)/4, 1)
+pre_exame <- round(soma_parciais/5, 1)
+
+i <- pre_exame==3.9
+pre_exame[i] <- 4
+
+notas$`NOTAS PRÉ EXAME` <- pre_exame
+
+notas$`SITUAÇÃO PRÉ EXAME` <- 
+  ifelse(notas$`NOTAS PRÉ EXAME` >= 7,
+       "APROVADO",
+       ifelse(notas$`NOTAS PRÉ EXAME` < 4, 
+              "REPROVADO",
+              "EXAME"))
+
+notas$`NOTAS FINAIS` <- 
+  ifelse(notas$`SITUAÇÃO PRÉ EXAME` == 'EXAME',
+         ifelse(is.na(notas$EXAME),
+                round(notas$`NOTAS PRÉ EXAME`/2,1),
+                round((notas$`NOTAS PRÉ EXAME`+ notas$EXAME)/2, 1)),
+         notas$`NOTAS PRÉ EXAME`)
+
+notas$`SITUAÇÃO FINAL` <- 
+  ifelse(notas$`NOTAS FINAIS` >= 5,
+         "APROVADO",
+         "REPROVADO")
+
+# DT::datatable(notas[,c('GRR', 
+#                        'FALTAS', 
+#                        'PROVA 1', 
+#                        'PROVA 2',
+#                        'PROVA 3',
+#                        'PROVA 4',
+#                        'REMOTA 1', 
+#                        'REMOTA 2',
+#                        'REMOTA 3',
+#                        'REMOTA 4'#,
+#                        #'TRABALHO 1',
+#                        #'TRABALHO 2',
+#                        #"NOTAS PRÉ EXAME",
+#                        #"SITUAÇÃO PRÉ EXAME"
+#                        #"EXAME",
+#                        #"NOTAS FINAIS",
+#                        #"SITUAÇÃO FINAL"
+#                        )], 
+#               class = 'cell-border stripe',
+#               rownames = F,
+#               #filter = 'top',
+#               editable = F
+#               )
+
+knitr::kable(notas[,c(2,3,4,5,6,7,8,9,10,12,70,71)])
+
+```
+
+---
+
+<center>
+```{r, eval=FALSE,echo=FALSE, warning=FALSE}
+
+datas1 <- stringr::str_remove(names(notas)[20:(length(names(notas))-5)],
+                              "'")
+
+datas2 <- stringr::str_remove(datas1, c("'"))
+
+datas <- lubridate::dmy(datas2)
+
+presencas <- colSums(is.na(notas[,20:(length(names(notas))-5)]))
+
+presencas <- data.frame(datas = datas,
+                        presencas = presencas)
+
+pander::pander(posicao(subset(presencas, datas <= lubridate::today())$presencas))
+pander::pander(dispersao(subset(presencas, datas <= lubridate::today())$presencas))
+```
+</center>
+
+```{r, eval=FALSE,comment=FALSE, message=FALSE, fig.align='center', warning=TRUE, echo = FALSE, warning=FALSE, fig.width=10}
+
+library(ggplot2)
+library(ggpubr)
+
+ggplot(data = subset(presencas, datas <= lubridate::today()),
+       aes(x=datas, y=presencas)) +
+  geom_line() +
+  geom_point() +
+  geom_smooth() +
+  geom_hline(yintercept = 71,
+             lwd = 1.5,
+             col = 2,
+             lty = 2) +
+  ylab("Nº de presentes") +
+  xlab("Data") +
+  ylim(c(0,71))+
+  ggtitle("Série de presenças")+
+  theme_classic() + 
+  theme(legend.position = 'none',
+        plot.title = element_text(family = "Helvetica",
+                                  face = "bold",
+                                  size = (20),
+                                  hjust = 0),
+        axis.title = element_text(face = "bold",
+                                  size = 15),
+        text = element_text(size=15))
+
+#pander::pander(posicao(subset(presencas, datas <= lubridate::today())$presencas))
+#pander::pander(dispersao(subset(presencas, datas <= lubridate::today())$presencas))
+
+```
+
+---
+
+
+# Análise das notas {.tabset .tabset-fade .tabset-pills}
+
+---
+
+## PROVA 1
+
+<center>
+```{r, echo=FALSE, warning=FALSE}
+pander::pander(posicao(notas$`PROVA 1`))
+pander::pander(dispersao(notas$`PROVA 1`))
+```
+</center>
+
+```{r, comment=FALSE, message=FALSE, fig.align='center', warning=TRUE, echo = FALSE, warning=FALSE}
+library(ggplot2)
+library(ggpubr)
+
+p1 = ggplot(notas) +
+  geom_histogram(aes(x=`PROVA 1`,
+                     y=..density..),
+                 position="identity",
+                 col = 1,
+                 lwd = 1,
+                 breaks = seq(0,10,0.5)) +
+  geom_density(aes(x=`PROVA 1`,
+                   y=..density..),
+               col = 4,
+               lwd = 1) +
+  ylab("Densidade") +
+  xlab("") +
+  ggtitle("Prova 1")+
+  theme_classic() + theme(legend.position = 'none',
+                          plot.title = element_text(family = "Helvetica",
+                                                    face = "bold",
+                                                    size = (20),
+                                                    hjust = 0), #0,5 para legenda centralizada
+                          axis.title = element_text(face = "bold",
+                                                    size = 15),
+                          text = element_text(size=15))
+
+p2 = ggplot(data = notas,
+            mapping = aes(y=`PROVA 1`, x='1')) +
+  stat_boxplot(geom ='errorbar')+
+  geom_boxplot(alpha = 1)+
+  #xlim(c(0,10)) +
+  stat_summary(fun.y=mean,
+               geom="point",
+               shape=20,
+               size=3,
+               color="red",
+               fill="red")+
+  ylab("Notas") +
+  xlab("") +
+  #ggtitle("Titulo")+
+  scale_y_continuous(limits = c(0, 10))+
+  theme_classic() + theme(legend.position = 'none',
+                          plot.title = element_text(family = "Helvetica",
+                                                    face = "bold",
+                                                    size = (20),
+                                                    hjust = 0), #0,5 para legenda centralizada
+                          axis.title = element_text(face = "bold",
+                                                    size = 15),
+                          axis.text.y=element_blank(),
+                          text = element_text(size=15)) +coord_flip()
+
+ggarrange(p1, p2,
+          heights = c(2, 1),
+          align = "hv",
+          ncol = 1,
+          nrow = 2)
+```
+
+---
+
+## PROVA 2
+
+<center>
+```{r, echo=FALSE, warning=FALSE}
+pander::pander(posicao(notas$`PROVA 2`))
+pander::pander(dispersao(notas$`PROVA 2`))
+```
+</center>
+
+```{r, comment=FALSE, message=FALSE, fig.align='center', warning=TRUE, echo = FALSE, warning=FALSE}
+library(ggplot2)
+library(ggpubr)
+
+p1 = ggplot(notas) +
+  geom_histogram(aes(x=`PROVA 2`,
+                     y=..density..),
+                 position="identity",
+                 col = 1,
+                 lwd = 1,
+                 breaks = seq(0,10,0.5)) +
+  geom_density(aes(x=`PROVA 2`,
+                   y=..density..),
+               col = 4,
+               lwd = 1) +
+  ylab("Densidade") +
+  xlab("") +
+  ggtitle("Prova 2")+
+  theme_classic() + theme(legend.position = 'none',
+                          plot.title = element_text(family = "Helvetica",
+                                                    face = "bold",
+                                                    size = (20),
+                                                    hjust = 0), #0,5 para legenda centralizada
+                          axis.title = element_text(face = "bold",
+                                                    size = 15),
+                          text = element_text(size=15))
+
+p2 = ggplot(data = notas,
+            mapping = aes(y=`PROVA 2`, x='1')) +
+  stat_boxplot(geom ='errorbar')+
+  geom_boxplot(alpha = 1)+
+  #xlim(c(0,10)) +
+  stat_summary(fun.y=mean,
+               geom="point",
+               shape=20,
+               size=3,
+               color="red",
+               fill="red")+
+  ylab("Notas") +
+  xlab("") +
+  #ggtitle("Titulo")+
+  scale_y_continuous(limits = c(0, 10))+
+  theme_classic() + theme(legend.position = 'none',
+                          plot.title = element_text(family = "Helvetica",
+                                                    face = "bold",
+                                                    size = (20),
+                                                    hjust = 0), #0,5 para legenda centralizada
+                          axis.title = element_text(face = "bold",
+                                                    size = 15),
+                          axis.text.y=element_blank(),
+                          text = element_text(size=15)) +coord_flip()
+
+ggarrange(p1, p2,
+          heights = c(2, 1),
+          align = "hv",
+          ncol = 1,
+          nrow = 2)
+```
+
+---
+
+## PROVA 3
+
+<center>
+```{r, echo=FALSE, warning=FALSE}
+pander::pander(posicao(notas$`PROVA 3`))
+pander::pander(dispersao(notas$`PROVA 3`))
+```
+</center>
+
+```{r, comment=FALSE, message=FALSE, fig.align='center', warning=TRUE, echo = FALSE, warning=FALSE}
+library(ggplot2)
+library(ggpubr)
+
+p1 = ggplot(notas) +
+  geom_histogram(aes(x=`PROVA 3`,
+                     y=..density..),
+                 position="identity",
+                 col = 1,
+                 lwd = 1,
+                 breaks = seq(0,10,0.5)) +
+  geom_density(aes(x=`PROVA 3`,
+                   y=..density..),
+               col = 4,
+               lwd = 1) +
+  ylab("Densidade") +
+  xlab("") +
+  ggtitle("Prova 3")+
+  theme_classic() + theme(legend.position = 'none',
+                          plot.title = element_text(family = "Helvetica",
+                                                    face = "bold",
+                                                    size = (20),
+                                                    hjust = 0), #0,5 para legenda centralizada
+                          axis.title = element_text(face = "bold",
+                                                    size = 15),
+                          text = element_text(size=15))
+
+p2 = ggplot(data = notas,
+            mapping = aes(y=`PROVA 3`, x='1')) +
+  stat_boxplot(geom ='errorbar')+
+  geom_boxplot(alpha = 1)+
+  #xlim(c(0,10)) +
+  stat_summary(fun.y=mean,
+               geom="point",
+               shape=20,
+               size=3,
+               color="red",
+               fill="red")+
+  ylab("Notas") +
+  xlab("") +
+  #ggtitle("Titulo")+
+  scale_y_continuous(limits = c(0, 10))+
+  theme_classic() + theme(legend.position = 'none',
+                          plot.title = element_text(family = "Helvetica",
+                                                    face = "bold",
+                                                    size = (20),
+                                                    hjust = 0), #0,5 para legenda centralizada
+                          axis.title = element_text(face = "bold",
+                                                    size = 15),
+                          axis.text.y=element_blank(),
+                          text = element_text(size=15)) +coord_flip()
+
+ggarrange(p1, p2,
+          heights = c(2, 1),
+          align = "hv",
+          ncol = 1,
+          nrow = 2)
+```
+
+---
+
+## PROVA 4
+
+<center>
+```{r, echo=FALSE, warning=FALSE}
+pander::pander(posicao(notas$`PROVA 4`))
+pander::pander(dispersao(notas$`PROVA 4`))
+```
+</center>
+
+```{r, comment=FALSE, message=FALSE, fig.align='center', warning=TRUE, echo = FALSE, warning=FALSE}
+library(ggplot2)
+library(ggpubr)
+
+p1 = ggplot(notas) +
+  geom_histogram(aes(x=`PROVA 4`,
+                     y=..density..),
+                 position="identity",
+                 col = 1,
+                 lwd = 1,
+                 breaks = seq(0,10,0.5)) +
+  geom_density(aes(x=`PROVA 4`,
+                   y=..density..),
+               col = 4,
+               lwd = 1) +
+  ylab("Densidade") +
+  xlab("") +
+  ggtitle("Prova 4")+
+  theme_classic() + theme(legend.position = 'none',
+                          plot.title = element_text(family = "Helvetica",
+                                                    face = "bold",
+                                                    size = (20),
+                                                    hjust = 0), #0,5 para legenda centralizada
+                          axis.title = element_text(face = "bold",
+                                                    size = 15),
+                          text = element_text(size=15))
+
+p2 = ggplot(data = notas,
+            mapping = aes(y=`PROVA 4`, x='1')) +
+  stat_boxplot(geom ='errorbar')+
+  geom_boxplot(alpha = 1)+
+  #xlim(c(0,10)) +
+  stat_summary(fun.y=mean,
+               geom="point",
+               shape=20,
+               size=3,
+               color="red",
+               fill="red")+
+  ylab("Notas") +
+  xlab("") +
+  #ggtitle("Titulo")+
+  scale_y_continuous(limits = c(0, 10))+
+  theme_classic() + theme(legend.position = 'none',
+                          plot.title = element_text(family = "Helvetica",
+                                                    face = "bold",
+                                                    size = (20),
+                                                    hjust = 0), #0,5 para legenda centralizada
+                          axis.title = element_text(face = "bold",
+                                                    size = 15),
+                          axis.text.y=element_blank(),
+                          text = element_text(size=15)) +coord_flip()
+
+ggarrange(p1, p2,
+          heights = c(2, 1),
+          align = "hv",
+          ncol = 1,
+          nrow = 2)
+```
+
+---
+
+## REMOTA 1
+
+<center>
+```{r, echo=FALSE, warning=FALSE}
+pander::pander(posicao(notas$`REMOTA 1`))
+pander::pander(dispersao(notas$`REMOTA 1`))
+```
+</center>
+
+```{r, comment=FALSE, message=FALSE, fig.align='center', warning=TRUE, echo = FALSE, warning=FALSE}
+library(ggplot2)
+library(ggpubr)
+
+p1 = ggplot(notas) +
+  geom_histogram(aes(x=`REMOTA 1`,
+                     y=..density..),
+                 position="identity",
+                 col = 1,
+                 lwd = 1,
+                 breaks = seq(0,10,0.5)) +
+  geom_density(aes(x=`REMOTA 1`,
+                   y=..density..),
+               col = 4,
+               lwd = 1) +
+  ylab("Densidade") +
+  xlab("") +
+  ggtitle("REMOTA 1")+
+  theme_classic() + theme(legend.position = 'none',
+                          plot.title = element_text(family = "Helvetica",
+                                                    face = "bold",
+                                                    size = (20),
+                                                    hjust = 0), #0,5 para legenda centralizada
+                          axis.title = element_text(face = "bold",
+                                                    size = 15),
+                          text = element_text(size=15))
+
+p2 = ggplot(data = notas,
+            mapping = aes(y=`REMOTA 1`, x='1')) +
+  stat_boxplot(geom ='errorbar')+
+  geom_boxplot(alpha = 1)+
+  #xlim(c(0,10)) +
+  stat_summary(fun.y=mean,
+               geom="point",
+               shape=20,
+               size=3,
+               color="red",
+               fill="red")+
+  ylab("Notas") +
+  xlab("") +
+  #ggtitle("Titulo")+
+  scale_y_continuous(limits = c(0, 10))+
+  theme_classic() + theme(legend.position = 'none',
+                          plot.title = element_text(family = "Helvetica",
+                                                    face = "bold",
+                                                    size = (20),
+                                                    hjust = 0), #0,5 para legenda centralizada
+                          axis.title = element_text(face = "bold",
+                                                    size = 15),
+                          axis.text.y=element_blank(),
+                          text = element_text(size=15)) +coord_flip()
+
+ggarrange(p1, p2,
+          heights = c(2, 1),
+          align = "hv",
+          ncol = 1,
+          nrow = 2)
+```
+
+---
+
+## REMOTA 2
+
+<center>
+```{r, echo=FALSE, warning=FALSE}
+pander::pander(posicao(notas$`REMOTA 2`))
+pander::pander(dispersao(notas$`REMOTA 2`))
+```
+</center>
+
+```{r, comment=FALSE, message=FALSE, fig.align='center', warning=TRUE, echo = FALSE, warning=FALSE}
+library(ggplot2)
+library(ggpubr)
+
+p1 = ggplot(notas) +
+  geom_histogram(aes(x=`REMOTA 2`,
+                     y=..density..),
+                 position="identity",
+                 col = 1,
+                 lwd = 1,
+                 breaks = seq(0,10,0.5)) +
+  geom_density(aes(x=`REMOTA 2`,
+                   y=..density..),
+               col = 4,
+               lwd = 1) +
+  ylab("Densidade") +
+  xlab("") +
+  ggtitle("REMOTA 2")+
+  theme_classic() + theme(legend.position = 'none',
+                          plot.title = element_text(family = "Helvetica",
+                                                    face = "bold",
+                                                    size = (20),
+                                                    hjust = 0), #0,5 para legenda centralizada
+                          axis.title = element_text(face = "bold",
+                                                    size = 15),
+                          text = element_text(size=15))
+
+p2 = ggplot(data = notas,
+            mapping = aes(y=`REMOTA 2`, x='1')) +
+  stat_boxplot(geom ='errorbar')+
+  geom_boxplot(alpha = 1)+
+  #xlim(c(0,10)) +
+  stat_summary(fun.y=mean,
+               geom="point",
+               shape=20,
+               size=3,
+               color="red",
+               fill="red")+
+  ylab("Notas") +
+  xlab("") +
+  #ggtitle("Titulo")+
+  scale_y_continuous(limits = c(0, 10))+
+  theme_classic() + theme(legend.position = 'none',
+                          plot.title = element_text(family = "Helvetica",
+                                                    face = "bold",
+                                                    size = (20),
+                                                    hjust = 0), #0,5 para legenda centralizada
+                          axis.title = element_text(face = "bold",
+                                                    size = 15),
+                          axis.text.y=element_blank(),
+                          text = element_text(size=15)) +coord_flip()
+
+ggarrange(p1, p2,
+          heights = c(2, 1),
+          align = "hv",
+          ncol = 1,
+          nrow = 2)
+```
+
+---
+
+## REMOTA 3
+
+<center>
+```{r, echo=FALSE, warning=FALSE}
+pander::pander(posicao(notas$`REMOTA 3`))
+pander::pander(dispersao(notas$`REMOTA 3`))
+```
+</center>
+
+```{r, comment=FALSE, message=FALSE, fig.align='center', warning=TRUE, echo = FALSE, warning=FALSE}
+library(ggplot2)
+library(ggpubr)
+
+p1 = ggplot(notas) +
+  geom_histogram(aes(x=`REMOTA 3`,
+                     y=..density..),
+                 position="identity",
+                 col = 1,
+                 lwd = 1,
+                 breaks = seq(0,10,0.5)) +
+  geom_density(aes(x=`REMOTA 3`,
+                   y=..density..),
+               col = 4,
+               lwd = 1) +
+  ylab("Densidade") +
+  xlab("") +
+  ggtitle("REMOTA 3")+
+  theme_classic() + theme(legend.position = 'none',
+                          plot.title = element_text(family = "Helvetica",
+                                                    face = "bold",
+                                                    size = (20),
+                                                    hjust = 0), #0,5 para legenda centralizada
+                          axis.title = element_text(face = "bold",
+                                                    size = 15),
+                          text = element_text(size=15))
+
+p2 = ggplot(data = notas,
+            mapping = aes(y=`REMOTA 3`, x='1')) +
+  stat_boxplot(geom ='errorbar')+
+  geom_boxplot(alpha = 1)+
+  #xlim(c(0,10)) +
+  stat_summary(fun.y=mean,
+               geom="point",
+               shape=20,
+               size=3,
+               color="red",
+               fill="red")+
+  ylab("Notas") +
+  xlab("") +
+  #ggtitle("Titulo")+
+  scale_y_continuous(limits = c(0, 10))+
+  theme_classic() + theme(legend.position = 'none',
+                          plot.title = element_text(family = "Helvetica",
+                                                    face = "bold",
+                                                    size = (20),
+                                                    hjust = 0), #0,5 para legenda centralizada
+                          axis.title = element_text(face = "bold",
+                                                    size = 15),
+                          axis.text.y=element_blank(),
+                          text = element_text(size=15)) +coord_flip()
+
+ggarrange(p1, p2,
+          heights = c(2, 1),
+          align = "hv",
+          ncol = 1,
+          nrow = 2)
+```
+
+---
+
+## REMOTA 4
+
+<center>
+```{r, echo=FALSE, warning=FALSE}
+pander::pander(posicao(notas$`REMOTA 4`))
+pander::pander(dispersao(notas$`REMOTA 4`))
+```
+</center>
+
+```{r, comment=FALSE, message=FALSE, fig.align='center', warning=TRUE, echo = FALSE, warning=FALSE}
+library(ggplot2)
+library(ggpubr)
+
+p1 = ggplot(notas) +
+  geom_histogram(aes(x=`REMOTA 4`,
+                     y=..density..),
+                 position="identity",
+                 col = 1,
+                 lwd = 1,
+                 breaks = seq(0,10,0.5)) +
+  geom_density(aes(x=`REMOTA 4`,
+                   y=..density..),
+               col = 4,
+               lwd = 1) +
+  ylab("Densidade") +
+  xlab("") +
+  ggtitle("REMOTA 4")+
+  theme_classic() + theme(legend.position = 'none',
+                          plot.title = element_text(family = "Helvetica",
+                                                    face = "bold",
+                                                    size = (20),
+                                                    hjust = 0), #0,5 para legenda centralizada
+                          axis.title = element_text(face = "bold",
+                                                    size = 15),
+                          text = element_text(size=15))
+
+p2 = ggplot(data = notas,
+            mapping = aes(y=`REMOTA 4`, x='1')) +
+  stat_boxplot(geom ='errorbar')+
+  geom_boxplot(alpha = 1)+
+  #xlim(c(0,10)) +
+  stat_summary(fun.y=mean,
+               geom="point",
+               shape=20,
+               size=3,
+               color="red",
+               fill="red")+
+  ylab("Notas") +
+  xlab("") +
+  #ggtitle("Titulo")+
+  scale_y_continuous(limits = c(0, 10))+
+  theme_classic() + theme(legend.position = 'none',
+                          plot.title = element_text(family = "Helvetica",
+                                                    face = "bold",
+                                                    size = (20),
+                                                    hjust = 0), #0,5 para legenda centralizada
+                          axis.title = element_text(face = "bold",
+                                                    size = 15),
+                          axis.text.y=element_blank(),
+                          text = element_text(size=15)) +coord_flip()
+
+ggarrange(p1, p2,
+          heights = c(2, 1),
+          align = "hv",
+          ncol = 1,
+          nrow = 2)
+```
+
+---
+
+## NOTAS FINAIS
+
+<center>
+```{r, echo=FALSE, warning=FALSE}
+pander::pander(posicao(notas$`NOTAS FINAIS`))
+pander::pander(dispersao(notas$`NOTAS FINAIS`))
+```
+</center>
+
+```{r, comment=FALSE, message=FALSE, fig.align='center', warning=TRUE, echo = FALSE, warning=FALSE}
+library(ggplot2)
+library(ggpubr)
+
+p1 = ggplot(notas) +
+  geom_histogram(aes(x=`NOTAS FINAIS`,
+                     y=..density..),
+                 position="identity",
+                 col = 1,
+                 lwd = 1,
+                 breaks = seq(0,10,0.5)) +
+  geom_density(aes(x=`NOTAS FINAIS`,
+                   y=..density..),
+               col = 4,
+               lwd = 1) +
+  ylab("Densidade") +
+  xlab("") +
+  ggtitle("NOTAS FINAIS")+
+  theme_classic() + theme(legend.position = 'none',
+                          plot.title = element_text(family = "Helvetica",
+                                                    face = "bold",
+                                                    size = (20),
+                                                    hjust = 0), #0,5 para legenda centralizada
+                          axis.title = element_text(face = "bold",
+                                                    size = 15),
+                          text = element_text(size=15))
+
+p2 = ggplot(data = notas,
+            mapping = aes(y=`NOTAS FINAIS`, x='1')) +
+  stat_boxplot(geom ='errorbar')+
+  geom_boxplot(alpha = 1)+
+  #xlim(c(0,10)) +
+  stat_summary(fun.y=mean,
+               geom="point",
+               shape=20,
+               size=3,
+               color="red",
+               fill="red")+
+  ylab("Notas") +
+  xlab("") +
+  #ggtitle("Titulo")+
+  scale_y_continuous(limits = c(0, 10))+
+  theme_classic() + theme(legend.position = 'none',
+                          plot.title = element_text(family = "Helvetica",
+                                                    face = "bold",
+                                                    size = (20),
+                                                    hjust = 0), #0,5 para legenda centralizada
+                          axis.title = element_text(face = "bold",
+                                                    size = 15),
+                          axis.text.y=element_blank(),
+                          text = element_text(size=15)) +coord_flip()
+
+ggarrange(p1, p2,
+          heights = c(2, 1),
+          align = "hv",
+          ncol = 1,
+          nrow = 2)
+```
+
+---
+
+<table><tr>
+
+<td> <img src="img/ufpr-transparent-600px.png" alt="Drawing" style="width: 200px;"/> </td>
+
+<td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td>
+
+<td> <img src="img/dest-texto-2.png" alt="Drawing" style="width: 250px;"/> </td>
+
+<td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td>
+
+<td> <img src="img/leg.png" alt="Drawing" style="width: 300px;"/> </td>
+
+</center>
+
+
+<div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>

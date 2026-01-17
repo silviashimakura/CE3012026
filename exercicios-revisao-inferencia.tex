@@ -1,0 +1,184 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[left=2cm,right=2cm,top=0.5cm,bottom=2cm]{geometry}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{hyphenat}
+\usepackage{float}
+\usepackage{placeins}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{natbib}
+\usepackage{arydshln}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{fancyhdr}
+\usepackage{multirow}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={CE301 - Estatística básica - Revisão de inferência},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{CE301 - Estatística básica - Revisão de inferência}
+\author{}
+\date{\vspace{-2.5em}\(1^o\) Semestre 2024}
+
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+
+%normal e binomial
+\item Numa certa população de animais marinhos, a distribuição de pesos é Normal, com média $\mu=$ 80.5 kg e desvio-padrão $\sigma=$ 17.9 kg.
+\begin{enumerate}
+\item Qual peso é superado por apenas 1\% dos pesos nessa população? 
+122.1
+
+\item Qual é a probabilidade de um animal dessa população ter peso acima de 90 kg? 
+
+0.2978
+
+%\item Numa amostra de  10 animais marinhos selecionados ao acaso desta popula\c c\~ao qual é a probabilidade de que exista pelo menos um com peso acima de 90 kg? 
+%0.9709
+
+\item Qual é a probabilidade do peso médio de uma amostra de tamanho 10 desses animais marinhos, superar 90 kg?
+0.0466
+
+\item Um pesquisador acredita que houve alteração nas condições climáticas nas últimas décadas e que esse fato pode ter afetado a distribuição dos pesos dos animais marinhos dessa espécie, tanto na média quanto na variância dos pesos. Para testar sua hipótese ele tomou uma amostra aleatória simples de tamanho 10 desses animais e obteve os seguintes dados: 
+
+\begin{center}
+\begin{tabular}{lc}
+\hline
+Pesos (kg)&64.6, 48, 67.8, 79.8, 95.4, 60.5, 75.5, 55, 59, 59.4 \\
+\hline
+\end{tabular}
+\end{center}
+
+Com base nesta amostra responda:
+\begin{enumerate}
+\item Quais são os parâmetros de interesse neste problema?
+$\mu$ e $\sigma^2$
+\item Quais são as estimativas pontuais dos parâmetros de interesse com base nos dados obtidos pelo pesquisador?
+$\hat{\mu}=$66.5\ e\ $\hat{\sigma}^2=$190.6
+\item Obtenha estimativas intervalares para os parâmetros de interesse com nível de confiança de 95\% com base na amostra. 
+
+(66.5$\pm$2.26$\times$13.8$/\sqrt{10}$)=(56.64,76.36)
+
+($\frac{(10-1)190.6}{19.02}$; $\frac{(10-1)190.6}{2.7}$) = (90.18,635.3)
+
+\item Estabeleça as hipóteses nula e alternativa dos testes de hipóteses para os parâmetros de interesse.
+
+$H_0: \mu=$80.5$\times H_a:\mu\neq$80.5
+
+$H_0: \sigma^2=$17.9$^2 \times H_a:\sigma^2\neq$17.9$^2$
+
+\item Realize os testes de hipóteses para os parâmetros ao nível de significância de 5\% e interprete os resultados. 
+
+
+
+RC=($t <$-2.26 ou $t >$2.26)
+
+
+
+RC=($\chi^2 <$2.7 ou $\chi^2 >$19.02)
+
+\end{enumerate}
+\item Qual deveria ser o tamanho da amostra em um novo estudo para que a margem de erro fosse de 1kg com 99\% de confiança? Use estimativa baseada na amostra acima como aproximação para o parâmetro populacional.
+
+
+$n=(\frac{2.58\times 13.8}{1})^2$=1265
+
+\end{enumerate}
+
+\newpage
+
+
+
+\item Um vendedor de sementes de milho garante um percentual de germinação de suas sementes de 95\%. Um agricultor desconfia que na verdade a proporção é menor do que a anunciada pelo vendedor. Antes de efetuar uma grande compra, o agricultor comprou um pacote com 140 sementes e plantou, observando mais tarde que 125 sementes germinaram. O resultado do experimento do agricultor confirma sua desconfiança? 
+\begin{enumerate}
+\item Qual é o parâmetro de interesse neste problema?
+$p$: proporção de sementes que germinam
+\item Qual é a estimativa pontual com base nos dados obtidos pelo agricultor?
+$\hat{p}=0.893$
+\item Assumindo que o vendedor esteja sendo honesto, qual é a probabilidade de se obter uma estimativa pontual do parâmetro de interesse tão ou mais distante do valor do parâmetro de interesse quanto a obtida pelo agricultor?
+$P(\hat{p}<0.893|H_0$ verdadeira$)=P(Z<$-3.09)=0.001
+\item Qual é o erro padrão da estimativa pontual do parâmetro de interesse?
+se=0.026
+\item Qual é a margem de erro da estimativa pontual do parâmetro de interesse com 95\% de confiança?
+e=1.96$\times$0.026=0.051
+\item Obtenha uma estimativa intervalar do parâmetro de interesse com 95\% de confiança?
+IC95=(0.893$\pm$ e)=(0.842,0.944)
+\item Estabeleça as hipóteses nula e alternativa do teste de hipóteses. Faça o teste de hipóteses usando um nível de significância de 5\%.
+$H_0: p=0.95\times H_a:p <$0.95
+$RC=\{z<-1.64\},$
+z=-3.09, 
+$z\in RC$, podemos rejeitar $H_0$
+\item Qual é o valor-p do teste?
+p-valor=$P(Z<$-3.09)= 0.001
+\item Qual deveria ser o tamanho da amostra em um novo estudo para que a margem de erro fosse de no máximo metade da obtida anteriormente com 95\% de confiança? Use a estimativa pontual do parâmetro obtida pelo agricultor como uma aproximação para o valor real do parâmetro.
+
+$n=(\frac{1.96}{e/2})^2 \times \hat{p}\times (1-\hat{p})=$565
+
+\end{enumerate}
+
+\end{enumerate}
+
+\end{document}

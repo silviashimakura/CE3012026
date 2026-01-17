@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Estatística básica</title>
+
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">CE301 - Estatística Básica</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li>
+  <a href="aulas.html">
+    <span class="fa fa-calendar"></span>
+     
+    Aulas
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-pencil"></span>
+     
+    Exercícios
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="listas/000-matbas.pdf">
+        <span class="fa fa-arrow-right"></span>
+         
+        Elementos de matemática
+      </a>
+    </li>
+    <li>
+      <a href="listas/100-exercicios-exploratoria.pdf">
+        <span class="fa fa-arrow-right"></span>
+         
+        Análise exploratória
+      </a>
+    </li>
+    <li>
+      <a href="praticas-R/atividade.html">
+        <span class="fa fa-arrow-right"></span>
+         
+        Análise exploratória com R
+      </a>
+    </li>
+    <li>
+      <a href="listas/201-exercicios-probabilidade.pdf">
+        <span class="fa fa-arrow-right"></span>
+         
+        Probabilidade
+      </a>
+    </li>
+    <li>
+      <a href="listas/202-exercicios-variaveis-aleatorias.pdf">
+        <span class="fa fa-arrow-right"></span>
+         
+        Variáveis aleatórias
+      </a>
+    </li>
+    <li>
+      <a href="listas/203-exercicios-distribuicoes.pdf">
+        <span class="fa fa-arrow-right"></span>
+         
+        Distribuições de probabilidade
+      </a>
+    </li>
+    <li>
+      <a href="listas/301-exercicios-distribuicao-amostral-ic.pdf">
+        <span class="fa fa-arrow-right"></span>
+         
+        Distribuição amostral e intervalos de confiança
+      </a>
+    </li>
+    <li>
+      <a href="listas/302-exercicios-testes-de-hipoteses.pdf">
+        <span class="fa fa-arrow-right"></span>
+         
+        Testes de hipóteses
+      </a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-table"></span>
+     
+    Tabelas e formulários
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="tabelas/formulario2.pdf">
+        <span class="fa fa-arrow-right"></span>
+         
+        Formulário
+      </a>
+    </li>
+    <li>
+      <a href="tabelas/tabela-z.pdf">
+        <span class="fa fa-arrow-right"></span>
+         
+        Tabela z (lado positivo)
+      </a>
+    </li>
+    <li>
+      <a href="tabelas/tabela-z2.pdf">
+        <span class="fa fa-arrow-right"></span>
+         
+        Tabela z (completa)
+      </a>
+    </li>
+    <li>
+      <a href="tabelas/tabela-t.pdf">
+        <span class="fa fa-arrow-right"></span>
+         
+        Tabela t
+      </a>
+    </li>
+    <li>
+      <a href="tabelas/tabela-chi.pdf">
+        <span class="fa fa-arrow-right"></span>
+         
+        Tabela Qui-quadrado
+      </a>
+    </li>
+    <li>
+      <a href="tabelas/tabela-f.pdf">
+        <span class="fa fa-arrow-right"></span>
+         
+        Tabela F
+      </a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="notas.html">
+    <span class="fa fa-square-poll-vertical"></span>
+     
+    Notas e frequência
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://est.ufpr.br/professores/19-silvia.html">
+    <span class="fa fa-user"></span>
+     
+    Silvia E.S.
+  </a>
+</li>
+<li>
+  <a href="https://est.ufpr.br/professores/00-amanda.html">
+    <span class="fa fa-user"></span>
+     
+    Amanda M.F.M.
+  </a>
+</li>
+<li>
+  <a href="https://est.ufpr.br/professores/17-paulojus.html">
+    <span class="fa fa-user"></span>
+     
+    Paulo J.R.Jr.
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Estatística básica</h1>
+<h3 class="subtitle"><div class="line-block">Prof. Dra. Silvia Emiko
+Shimakura<br />
+Prof. Dra. Amanda Merian Freitas Mendes<br />
+Prof. Dr. Paulo Justiniano Ribeiro Junior</div></h3>
+<h4 class="author"><div class="line-block"><br />
+2026/01 - Estatística e Ciência de Dados</div></h4>
+
+</div>
+
+
+<hr />
+<div id="aulas-do-curso" class="section level1">
+<h1>Aulas do curso</h1>
+<hr />
+<div id="bloco-1-análise-exploratória" class="section level2">
+<h2>Bloco 1: Análise Exploratória</h2>
+<p><strong>Semana 1</strong></p>
+<ul>
+<li>Semana de recepção aos calouros
+<!-- - 13/03/26 (qui) - [Apresentação do curso (Prof. Lineu).](slides/100-introducao.pdf) --></li>
+</ul>
+<p><strong>Semana 2</strong></p>
+<ul>
+<li>02/03/26 (seg) - <a href="slides/000-revisao-matematica.pdf">Revisão
+matemática.</a></li>
+<li>03/03/26 (ter) - Revisão matemática.</li>
+<li>05/03/26 (qui) - Introdução ao R (<a
+href="slides/000-introducao-ao-r.pdf">slides</a>, <a
+href="praticas-R/000-ambientacao-ao-R.R">script</a>)</li>
+<li>06/03/26 (sex) - Revisão matemática.</li>
+</ul>
+<p><strong>Semana 3</strong></p>
+<ul>
+<li>09/03/26 (seg) - <a href="slides/101-dados-e-amostragem.pdf">Dados e
+amostragem.</a> <a
+href="praticas-aula/100-variaveis-estudos-amostragem-enunciados.pdf">Atividade
+prática: tipos de variáveis, tipos de estudos e amostragem</a>. <a
+href="slides/Revis%C3%A3o_Amostragem_estratificada_e_por_conglomerados.pdf">Revisão:
+amostragem estratificada e por conglomerados</a>.</li>
+<li>10/03/26 (ter) - <a
+href="slides/102-exploratoria-quali-uni-tabelas-graficos.pdf">Gráficos e
+tabelas para variáveis qualitativas.</a> <a
+href="slides/103-exploratoria-quant-uni-tabelas-graficos.pdf">Gráficos e
+tabelas para variáveis quantitativas.</a></li>
+<li>12/03/26 (qui) - <a
+href="praticas-R/100-graficos-tabelas-uni.R">Gráficos e tabelas no
+R.</a></li>
+<li>13/03/26 (sex) - <a
+href="praticas-aula/101-tabelas-graficos-quali-quant-solucao.pdf">Atividade
+prática: gráficos e tabelas</a>.</li>
+</ul>
+<p><strong>Semana 4</strong></p>
+<ul>
+<li>16/03/26 (seg) - <a
+href="slides/104-exploratoria-medidas-posicao.pdf">Resumos numéricos -
+medidas de posição.</a></li>
+<li>17/03/26 (ter) - <a
+href="slides/105-exploratoria-medidas-dispersao.pdf">Resumos numéricos -
+medidas de dispersão.</a></li>
+<li>19/03/26 (qui) - <a href="praticas-R/101-medidas-uni.R">Medidas de
+posição e dispersão no R.</a> <a href="praticas-R/milsa.R">Resumos
+numéricos</a>.</li>
+<li>20/03/26 (sex) - <a
+href="praticas-aula/102-medidas-posicao-dispersao-solucao.pdf">Atividade
+prática: medidas de posição e dispersão</a>.</li>
+</ul>
+<p><strong>Semana 5</strong></p>
+<ul>
+<li>23/03/26 (seg) - <a
+href="slides/106-exploratoria-bivariada.pdf">Análises bivariadas.</a> <a
+href="praticas-aula/103-analises-bivariadas-solucao.pdf">Atividade
+prática: análises bivariadas</a>.</li>
+<li>24/03/26 (ter) - Análises bivariadas.</li>
+<li>26/03/26 (qui) - <a
+href="praticas-R/102-analises-bivariadas.R">Análises bivariadas no
+R.</a></li>
+<li>27/03/26 (sex) - Mini-teste.</li>
+</ul>
+<p><strong>Semana 6</strong></p>
+<ul>
+<li>30/03/26 (seg) - Tira dúvidas.</li>
+<li>31/03/26 (ter) - Tira dúvidas.</li>
+<li>02/04/26 (qui) - <strong>PROVA 1</strong></li>
+<li>03/04/26 (sex) - <strong>Feriado: Paixão</strong></li>
+</ul>
+<hr />
+</div>
+<div id="bloco-2-probabilidades" class="section level2">
+<h2>Bloco 2: Probabilidades</h2>
+<p><strong>Semana 7</strong></p>
+<ul>
+<li>06/04/26 (seg) - <a href="slides/IntroProb.pdf">Motivando
+probabilidades</a>. <a
+href="praticas-aula/preprobSOL1a7.pdf">Pré-Prob</a>.</li>
+<li>07/04/26 (ter) - <a href="slides/200-intro-prob.pdf">Introdução a
+probabilidade</a>. <a
+href="praticas-aula/200-probabilidade-solucao.pdf">Atividade prática:
+Lista 1 (item 1 ao item 3)</a>.</li>
+<li>09/04/26 (qui) - Obtendo probabilidades da forma frequentista (<a
+href="praticas-R/201-moeda.R">moeda</a>, <a
+href="praticas-R/202-dado.R">dado</a>, <a
+href="praticas-R/203-chavalier1.R">chavalier 1</a>, <a
+href="praticas-R/204-chavalier2.R">chavalier 2</a>).</li>
+<li>10/04/26 (sex) - <a
+href="slides/201-operacoes-com-probabilidades.pdf">Operações com
+probabilidades</a>.</li>
+</ul>
+<p><strong>Semana 8</strong></p>
+<ul>
+<li>13/04/26 (seg) - <a
+href="praticas-aula/200-probabilidade-solucao.pdf">Atividade prática:
+Lista 1 (item 4 ao item 7)</a>, <a
+href="praticas-aula/pj-pospro.pdf">Lista 2 (item 1 ao item 5).</a></li>
+<li>14/04/26 (ter) - <a href="slides/202-teorema-de-bayes.pdf">Teorema
+de Bayes</a>.</li>
+<li>16/04/26 (qui) - Calculando probabilidade com base em tabelas de
+dupla entrada (<a
+href="praticas-R/205-prob-animais.R">animais</a>).</li>
+<li>17/04/26 (sex) - <a
+href="praticas-aula/200-probabilidade-solucao.pdf">Atividade prática:
+Lista 1 (item 8)</a>.</li>
+</ul>
+<p><strong>Semana 9</strong></p>
+<ul>
+<li>20/04/26 (seg) -</li>
+<li>21/04/26 (ter) - <strong>Feriado: Tiradentes.</strong></li>
+<li>23/04/26 (qui) - <a href="praticas-aula/pj-pospro.pdf">Atividade
+prática: Lista 2 (item 6 até item 10)</a></li>
+<li>24/04/26 (sex) - Mini-teste</li>
+</ul>
+<p><strong>Semana 10</strong></p>
+<ul>
+<li>27/04/26 (seg) - Tira dúvidas.</li>
+<li>28/04/26 (ter) - Tira dúvidas.</li>
+<li>30/04/26 (qui) - <strong>PROVA 2.</strong></li>
+<li>01/05/26 (sex) - <strong>Feriado: Dia do Trabalho.</strong></li>
+</ul>
+<hr />
+</div>
+<div id="bloco-3-variáveis-aleatórias-e-distribuições-de-probabilidade"
+class="section level2">
+<h2>Bloco 3: Variáveis Aleatórias e Distribuições de Probabilidade</h2>
+<p><strong>Semana 11</strong></p>
+<ul>
+<li>04/05/26 (seg) - <a
+href="slides/300-variaveis-aleatorias.pdf">Variáveis aleatórias
+discretas e contínuas.</a></li>
+<li>05/05/26 (ter) - <a
+href="praticas-aula/300-variaveis-aleatorias-enunciado.pdf">Atividade
+prática: variáveis aleatórias</a>.</li>
+<li>07/05/26 (qui) -</li>
+<li>08/05/26 (sex) - <a
+href="listas/202-exercicios-variaveis-aleatorias.pdf">Lista: Variáveis
+aleatórias</a>.</li>
+</ul>
+<p><strong>Semana 12</strong></p>
+<ul>
+<li>11/05/27 (seg) - <a href="slides/ProbVAs-2.pdf">Famílias de
+distribuições</a>.</li>
+<li>12/05/26 (ter) - <a
+href="slides/301-distribuicoes-discretas.pdf">Distribuições de
+probabilidade discretas</a>.</li>
+<li>14/05/26 (qui) -</li>
+<li>15/05/26 (sex) - <a
+href="listas/203-exercicios-distribuicoes.pdf">Lista: Distribuições de
+probabilidade discretas</a>.</li>
+</ul>
+<p><strong>Semana 13</strong></p>
+<ul>
+<li>18/05/26 (seg) - <a
+href="slides/302-distribuicoes-continuas.pdf">Distribuições de
+probabilidade contínuas</a>.</li>
+<li>19/05/26 (ter) - <a
+href="listas/203-exercicios-distribuicoes.pdf">Lista: Distribuições de
+probabilidade contínuas</a>.</li>
+<li>21/05/26 (qui) - <a href="praticas-R/vas.R">Prática em R (1).</a> <a
+href="praticas-R/vasdists.R">Prática em R (2).</a> <a
+href="praticas-R/300-distribuicoes.R">Variáveis aleatórias e
+distribuições de probabilidade no R.</a></li>
+<li>22/05/26 (sex) - Mini-teste.</li>
+</ul>
+<p><strong>Semana 14</strong></p>
+<ul>
+<li>25/05/26 (seg) - Tira dúvidas.</li>
+<li>26/05/26 (ter) - Tira dúvidas.</li>
+<li>28/05/26 (qui) - <strong>PROVA 3.</strong></li>
+<li>29/05/26 (sex) - <a
+href="slides/400-intro-inferencia.pdf">Introdução à inferência.</a> <a
+href="praticas-aula/400-intro-inferencia-dist-amostral-enunciado.pdf">Exercícios.</a></li>
+</ul>
+<hr />
+</div>
+<div id="bloco-4-inferência" class="section level2">
+<h2>Bloco 4: Inferência</h2>
+<p><strong>Semana 15</strong></p>
+<ul>
+<li>01/06/26 (seg) - <a
+href="slides/401-estimacao-pontual-intervalar.pdf">Estimação pontual e
+intervalar</a></li>
+<li>02/06/26 (ter) - <a
+href="praticas-aula/401-intervalo-de-confianca-enunciado.pdf">Exercícios</a>.</li>
+<li>04/06/26 (qui) - <strong>Feriado: Corpus Christ</strong></li>
+<li>05/06/26 (sex) - Recesso.</li>
+</ul>
+<p><strong>Semana 16</strong></p>
+<ul>
+<li>08/06/26 (seg) - <a href="slides/402-tamanho-amostral.pdf">Tamanho
+amostral.</a> <a
+href="praticas-aula/402-tamanho-amostral-enunciado.pdf">Exercícios.</a></li>
+<li>09/06/26 (ter) - <a
+href="slides/403-testes-de-hipoteses.pdf">Introdução aos testes de
+hipóteses, testes para uma população</a>.</li>
+<li>11/06/26 (qui) - <a
+href="praticas-R/401-exercicios-ic-tamanho-amostral.R">Prática em
+R</a>.</li>
+<li>12/06/26 (sex) - <a
+href="praticas-aula/403-teste-de-hipoteses-enunciado.pdf">Exercícios:
+testes de hipóteses.</a></li>
+</ul>
+<p><strong>Semana 16</strong></p>
+<ul>
+<li>15/06/26 (seg) - <a
+href="praticas-aula/exercicios-revisao-inferencia.pdf">Exercícios:
+revisão inferência.</a></li>
+<li>16/06/26 (ter) - <a
+href="praticas-aula/exercicios-revisao-inferencia.pdf">Exercícios:
+revisão inferência.</a></li>
+<li>18/06/26 (qui) - <a href="praticas-R/402-ic-th.R">Prática em
+R</a>.</li>
+<li>19/06/26 (sex) - Mini-teste.</li>
+</ul>
+<p><strong>Semana 17</strong></p>
+<ul>
+<li>22/06/26 (seg) - Tira dúvidas.</li>
+<li>23/06/26 (ter) - Tira dúvidas.</li>
+<li>25/06/26 (qui) - <strong>PROVA 4.</strong></li>
+</ul>
+<p><strong>Exame</strong></p>
+<ul>
+<li>02/07/26 (qui) - <strong>EXAME.</strong></li>
+</ul>
+<hr />
+<center>
+<table>
+<tr>
+<td>
+<img src="img/ufpr-transparent-600px.png" alt="Drawing" style="width: 200px;"/>
+</td>
+<td>
+           
+</td>
+<td>
+<img src="img/dest-texto-2.png" alt="Drawing" style="width: 250px;"/>
+</td>
+<td>
+           
+</td>
+<td>
+<img src="img/leg.png" alt="Drawing" style="width: 300px;"/>
+</td>
+</center>
+<div class="tocify-extend-page" data-unique="tocify-extend-page"
+style="height: 0;">
+
+</div>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

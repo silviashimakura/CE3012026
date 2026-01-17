@@ -1,0 +1,285 @@
+---
+title: "CE301 - Estatística Básica - Prova 4"
+date: "1o. Semestre 2025"
+geometry: "left=2cm,right=2cm,top=0.5cm,bottom=1.5cm"
+output:
+  pdf_document:
+    keep_tex: true
+fontsize: 12pt
+header-includes:
+- \usepackage[utf8]{inputenc}
+- \usepackage[T1]{fontenc}
+- \usepackage[portuguese]{babel}
+- \usepackage{hyphenat}
+- \usepackage{float}
+- \usepackage{placeins}
+- \usepackage{mathtools}
+- \usepackage{amsmath}
+- \usepackage{natbib}
+- \usepackage{arydshln}
+- \usepackage{multirow}
+- \usepackage{booktabs}
+- \usepackage{caption}
+- \usepackage{fancyhdr}
+- \usepackage{multirow}
+- \usepackage{comment}
+- \newcommand{\R}{{\normalfont\textsf{R}}{}}
+#- \excludecomment{solucao}
+- \includecomment{solucao}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+require(psych)
+require(knitr)
+require(mvtnorm)
+require(ggplot2)
+```
+
+\noindent
+\textbf{Nome:} \underline{\hspace{16cm}}\
+
+\textbf{Data:} \underline{\hspace{1cm}/\hspace{1cm}/\hspace{1cm}} \hspace{0.5cm} 
+\textbf{GRR:} \underline{\hspace{3cm}} \hspace{0.5cm}
+\textbf{Assinatura:} \underline{\hspace{5cm}}
+
+\vspace{0.5cm}
+
+1) Uma refinaria recebe navios transportando petróleo bruto. Historicamente, a quantidade de carga por navio segue distribuição normal com média $\mu=30000$ toneladas, mas o desvio-padrão populacional $\sigma$ é desconhecido. Você coleta uma amostra aleatória simples de $n=25$ navios, e obtém uma média amostral de $\bar{x}=28000$ toneladas e um desvio-padrão amostral de $s=4200$ toneladas.
+
+a) Identifique e descreva, neste contexto, os seguintes elementos segundo os conceitos de estatística. (0,5 ponto)
+\begin{enumerate}
+\item[i)] a população,
+\item[ii)] a variável aleatória de interesse,
+\item[iii)] o parâmetro de interesse,
+\item[iv)] a amostra,
+\item[v)] o estimador,
+\item[iv)] a estimativa,
+\item[vii)] a distribuição amostral.
+\end{enumerate}
+
+b) Construa o intervalo de confiança de 95\% para $\mu$. Qual distribuição foi usada? Interprete o resultado no contexto da refinaria. (0,5 ponto)
+
+c) A refinaria suspeita que a média atual é menor que a histórica de 30000 t.
+\begin{itemize}
+\item[i)] Formule a hipótese nula e a alternativa? (0,5 ponto)
+\item[ii)] Calcule o valor da estatística de teste, a região crítica e o p-valor? (1,0 ponto)
+\item[iii)] Qual é a conclusão do teste com nível de significância de 5\%? Interpretação prática. (0,5 ponto)
+\end{itemize}
+
+d) Obtenha um intervalo de confiança de 95\% para $\sigma^2$. Quais parâmetros foram usados (graus de liberdade, distribuição)? Interprete. (0,5 ponto)
+
+e) Calcule o tamanho de amostra necessário para que a margem de erro máxima para estimar $\mu$ seja 500 toneladas, com 99\% de confiança. Use como estimativa substituta $s = 4200$ t. Interprete esse resultado. (0,5 ponto)
+
+
+```{r,echo=FALSE}
+n1 <- 25
+xbar1 <- 28000
+s1 <- 4200
+alpha <- 0.05
+tcrit1 <- qt(1-alpha/2, df = n1 - 1)
+me1 <- tcrit1 * s1 / sqrt(n1)
+ic_mu <- round(xbar1 + c(-me1, +me1),1)
+
+tstat1 <- (xbar1 - 30000) / (s1 / sqrt(n1))
+pval1 <- pt(tstat1, df = n1 - 1)
+tcrit2 <- qt(alpha, df = n1 - 1)
+
+chi_lo <- qchisq(0.975, df = n1 - 1)
+chi_hi <- qchisq(0.025, df = n1 - 1)
+ic_var <- (n1 - 1) * s1^2 / c(chi_lo, chi_hi)
+
+E <- 500
+z99 <- round(qnorm(0.995),2)
+n_req1 <- (z99 * s1 / E)^2
+
+```
+
+\begin{solucao}
+\hrulefill
+
+\textbf{Solução}
+\begin{itemize}
+\item[a)] 
+\begin{enumerate}
+\item[i)] a população: todos os navios que transportam petróleo bruto para a refinaria,
+\item[ii)] a variável aleatória de interesse: a quantidade de carga transportada por cada navio,
+\item[iii)] o parâmetro de interesse: a média $\mu$ da quantidade de carga e a variância $\sigma^2$ da quantidade de carga,
+\item[iv)] a amostra: os 25 navios selecionados aleatoriamente,
+\item[v)] o estimador: $\bar{x}$ (média amostral) e $s^2$ (variância amostral),
+\item[iv)] a estimativa: $\bar{x} = 28000$ toneladas e $s^2 = 17640000$ toneladas$^2$,
+\item[vii)] a distribuição amostral: $\bar{X}$ segue distribuição $t$ de Student com $n-1=24$ graus de liberdade, pois a população é normal e o desvio-padrão populacional é desconhecido e $(n-1) s^2/\sigma^2$ segue distribuição $\chi^2$ com $n-1=24$ graus de liberdade.
+\end{enumerate}
+
+\item[b)] IC 95\% para $\mu$: [`r xbar1` $\pm$ `r round(tcrit1,3)` * `r s1`/`r sqrt(n1)`]= [`r round(ic_mu[1])`; `r round(ic_mu[2])`] toneladas. 
+
+\textbf{Interpretação}: Há 95\% de confiança de que este intervalo cobre a verdadeira média.
+
+\item[c)] Teste unilateral $H_0: \mu=30000$ vs $H_1:\mu<30000$
+
+\begin{itemize}
+\item Estatística de teste: $t_{calc}=$ `r tstat1`
+\item $RC=\{t_{calc}\leq$ `r round(tcrit2,3)`$\}$
+\item p-valor=`r pval1` $< 0,05 \rightarrow $ Rejeitamos $H_0$.  
+\end{itemize}
+
+\textbf{Conclusão}: Há evidência suficiente de que a média atual é menor que 30000 t.
+
+
+\item[d)] IC 95\% para $\sigma^2$: [$`r (n1 - 1)` * `r s1`^2 / `r round(chi_lo,2)`; `r (n1 - 1)` * `r s1`^2 / `r round(chi_hi,2)`$] toneladas$^2$= [`r round(ic_var[1])`; `r round(ic_var[2])`] ton$^2$
+
+\textbf{Interpretação}: Há 95\% de confiança de que este intervalo cobre a verdadeira variância das cargas.
+
+\item[e)] \textbf{Tamanho amostral} p/ $ME = 500$ (99\% conf.): $n=(`r z99` * `r s1` / `r E`)^2$= `r ceiling(n_req1)` navios. 
+
+\textbf{Interpretação}: Para uma estimativa tão precisa, seria necessário uma amostra bem maior.
+
+
+\end{itemize}
+
+\end{solucao}
+
+\hrulefill
+
+2) Uma fábrica visa que 2% das peças produzidas sejam defeituosas. Em um lote recente, foi sorteada uma amostra aleatória simples de $n = 500$ peças e observou-se 12 peças defeituosas.
+
+a) Identifique e descreva, neste contexto, os seguintes elementos segundo os conceitos de estatística. (0,5 ponto)
+\begin{enumerate}
+\item a população,
+\item a variável aleatória de interesse,
+\item o parâmetro de interesse,
+\item a amostra,
+\item o estimador,
+\item a estimativa,
+\item a distribuição amostral.
+\end{enumerate}
+
+b) Calcule o erro padrão da proporção estimada. Verifique as condições para aplicar a aproximação normal ($np\geq 5$ e $n(1-p)\geq 5$). (0,5 ponto)
+
+c) Monte o intervalo de confiança otimista de 95\% para a proporção populacional de peças defeituosas. Interprete o resultado em relação ao padrão da fábrica. (0,5 ponto)
+
+d) Há evidência de que a taxa de defeitos excede o limite desejado? Estabeleça $H_0$ e $H_1$ para o teste de hipóteses. Calcule a estatística de teste e a região crítica. Decida a um nível de significância $\alpha=5$\%.  (1,5 pontos)
+
+e) Especifique o p-valor calculado e explique seu significado no contexto decisional. (0,5 ponto)
+
+f) Quer-se reduzir a margem de erro para metade da atual (considerando o intervalo de confiança prévio) com 95\% de confiança. Utilize valor otimista $p=0,02$ (maximiza precisão). Calcule o novo $n$. Explique como interpretar esse tamanho conforme investimento em controle de qualidade. (0,5 ponto)
+
+
+```{r,echo=FALSE}
+n2 <- 500
+p_hat2 <- 12 / 500
+p0 <- 0.02
+
+se2 <- sqrt(p_hat2 * (1 - p_hat2) / n2)
+np0 <- n2 * p0
+nq0 <- n2 * (1 - p0)
+
+z95 <- qnorm(0.975)
+ic_p <- p_hat2 + c(-1, 1) * z95 * se2
+
+zstat2 <- (p_hat2 - p0) / se2
+pval2 <- 1 - pnorm(zstat2)
+
+E_old <- z95 * se2
+E_new <- E_old / 2
+n_new <- (z95^2 * p0 * (1 - p0)) / E_new^2
+
+```
+
+\begin{solucao}
+\hrulefill
+
+\textbf{Solução}
+
+\begin{enumerate}
+\item[a)] 
+\begin{enumerate}
+\item a população: todas as peças produzidas pela fábrica,
+\item a variável aleatória de interesse: a proporção de peças defeituosas,
+\item o parâmetro de interesse: a proporção populacional de peças defeituosas $p$,
+\item a amostra: as 500 peças selecionadas aleatoriamente,
+\item o estimador: $\hat{p} = \frac{12}{500}$ (proporção amostral de defeitos),
+\item a estimativa: $\hat{p} = 0.024$ (2,4\% de defeitos),
+\item a distribuição amostral: $\hat{p}$ segue aproximadamente uma distribuição normal, pois $n$ é grande e $np \geq 5$ e $n(1-p) \geq 5$.
+\end{enumerate}
+
+\item[b)] Erro padrão e condições
+\begin{align*}
+se &= `r se2`\\
+np &= `r np0`\geq 5\\
+nq &= `r nq0`\geq 5\\
+& \mbox{condições atendidas}
+\end{align*}
+
+\item[c)] IC 95\% para proporção
+\begin{align*}
+\mbox{Intervalo= } & [`r round(ic_p[1],4)`;`r round(ic_p[2],4)`]\\
+\mbox{Interpretação: }& \mbox{A verdadeira taxa de defeitos é coberta pelo IC com uma confiança de 95}\%. 
+\end{align*}
+
+\item[d)] Teste unilateral $H_0:p=0,02$ vs $H_1:p>0,02$
+\begin{align*}
+\mbox{Estatística de teste: }& z=`r round(zstat2,2)`\\
+\mbox{p-valor: }& `r round(pval2,4)`  > 0.05 \rightarrow \mbox{não rejeita} H_0\\
+\mbox{Conclusão: }& \mbox{ sem evidência de que a proporção excede 2}\%.
+\end{align*}
+
+\item[e)] Valor-p = `r round(pval2,4)`. 
+\begin{align*}
+\mbox{Interpretação: }& \mbox{ Sob } H_0, \mbox{há } `r round(pval2*100,1)`\% \mbox{de chance de observar } \hat p \mbox{ tão alto ou maior;} \\
+&\mbox{Não é suficiente para rejeitar.}
+\end{align*}
+
+\item[f)] Tamanho amostral p/ metade do erro (95\%)
+
+Resultado: `r ceiling(n_new)` peças. 
+
+Interpretação: aumentaria a amostra para reduzir o erro pela metade.
+
+\end{enumerate}
+
+\end{solucao}
+
+\hrulefill
+
+3) Explique os conceitos de erro tipo I e erro tipo II em testes de hipóteses e interprete no contexto da questão 2. Discuta como esses erros podem impactar decisões neste contexto. (1,0 ponto)
+
+\hrulefill
+
+4) Seja $Y$ a variável tempo de serviço dos funcionários de determinada localidade. Se $Y$ tem distribuição normal com média 15 anos desvio padrão 10 anos.
+\begin{enumerate}
+\item  Qual   a   probabilidade   de   um   funcionário,
+aleatoriamente  escolhido,  ter  pelo  menos  10
+anos de tempo de serviço? (0,5 ponto)
+\item Tomando-se uma amostra de 16 funcionários, qual   a   probabilidade   do   tempo   médio   de
+serviço estar entre 13 e 16 anos? (0,5 ponto)
+\end{enumerate}
+
+```{r,echo=FALSE}
+pa <- pnorm(10, m=15, sd=10, lower=FALSE)
+pb <- diff(pnorm(c(13,16), m=15, sd=10/4))
+```
+
+\begin{solucao}
+
+\textbf{Solução:}
+
+\begin{align*}
+Y &: \mbox{tempo de serviço de um funcionário} \\
+Y & \sim \rm{N}(\mu=15, \sigma^2=10^2)\\
+\overline{Y} &: \mbox{tempo médio de serviço de um grupo de 16 funcionários} \\
+\overline{Y}_{16} & \sim \rm{N}(\mu=15, \sigma^2=10^2/16)\\
+\end{align*}
+\begin{enumerate}
+\item $P[Y \geq 10] = P[Z \geq \frac{10-15}{10}] = P[Z \geq -0.5] = `r round(pa, dig=4)`$ 
+\item $P[13 \leq \overline{Y}_{16} \leq 16] = P[\frac{13-15}{10/\sqrt{16}} \leq Z \leq \frac{16-15}{10/\sqrt{16}}] = P[`r round((13-15)/(10/4), dig=3)` \leq Z \leq  `r round((16-15)/(10/4),3)`] = `r round(pb, dig=4)`$ 
+\end{enumerate}
+
+\hrulefill
+\end{solucao}
+
+
+
+\hrulefill
+

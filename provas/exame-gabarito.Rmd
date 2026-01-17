@@ -1,0 +1,285 @@
+---
+title: "CE301 - Estatística Básica - Exame Final"
+date: "1o. Semestre 2025"
+geometry: "left=2cm,right=2cm,top=0.5cm,bottom=1.5cm"
+output:
+  pdf_document:
+    keep_tex: true
+fontsize: 11pt
+header-includes:
+- \usepackage[utf8]{inputenc}
+- \usepackage[T1]{fontenc}
+- \usepackage[portuguese]{babel}
+- \usepackage{hyphenat}
+- \usepackage{float}
+- \usepackage{placeins}
+- \usepackage{mathtools}
+- \usepackage{amsmath}
+- \usepackage{natbib}
+- \usepackage{arydshln}
+- \usepackage{multirow}
+- \usepackage{booktabs}
+- \usepackage{caption}
+- \usepackage{fancyhdr}
+- \usepackage{multirow}
+- \usepackage{comment}
+- \newcommand{\R}{{\normalfont\textsf{R}}{}}
+- \excludecomment{solucao}
+#- \includecomment{solucao}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+require(psych)
+require(knitr)
+require(mvtnorm)
+require(ggplot2)
+```
+
+\noindent
+\textbf{Nome:} \underline{\hspace{16cm}}\
+
+\textbf{Data:} \underline{\hspace{1cm}/\hspace{1cm}/\hspace{1cm}} \hspace{0.5cm} 
+\textbf{GRR:} \underline{\hspace{3cm}} \hspace{0.5cm}
+\textbf{Assinatura:} \underline{\hspace{4.5cm}}
+
+\vspace{0.5cm}
+
+1) (2,0 pts) Os números abaixo mostram as notas de um grupo de alunos em duas avaliações:
+\begin{center}
+\begin{tabular}{l|ccccccccccccccc}
+\hline
+Aluno  & 1& 2& 3& 4& 5& 6& 7& 8& 9&10&11&12&13&14&15\\  
+\hline
+Prova 1&35&39&50&47&33&17&17&80&23&51& 2&21&20&12&81\\
+Prova 2&65&63&80&72&65&35&62&72&50&60&32&59&40&68&79\\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{enumerate}
+\item[a)] Calcule média, variância e coeficiente de variação das notas em cada avaliação.
+\item[b)] Calcule quartis, amplitude e amplitude interquartílica de cada avaliação. Faça um diagrama \textit{box-plot} para comparar as notas das duas avaliações. 
+\item[c)] Usando as medidas e o gráfico acima, compare o rendimento dos alunos nas duas provas.
+\item[d)] Qual gráfico você faria para visualizar a relação (associação) entre os resultados das duas provas? Qual medida estatística poderia ser usada para quantificar a associação entre os resultados? Explique o que esta medida indicaria.
+\end{enumerate}
+
+
+```{r,echo=FALSE}
+n1 <- 25
+xbar1 <- 28000
+s1 <- 4200
+alpha <- 0.05
+tcrit1 <- qt(1-alpha/2, df = n1 - 1)
+me1 <- tcrit1 * s1 / sqrt(n1)
+ic_mu <- round(xbar1 + c(-me1, +me1),1)
+
+tstat1 <- (xbar1 - 30000) / (s1 / sqrt(n1))
+pval1 <- pt(tstat1, df = n1 - 1)
+tcrit2 <- qt(alpha, df = n1 - 1)
+
+chi_lo <- qchisq(0.975, df = n1 - 1)
+chi_hi <- qchisq(0.025, df = n1 - 1)
+ic_var <- (n1 - 1) * s1^2 / c(chi_lo, chi_hi)
+
+E <- 500
+z99 <- round(qnorm(0.995),2)
+n_req1 <- (z99 * s1 / E)^2
+
+```
+
+\begin{solucao}
+\hrulefill
+
+\textbf{Solução}
+\begin{itemize}
+\item[a)] 
+\begin{enumerate}
+\item[i)] a população: todos os navios que transportam petróleo bruto para a refinaria,
+\item[ii)] a variável aleatória de interesse: a quantidade de carga transportada por cada navio,
+\item[iii)] o parâmetro de interesse: a média $\mu$ da quantidade de carga e a variância $\sigma^2$ da quantidade de carga,
+\item[iv)] a amostra: os 25 navios selecionados aleatoriamente,
+\item[v)] o estimador: $\bar{x}$ (média amostral) e $s^2$ (variância amostral),
+\item[iv)] a estimativa: $\bar{x} = 28000$ toneladas e $s^2 = 17640000$ toneladas$^2$,
+\item[vii)] a distribuição amostral: $\bar{X}$ segue distribuição $t$ de Student com $n-1=24$ graus de liberdade, pois a população é normal e o desvio-padrão populacional é desconhecido e $(n-1) s^2/\sigma^2$ segue distribuição $\chi^2$ com $n-1=24$ graus de liberdade.
+\end{enumerate}
+
+\item[b)] IC 95\% para $\mu$: [`r xbar1` $\pm$ `r round(tcrit1,3)` * `r s1`/`r sqrt(n1)`]= [`r round(ic_mu[1])`; `r round(ic_mu[2])`] toneladas. 
+
+\textbf{Interpretação}: Há 95\% de confiança de que este intervalo cobre a verdadeira média.
+
+\item[c)] Teste unilateral $H_0: \mu=30000$ vs $H_1:\mu<30000$
+
+\begin{itemize}
+\item Estatística de teste: $t_{calc}=$ `r tstat1`
+\item $RC=\{t_{calc}\leq$ `r round(tcrit2,3)`$\}$
+\item p-valor=`r pval1` $< 0,05 \rightarrow $ Rejeitamos $H_0$.  
+\end{itemize}
+
+\textbf{Conclusão}: Há evidência suficiente de que a média atual é menor que 30000 t.
+
+
+\item[d)] IC 95\% para $\sigma^2$: [$`r (n1 - 1)` * `r s1`^2 / `r round(chi_lo,2)`; `r (n1 - 1)` * `r s1`^2 / `r round(chi_hi,2)`$] toneladas$^2$= [`r round(ic_var[1])`; `r round(ic_var[2])`] ton$^2$
+
+\textbf{Interpretação}: Há 95\% de confiança de que este intervalo cobre a verdadeira variância das cargas.
+
+\item[e)] \textbf{Tamanho amostral} p/ $ME = 500$ (99\% conf.): $n=(`r z99` * `r s1` / `r E`)^2$= `r ceiling(n_req1)` navios. 
+
+\textbf{Interpretação}: Para uma estimativa tão precisa, seria necessário uma amostra bem maior.
+
+
+\end{itemize}
+
+\end{solucao}
+\hrulefill
+
+2) (3,0 pts) O Índice de Qualidade do Ar (IQA) é uma representação dos níveis de concentração de poluição do ar, varia numa escala entre 0 e 400, e ajuda a determinar quando se espera que a qualidade do ar seja prejudicial. Para efetuar o monitoramento de poluentes no ar em uma determinada área foram coletadas amostras. Os níveis de concentração de poluição do ar, medidos em IQA, são fornecidos a seguir.
+```{r,echo=FALSE, message=FALSE, warning=FALSE}
+set.seed(125)
+n <- 12
+x <- round(rnorm(n, m=180, sd=25), dig=1)
+knitr::kable(t(x), caption = "Níveis de concentração de poluição do ar (IQA)", digits=1)
+
+```
+
+\begin{enumerate}
+\item[a)] Caracterize o nível de poluição na área através de um resumo estatístico adequado dos dados.
+%\item[b)] Qual valor você escolheria para estimar o nível de poluição na área? 
+%\item[c)] Qual é a estimativa deste valor? Como você representaria a incerteza sobre esta estimativa?
+\item[b)] A legislação afirma que se o índice estiver acima de 200 IQA a qualidade do ar na área é considerada em nível de atenção e sujeita a intervenção para controle. Baseando-se nos dados, e um nível de significância de 5\%, você indicaria a intervenção na área?
+\end{enumerate}
+
+Num relatório foram reportadas análises dos dados (Tabela 1) que incluiam as informações a seguir:
+
+\textbf{O nível de poluição na área expresso pela média aritmética dos valores medidos nas amostras
+é de `r round(mean(x), dig=2)` $IQA$. A margem de erro é de `r round(qnorm(0.95) * 25/sqrt(length(x)), dig=2)` $IQA$ obtida pela expressão $z \cdot 25/\sqrt{`r length(x)`}$ com $z = `r round(qnorm(0.95), dig=3)`$ obtido da distribuição normal, e  considerando-se que a variância dos índices é conhecida e igual a $25^2$ $IQA^2$}.
+
+Na análise estatística apresentada no relatório:
+\begin{enumerate}
+\item[c)] Qual a população, a variável aleatória e a amostra no contexto deste problema?
+%\item[f)] Qual o estimador escolhido e a estimativa pontual obtida?
+\item[d)] Qual a estimativa intervalar e seu nível de confiança?
+\item[e)] Quais as suposições utilizadas na análise?
+\item[f)] Como os resultados poderiam ser utilizados para determinar se deve ou não haver intervenção na área?
+%\item[g)] Qual deveria ser o tamanho da amostra para que a margem de erro fosse de no máximo $10 ~IQA$? 
+\end{enumerate}
+\hrulefill
+
+3) (0,5 pt) Em um teste múltipla escolha há 5 questões e cada questão tem 5 alternativas das quais apenas uma é correta.
+Assumindo independência entre as questões, qual é a probabilidade de um indivíduo acertar por mero acaso alguma questão?
+
+```{r,echo=FALSE}
+pacerto <- 0.20
+perro <- 1-pacerto
+perrartodas <- perro^5
+pacertaralguma <- 1-perrartodas
+
+```
+
+\hrulefill
+
+4) (1,0 pt) Acredita-se que numa certa população, 20\% de seus habitantes sofrem de algum tipo de alergia medicamentosa e 
+são classificados como alérgicos. Sendo alérgico, a probabilidade de ter reação a um certo antibiótico é 0.5. 
+Dentre os não alérgicos essa probabilidade é de apenas 0.05. 
+\begin{enumerate}
+\item Qual a probabilidade de uma pessoa dessa população ter reação ao fazer uso do antibiótico? 
+\item Uma pessoa dessa população teve reação ao fazer uso do antibótico. Qual é a probabilidade dela ser do grupo não alérgico? 
+\end{enumerate}
+
+```{r,echo=FALSE}
+pa=0.2
+pac=1-pa
+prdadoa=0.5
+prdadoac=0.05
+pr=round((pa*prdadoa+pac*prdadoac),dig=4)
+pacdador=round((pac*prdadoac)/pr,dig=4)
+
+```
+
+
+\hrulefill
+
+5) (1,5 pts) Um fabricante afirma que sua vacina contra gripe imuniza 85\% dos sujeitos tomam a vacina. Uma amostra de 25 indivíduos entre os que tomaram a vacina foi sorteada e testes foram feitos 
+para verificar a imunização ou não desses indivíduos. 
+
+\begin{enumerate}
+\item[a)] Qual seria a estimativa pontual e a intervalar (com confiança de 90\%) da proporção $p$ de imunizados na população vacinada se fossem observados 18 imunizados dentre os 25 avaliados? 
+
+```{r,echo=FALSE}
+pchap <- 18/25
+l <- pchap+qnorm(c(0.05,0.95))*sqrt(pchap*(1-pchap)/n)
+
+```
+
+\item[b)] Se fossem observados 18 imunizados dentre os 25 vacinados, haveria evidência suficiente contra o fabricante e poderíamos concluir que o percentual de imunização é inferior a 85\% ao nível de significância de 5\%?  
+
+
+\item[c)] Qual deveria ser o tamanho da amostra em um novo estudo para que a margem de erro fosse de no máximo
+0,02 com 90\% de confiança? Use a estimativa pontual de $p$ obtida no item anterior. 
+
+```{r,echo=FALSE}
+e <- 0.02
+n <- (qnorm(0.95)/e)^2*pchap*(1-pchap)
+
+```
+
+
+```{r,echo=FALSE}
+# <!-- \item Suponha que se adote o critério de refutar a afirmativa do fabricante caso sejam observados 18 ou menos -->
+# <!-- não imunizados dentre 25 avaliados. Se a afirmativa for verdadeira (a vacina de fato imuniza 85\%), qual é a probabilidade de refutá-la erroneamente? -->
+# <!-- ```{r,echo=FALSE} -->
+# <!-- x <- 18 -->
+# <!-- n <- 25 -->
+# <!-- p0 <- 0.85 -->
+# <!-- res <- pnorm(x/n,p0,sqrt(p0*(1-p0)/n)) -->
+# <!-- ``` -->
+# <!-- \item Adotando o mesmo critério de refutar a afirmativa do fabricante caso sejam observados 18 ou menos -->
+# <!-- não imunizados dentre 25 avaliados. Se a afirmativa do fabricante for falsa e a imunização real for de 70\%. Qual é a probabilidade de errar ao não refutar a afirmativa do fabricante? -->
+# <!-- ```{r,echo=FALSE} -->
+# <!-- p0 <- 0.7 -->
+# <!-- x <- 18 -->
+# <!-- n <- 25 -->
+# <!-- res <- pnorm(x/n,p0,sqrt(p0*(1-p0)/n),lower.tail = FALSE) -->
+# <!-- ``` -->
+
+```
+
+\end{enumerate}
+
+\hrulefill
+
+
+6) (2,0 pts) Um indivíduo vai participar de uma competição que consiste em
+ responder questões que são lhe são apresentadas sequencialmente. Com o nível de conhecimento que possui, a chance de acertar uma questão escolhida ao acaso é de 75\%.
+Neste contexto, para cada diferente situação apresentada a seguir, defina a variável aleatória, sua distribuição de probabilidades e indique sem fazer os cálculos como você obteria a probabilidade solicitada.
+Se preciso, faça suposições necessárias e adequadas em cada caso.
+\begin{enumerate}
+\item Se for responder até errar uma pergunta, qual a probabilidade de conseguir acertar quatro ou mais questões?
+\item Se for responder cinco perguntas, qual a probabilidade de
+acertar quatro ou mais?
+\item Se for responder até acertar a terceira pergunta, qual a probabilidade de errar apenas uma?
+\item Se o candidato selecionar aleatoriamente seis questões de um banco de 40 questões das quais o candidato sabe a resposta de 30 delas (75\%), qual a probabilidade de acertar ao menos cinco delas.
+\end{enumerate}
+
+```{r,echo=FALSE}
+pa <- pgeom(3,p=0.25, lower=F)
+pb <- pbinom(3, size=5, prob=0.75, lower=F)
+# Y: number of failures which occur in a sequence of Bernoulli trials before a target number of successes is reached
+pc <- dnbinom(1, size=3, prob=0.75)
+pd <- phyper(4, m=30, n=10, k=6, lower=F)
+```
+
+\hrulefill
+
+<!-- 7) Os salários dos funcionários de uma pequena empresa de pesquisa varia de acordo com a função exercida e são os seguintes: -->
+<!-- $$\texttt{80 90 90 90 90 100 100 100 100 110 110 110 110 120}$$ -->
+<!-- Deseja-se oferecer um aumento no salário dos funcionários mas ainda não foi decidido como será feito este aumento. A opção 1 é conceder um aumento de 50\% sobre o salário de cada um dos funcionários. A opção 2 é conceder um aumento de 50 unidades monetárias para todos os funcionários. Selecione a(s) alternativa(s) correta(s): -->
+<!-- %\begin{enumerate} -->
+<!-- %  \item A opção 1 resulta num salário médio maior do que a opção 2;  -->
+<!-- %  \item Tanto faz, não há diferença nas médias e nos desvios-padrão entre as opções 1 e 2; -->
+<!-- %  \item A opção 1 resulta num desvio-padrão maior do que a opção 2; -->
+<!-- %  \item O coeficiente de variação da opção 2 é maior do que o coeficiente de variação da opção 1; -->
+<!-- %  \item O total gasto em folha para pagamento dos funcionários desta empresa será maior com a opção 1 do que com a opção 2. -->
+<!-- %\end{enumerate} -->
+<!-- Justifique suas respostas. Sugestão: use um exemplo com dados fictícios para justificar suas respostas.  -->

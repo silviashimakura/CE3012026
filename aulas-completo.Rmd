@@ -1,0 +1,191 @@
+---
+title: "Estatística básica"
+subtitle: |
+  | Prof. Dra. Silvia Emiko Shimakura
+  | Prof. Dra. Amanda Merian Freitas Mendes
+  | Prof. Dr. Paulo Justiniano Ribeiro Junior
+author: |
+  |
+  | 2025/01 - Estatística e Ciência de Dados
+output:
+  html_document:                    
+    #toc: true                       
+    #toc_depth: 3                    
+    #toc_float:                      
+    #  collapsed: true
+    #  smooth_scroll: true
+    #number_sections: true           
+    #theme: default
+    #spacelab
+    #default,cerulean,journal,flatly,readable,spacelab,
+    #united,cosmo,lumen,paper,sandstone,simplex,yeti
+    
+    highlight: espresso
+    #default, tango, pygments, kate, monochrome, espresso, zenburn, haddock, and textmate
+    #css: styles.css                
+    fig_width: 7                    
+    fig_height: 6                   
+    fig_caption: true               
+    fig_align: 'center'
+    #code_folding: hide              
+#    keep_md: true
+---
+
+---
+
+# Aulas do curso
+
+---
+
+## Bloco 1: Análise Exploratória
+
+**Semana 1**
+
+ - **Semana de recepção aos calouros**
+
+**Semana 2**
+
+ - 17/03/25 (seg) - [Revisão matemática.](slides/000-revisao-matematica.pdf)
+ - 18/03/25 (ter) - Revisão matemática.
+ - 20/03/25 (qui) - Introdução ao R ([slides](slides/000-introducao-ao-r.pdf), [script](praticas-R/000-ambientacao-ao-R.R))
+ - 21/03/25 (sex) - [Dados e amostragem.](slides/101-dados-e-amostragem.pdf) [Atividade prática: tipos de variáveis, tipos de estudos e amostragem](praticas-aula/100-variaveis-estudos-amostragem.pdf).
+    
+**Semana 3**
+
+ - 24/03/25 (seg) - [Gráficos e tabelas para variáveis qualitativas.](slides/102-exploratoria-quali-uni-tabelas-graficos.pdf)
+ - 25/03/25 (ter) - [Gráficos e tabelas para variáveis quantitativas.](slides/103-exploratoria-quant-uni-tabelas-graficos.pdf)
+ - 27/03/25 (qui) - [Gráficos e tabelas no R.](praticas-R/100-graficos-tabelas-uni.R)
+ - 28/03/25 (sex) - [Atividade prática: gráficos e tabelas](praticas-aula/101-tabelas-graficos-quali-quant-solucao.pdf).
+    
+**Semana 4**
+
+ - 31/03/25 (seg) - [Resumos numéricos - medidas de posição.](slides/104-exploratoria-medidas-posicao.pdf)
+ - 01/04/25 (ter) - [Resumos numéricos - medidas de dispersão.](slides/105-exploratoria-medidas-dispersao.pdf)
+ - 03/04/25 (qui) - [Medidas de posição e dispersão no R.](praticas-R/101-medidas-uni.R)
+ - 04/04/25 (sex) - [Atividade prática: medidas de posição e dispersão](praticas-aula/102-medidas-posicao-dispersao-solucao.pdf).
+    
+**Semana 5**
+
+ - 07/04/25 (seg) - [Análises bivariadas.](slides/106-exploratoria-bivariada.pdf)
+ - 08/04/25 (ter) - Análises bivariadas.
+ - 10/04/25 (qui) - [Análises bivariadas no R.](praticas-R/102-analises-bivariadas.R)
+ - 11/04/25 (sex) - [Atividade prática: análises bivariadas](praticas-aula/103-analises-bivariadas-solucao.pdf).
+    
+**Semana 6**
+
+ - 14/04/25 (seg) - Tira dúvidas Silvia (sala 203).
+ - 15/04/25 (ter) - Tira dúvidas Amanda (sala XXX).
+ - 17/04/25 (qui) - [**PROVA 1**](provas/prova1-ce301.pdf).
+ - 18/04/25 (sex) - **Feriado: sexta-feira santa.**
+
+---
+
+## Bloco 2: Probabilidades
+
+**Semana 7**
+
+ - 21/04/25 (seg) - **Feriado: Tiradentes.**
+ - 22/04/25 (ter) - Revisão da prova/resolução no R.
+ - 24/04/25 (qui) - Aula com o prof. Paulo Justiniano: Motivando probabilidades. [Lista 1](pj-preprob.pdf), [Lista 2](pj-pospro.pdf).
+ - 25/04/25 (sex) - [Introdução a probabilidade.](slides/200-intro-prob.pdf).
+
+**Semana 8**
+
+ - 28/04/25 (seg) - [Operações com probabilidades.](slides/201-operacoes-com-probabilidades.pdf).
+ - 29/04/25 (ter) - [Atividade prática: probabilidade](praticas-aula/200-probabilidade-solucao.pdf).
+ - 01/05/25 (qui) - **Feriado: dia do trabalho.**
+ - 02/05/25 (sex) - [Teorema de Bayes.](slides/202-teorema-de-bayes.pdf).
+    
+**Semana 9**
+
+ - 05/05/25 (seg) - Teorema de Bayes.
+ - 06/05/25 (ter) - Exercícios.
+ - 08/05/25 (qui) - Obtendo probabilidades da forma frequentista ([moeda](praticas-R/201-moeda.R), [dado](praticas-R/202-dado.R), [chavalier 1](praticas-R/203-chavalier1.R), [chavalier 2](praticas-R/204-chavalier2.R)). Calculando probabilidade com base em tabelas de dupla entrada ([animais](praticas-R/205-prob-animais.R)).
+ - 09/05/25 (sex) - [Atividade prática: probabilidades](praticas-aula/200-probabilidade-solucao.pdf).
+    
+**Semana 10**
+
+ - 12/05/25 (seg) - Tira dúvidas.
+ - 13/05/25 (ter) - Tira dúvidas.
+ - 15/05/25 (qui) - [**PROVA 2**](provas/prova2-ce301.pdf).
+ - 16/05/25 (sex) - Revisão da prova.
+
+---
+
+## Bloco 3: Variáveis Aleatórias e Distribuições de Probabilidade
+
+**Semana 11**
+
+ - 19/05/25 (seg) - Variáveis aleatórias discretas e contínuas. ([slides](slides/300-variaveis-aleatorias.pdf)
+ - 20/05/25 (qua) - [Atividade prática: variáveis aleatórias](praticas-aula/300-variaveis-aleatorias-solucao.pdf).
+ - 22/05/25 (qui) - [distribuições de probabilidade discretas](slides/301-distribuicoes-discretas.pdf).
+ - 23/05/25 (sex) - Exercícios.
+
+**Semana 12**
+
+ - 26/05/27 (seg) - [distribuições de probabilidade contínuas](slides/302-distribuicoes-continuas.pdf).
+ - 27/05/25 (ter) - Exercícios.
+ - 29/05/25 (qui) - Variáveis aleatórias e distribuições de probabilidade no R. ([script](praticas-R/300-distribuicoes.R), [tarefa](praticas-R/301-exercicios-sugeridos.R))
+ - 30/05/25 (sex) - Tira dúvidas.
+    
+**Semana 13**
+
+ - 02/06/25 (seg) - Tira dúvidas.
+ - 03/06/25 (ter) - [**PROVA 3**](provas/prova3-ce301.pdf).
+ - 05/06/25 (qui) - Revisão da prova e [Introdução à inferência](slides/400-intro-inferencia.pdf)
+ - 06/06/25 (sex) - [Exercícios](praticas-aula/400-intro-inferencia-dist-amostral-solucao.pdf).
+
+---
+
+## Bloco 4: Inferência
+
+**Semana 14**
+
+ - 09/06/25 (seg) - [Estimação pontual e intervalar](slides/401-estimacao-pontual-intervalar.pdf)
+ - 10/06/25 (ter) - [Exercícios](praticas-aula/401-intervalo-de-confianca-solucao.pdf).
+ - 12/06/25 (qui) - [Prática em R](praticas-R/401-exercicios-ic-tamanho-amostral.R).
+ - 13/06/25 (sex) - [Tamanho amostral](slides/402-tamanho-amostral.pdf), [exercícios](praticas-aula/402-tamanho-amostral-enunciado.pdf)
+
+**Semana 15**
+
+ - 16/06/25 (seg) - [Introdução aos testes de hipóteses, testes para uma população](slides/403-testes-de-hipoteses.pdf).
+ - 17/06/25 (ter) - [Exercícios](praticas-aula/403-teste-de-hipoteses-enunciado.pdf).
+ - 19/06/25 (qui) - **Feriado: Corpus Christ**
+ - 20/06/25 (sex) - Tira dúvidas.
+    
+**Semana 16**
+
+ - 23/06/25 (seg) - [Exercícios](exercicios-revisao-inferencia-respostas.pdf).
+ - 24/06/25 (ter) - Tira dúvidas.
+ - 26/06/25 (qui) - [Prática em R](praticas-R/402-ic-th.R).
+ - 27/06/25 (sex) - [**PROVA 4**](provas/prova4-ce301.pdf).
+ 
+**Semana 17**
+
+ - **SEMANA DE ESTUDOS**
+ - 02/07/25 (qua) - **FIM DO PERÍODO LETIVO.**
+    
+**Exame**
+
+ - 07/07/25 (seg) - **EXAME.**
+
+---
+
+<center>
+
+<table><tr>
+
+<td> <img src="img/ufpr-transparent-600px.png" alt="Drawing" style="width: 200px;"/> </td>
+
+<td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td>
+
+<td> <img src="img/dest-texto-2.png" alt="Drawing" style="width: 250px;"/> </td>
+
+<td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td>
+
+<td> <img src="img/leg.png" alt="Drawing" style="width: 300px;"/> </td>
+
+</center>
+
+
+<div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>

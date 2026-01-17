@@ -1,0 +1,161 @@
+---
+title: "CE301 - Estatística básica - Revisão de inferência"
+date: "$1^o$ Semestre 2024"
+geometry: "left=2cm,right=2cm,top=0.5cm,bottom=2cm"
+output:
+  pdf_document:
+    keep_tex: true
+header-includes:
+- \usepackage[utf8]{inputenc}
+- \usepackage[T1]{fontenc}
+- \usepackage[portuguese]{babel}
+- \usepackage{hyphenat}
+- \usepackage{float}
+- \usepackage{placeins}
+- \usepackage{mathtools}
+- \usepackage{amsmath}
+- \usepackage{natbib}
+- \usepackage{arydshln}
+- \usepackage{multirow}
+- \usepackage{booktabs}
+- \usepackage{caption}
+- \usepackage{fancyhdr}
+- \usepackage{multirow}
+---
+
+```{r,echo=FALSE}
+eval=TRUE
+Grupo=1
+set.seed(256561379)
+semente=runif(50,2131241, 763535643)
+set.seed(semente[Grupo])
+library(kableExtra)
+```
+
+\begin{enumerate}
+
+%normal e binomial
+\item Numa certa população de animais marinhos, a distribuição de pesos é Normal, com média $\mu=$`r x=round(rnorm(1,80,5),1)` `r x` kg e desvio-padrão $\sigma=$`r y=round(rnorm(1,15,4),1)` `r y` kg.
+\begin{enumerate}
+\item Qual peso é superado por apenas 1\% dos pesos nessa população? 
+`r if(eval) round(x+qnorm(0.99,0,1)*y,1)`
+
+\item Qual é a probabilidade de um animal dessa população ter peso acima de 90 kg? 
+`r if(eval) p=round(1-pnorm(90,x,y),4)`
+`r if(eval) p`
+
+%\item Numa amostra de `r n=sample(8:10,size=1)` `r n` animais marinhos selecionados ao acaso desta popula\c c\~ao qual é a probabilidade de que exista pelo menos um com peso acima de 90 kg? 
+%`r if(eval) round(1-dbinom(0,n,p),4)`
+
+\item Qual é a probabilidade do peso médio de uma amostra de tamanho `r n` desses animais marinhos, superar 90 kg?
+`r if(eval) round(1-pnorm(90,x,y/sqrt(n)),4)`
+
+\item Um pesquisador acredita que houve alteração nas condições climáticas nas últimas décadas e que esse fato pode ter afetado a distribuição dos pesos dos animais marinhos dessa espécie, tanto na média quanto na variância dos pesos. Para testar sua hipótese ele tomou uma amostra aleatória simples de tamanho `r n` desses animais e obteve os seguintes dados: 
+```{r,echo=FALSE}
+pesos <- round(rnorm(n, 70, y),1)
+```
+\begin{center}
+\begin{tabular}{lc}
+\hline
+Pesos (kg)&`r pesos` \\
+\hline
+\end{tabular}
+\end{center}
+
+Com base nesta amostra responda:
+\begin{enumerate}
+\item Quais são os parâmetros de interesse neste problema?
+`r if(eval) paste0("$\\mu$ e $\\sigma^2$")`
+\item Quais são as estimativas pontuais dos parâmetros de interesse com base nos dados obtidos pelo pesquisador?
+`r if(eval) paste0("$\\hat{\\mu}=$",round(mean(pesos),1),"\\ e\\ $\\hat{\\sigma}^2=$",round(var(pesos),1))`
+\item Obtenha estimativas intervalares para os parâmetros de interesse com nível de confiança de 95\% com base na amostra. 
+
+`r if(eval) paste0("(",mean(pesos),"$\\pm$", round(qt(0.975,n-1),2),"$\\times$",  round(sd(pesos),1),"$/\\sqrt{",n,"}$)=(", round(mean(pesos)-round(qt(0.975,n-1),2)*(round(sd(pesos),1)/sqrt(n)),2),",",  round(mean(pesos)+round(qt(0.975,n-1),2)*(round(sd(pesos),1)/sqrt(n)),2),")")`
+
+`r if(eval) paste0("($\\frac{(",n,"-1)", round(var(pesos),1),"}{",round(qchisq(0.975,n-1),2),"}$; $\\frac{(",n,"-1)",round(var(pesos),1),"}{",round(qchisq(0.025,n-1),2),"}$) = (", round((n-1)*var(pesos)/qchisq(0.975,n-1),2),",", round((n-1)*var(pesos)/qchisq(0.025,n-1),2),")")`
+
+\item Estabeleça as hipóteses nula e alternativa dos testes de hipóteses para os parâmetros de interesse.
+
+`r if(eval) paste0("$H_0: \\mu=$", x, "$\\times H_a:\\mu\\neq$", x)`
+
+`r if(eval) paste0("$H_0: \\sigma^2=$", y,"$^2 \\times H_a:\\sigma^2\\neq$", y,"$^2$")`
+
+\item Realize os testes de hipóteses para os parâmetros ao nível de significância de 5\% e interprete os resultados. 
+
+```{r, comment=FALSE, message=FALSE, fig.align='center', warning=FALSE, echo = FALSE,eval=eval}
+t <- (mean(pesos)-x)/(sd(pesos)/sqrt(n))
+tl <- round(qt(0.025,n-1),2)
+tu <- round(qt(0.975,n-1),2)
+aux <- paste0("RC=($t <$", tl," ou $t >$", tu,")", collapse = NULL, recycle0 = FALSE)
+
+```
+
+`r if(eval) aux`
+
+```{r, comment=FALSE, message=FALSE, fig.align='center', warning=FALSE, echo = FALSE,eval=eval}
+x2 <- (n-1)*var(pesos)/y^2
+x2l <- round(qchisq(0.025,n-1),2)
+x2u <- round(qchisq(0.975,n-1),2)
+aux <- paste0("RC=($\\chi^2 <$", x2l," ou $\\chi^2 >$", x2u,")")
+
+```
+
+`r if(eval) aux`
+
+\end{enumerate}
+\item Qual deveria ser o tamanho da amostra em um novo estudo para que a margem de erro fosse de 1kg com 99\% de confiança? Use estimativa baseada na amostra acima como aproximação para o parâmetro populacional.
+```{r, comment=FALSE, message=FALSE, fig.align='center', warning=FALSE, echo = FALSE,eval=eval}
+n <- ceiling((qnorm(0.995)*sd(pesos)/1)^2)
+aux <- paste0("$n=(\\frac{",round(qnorm(0.995),2),"\\times ",round(sd(pesos),1),"}{1})^2$=", n)
+```
+
+`r if(eval) aux`
+
+\end{enumerate}
+
+\newpage
+
+```{r,echo=FALSE}
+p0=0.95
+n=sample(seq(100,150,by=10),1)
+x=round(179/200*n)
+pchap=round(x/n,3)
+se=round(sqrt(pchap*(1-pchap)/n),3)
+perc <- 95
+pp <- perc/100+(1-perc/100)/2
+e <- round(qnorm(pp)*se,3)
+li=round(pchap-e,3)
+ls=round(pchap+e,3)
+zc <- round(qnorm(0.05),2)
+z=round((pchap-p0)/sqrt(p0*(1-p0)/n),2)
+```
+
+\item Um vendedor de sementes de milho garante um percentual de germinação de suas sementes de `r p0*100`\%. Um agricultor desconfia que na verdade a proporção é menor do que a anunciada pelo vendedor. Antes de efetuar uma grande compra, o agricultor comprou um pacote com `r n` sementes e plantou, observando mais tarde que `r x` sementes germinaram. O resultado do experimento do agricultor confirma sua desconfiança? 
+\begin{enumerate}
+\item Qual é o parâmetro de interesse neste problema?
+`r if(eval) paste0("$p$: proporção de sementes que germinam")`
+\item Qual é a estimativa pontual com base nos dados obtidos pelo agricultor?
+`r if(eval) paste0("$\\hat{p}=",pchap,"$")`
+\item Assumindo que o vendedor esteja sendo honesto, qual é a probabilidade de se obter uma estimativa pontual do parâmetro de interesse tão ou mais distante do valor do parâmetro de interesse quanto a obtida pelo agricultor?
+`r if(eval) paste0("$P(\\hat{p}<",pchap,"|H_0$ verdadeira$)=P(Z<$",z,")=", round(pnorm(z),5))`
+\item Qual é o erro padrão da estimativa pontual do parâmetro de interesse?
+`r if(eval) paste0("se=",se)`
+\item Qual é a margem de erro da estimativa pontual do parâmetro de interesse com `r perc`\% de confiança?
+`r if(eval) paste0("e=",round(qnorm(pp),2),"$\\times$",se,"=",e)`
+\item Obtenha uma estimativa intervalar do parâmetro de interesse com `r perc`\% de confiança?
+`r if(eval) paste0("IC",perc,"=(",pchap,"$\\pm$ e",")=(",li,",", ls,")")`
+\item Estabeleça as hipóteses nula e alternativa do teste de hipóteses. Faça o teste de hipóteses usando um nível de significância de 5\%.
+`r if(eval) paste0("$H_0: p=", p0, "\\times H_a:p <$", p0)`
+`r if(eval) paste0("$RC=\\{z<",zc,"\\},$")`
+`r if(eval) paste0("z=",z,",")` 
+`r if(eval) paste0(ifelse(abs(z)<zc,"$z\\notin RC$, não podemos rejeitar $H_0$","$z\\in RC$, podemos rejeitar $H_0$"))`
+\item Qual é o valor-p do teste?
+`r if(eval) paste0("p-valor=$P(Z<$",z,")= ", round(pnorm(z),5))`
+\item Qual deveria ser o tamanho da amostra em um novo estudo para que a margem de erro fosse de no máximo metade da obtida anteriormente com `r perc`\% de confiança? Use a estimativa pontual do parâmetro obtida pelo agricultor como uma aproximação para o valor real do parâmetro.
+`r if(eval) n=ceiling((qnorm(pp)/(e/2))^2*(pchap*(1-pchap)))`
+`r if(eval) paste0("$n=(\\frac{",round(qnorm(pp),2),"}{e/2})^2 \\times \\hat{p}\\times (1-\\hat{p})=$", n)`
+
+\end{enumerate}
+
+\end{enumerate}
+

@@ -1,0 +1,45 @@
+\hrulefill
+
+\textbf{Solução}
+
+\begin{enumerate}
+\item[a)] Parâmetro e estimativa
+\begin{itemize}
+\item Parâmetro: proporção populacional $p$
+\item Estimativa pontual: $\hat{p} = 0.024$
+\end{itemize}
+
+\item[b)] Erro padrão e condições
+\begin{align*}
+se &= 0.0068446\\
+np_0 &= 10\geq 5\\
+nq_0 &= 490\geq 5\\
+& \mbox{condições atendidas}
+\end{align*}
+
+\item[c)] IC 95\% para proporção
+\begin{align*}
+\mbox{Intervalo= } & [0.0106;0.0374]\\
+\mbox{Interpretação: }& \mbox{A verdadeira taxa de defeitos é coberta pelo IC com uma confiança de 95}\%.
+\end{align*}
+
+\item[d)] Teste unilateral $H_0:p=0,02$ vs $H_1:p>0,02$
+\begin{align*}
+\mbox{Estatística de teste: }& z=0.58\\
+\mbox{p-valor: }& 0.2795  > 0.05 \rightarrow \mbox{não rejeita} H_0\\
+\mbox{Conclusão: }& \mbox{ sem evidência de que a proporção excede 2}\%.
+\end{align*}
+
+\item[e)] Valor-p = 0.2795.
+\begin{align*}
+\mbox{Interpretação: }& \mbox{ Sob } H_0, \mbox{há } 27.9\% \mbox{de chance de observar } \hat p \mbox{ tão alto ou maior;} \\
+&\mbox{Não é suficiente para rejeitar.}
+\end{align*}
+
+\item[f)] Tamanho amostral p/ metade do erro (95\%)
+
+Resultado: 1674 peças.
+
+Interpretação: aumentaria a amostra para reduzir o erro pela metade.
+
+\end{enumerate}

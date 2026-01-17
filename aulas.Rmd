@@ -1,0 +1,200 @@
+---
+title: "Estatística básica"
+subtitle: |
+  | Prof. Dra. Silvia Emiko Shimakura
+  | Prof. Dra. Amanda Merian Freitas Mendes
+  | Prof. Dr. Paulo Justiniano Ribeiro Junior
+author: |
+  |
+  | 2026/01 - Estatística e Ciência de Dados
+output:
+  html_document:                    
+    #toc: true                       
+    #toc_depth: 3                    
+    #toc_float:                      
+    #  collapsed: true
+    #  smooth_scroll: true
+    #number_sections: true           
+    #theme: default
+    #spacelab
+    #default,cerulean,journal,flatly,readable,spacelab,
+    #united,cosmo,lumen,paper,sandstone,simplex,yeti
+    
+    highlight: espresso
+    #default, tango, pygments, kate, monochrome, espresso, zenburn, haddock, and textmate
+    #css: styles.css                
+    fig_width: 7                    
+    fig_height: 6                   
+    fig_caption: true               
+    fig_align: 'center'
+    #code_folding: hide              
+#    keep_md: true
+---
+
+---
+
+# Aulas do curso
+
+---
+
+## Bloco 1: Análise Exploratória
+
+**Semana 1**
+
+ - Semana de recepção aos calouros
+ <!-- - 13/03/26 (qui) - [Apresentação do curso (Prof. Lineu).](slides/100-introducao.pdf) -->
+
+**Semana 2**
+
+ - 02/03/26 (seg) - [Revisão matemática.](slides/000-revisao-matematica.pdf)
+ - 03/03/26 (ter) - Revisão matemática.
+ - 05/03/26 (qui) - Introdução ao R ([slides](slides/000-introducao-ao-r.pdf), [script](praticas-R/000-ambientacao-ao-R.R))
+ - 06/03/26 (sex) - Revisão matemática.
+    
+**Semana 3**
+
+ - 09/03/26 (seg) - [Dados e amostragem.](slides/101-dados-e-amostragem.pdf) [Atividade prática: tipos de variáveis, tipos de estudos e amostragem](praticas-aula/100-variaveis-estudos-amostragem-enunciados.pdf). [Revisão: amostragem estratificada e por conglomerados](slides/Revisão_Amostragem_estratificada_e_por_conglomerados.pdf).
+ - 10/03/26 (ter) - [Gráficos e tabelas para variáveis qualitativas.](slides/102-exploratoria-quali-uni-tabelas-graficos.pdf) [Gráficos e tabelas para variáveis quantitativas.](slides/103-exploratoria-quant-uni-tabelas-graficos.pdf)
+ - 12/03/26 (qui) - [Gráficos e tabelas no R.](praticas-R/100-graficos-tabelas-uni.R) 
+ - 13/03/26 (sex) - [Atividade prática: gráficos e tabelas](praticas-aula/101-tabelas-graficos-quali-quant-solucao.pdf).
+    
+**Semana 4**
+
+ - 16/03/26 (seg) - [Resumos numéricos - medidas de posição.](slides/104-exploratoria-medidas-posicao.pdf)
+ - 17/03/26 (ter) - [Resumos numéricos - medidas de dispersão.](slides/105-exploratoria-medidas-dispersao.pdf)
+ - 19/03/26 (qui) - [Medidas de posição e dispersão no R.](praticas-R/101-medidas-uni.R) [Resumos numéricos](praticas-R/milsa.R).
+ - 20/03/26 (sex) - [Atividade prática: medidas de posição e dispersão](praticas-aula/102-medidas-posicao-dispersao-solucao.pdf).
+    
+**Semana 5**
+
+ - 23/03/26 (seg) - [Análises bivariadas.](slides/106-exploratoria-bivariada.pdf) [Atividade prática: análises bivariadas](praticas-aula/103-analises-bivariadas-solucao.pdf).
+ - 24/03/26 (ter) - Análises bivariadas.
+ - 26/03/26 (qui) - [Análises bivariadas no R.](praticas-R/102-analises-bivariadas.R)
+ - 27/03/26 (sex) - Mini-teste.
+
+**Semana 6**
+
+ - 30/03/26 (seg) - Tira dúvidas.
+ - 31/03/26 (ter) - Tira dúvidas.
+ - 02/04/26 (qui) - **PROVA 1**
+ - 03/04/26 (sex) - **Feriado: Paixão**
+    
+---
+
+## Bloco 2: Probabilidades
+
+**Semana 7**
+
+ - 06/04/26 (seg) - [Motivando probabilidades](slides/IntroProb.pdf). [Pré-Prob](praticas-aula/preprobSOL1a7.pdf).
+ - 07/04/26 (ter) - [Introdução a probabilidade](slides/200-intro-prob.pdf). [Atividade prática: Lista 1 (item 1 ao item 3)](praticas-aula/200-probabilidade-solucao.pdf). 
+ - 09/04/26 (qui) - Obtendo probabilidades da forma frequentista ([moeda](praticas-R/201-moeda.R), [dado](praticas-R/202-dado.R), [chavalier 1](praticas-R/203-chavalier1.R), [chavalier 2](praticas-R/204-chavalier2.R)). 
+ - 10/04/26 (sex) - [Operações com probabilidades](slides/201-operacoes-com-probabilidades.pdf).
+   
+**Semana 8**
+
+ - 13/04/26 (seg) - [Atividade prática: Lista 1 (item 4 ao item 7)](praticas-aula/200-probabilidade-solucao.pdf), [Lista 2 (item 1 ao item 5).](praticas-aula/pj-pospro.pdf)
+ - 14/04/26 (ter) - [Teorema de Bayes](slides/202-teorema-de-bayes.pdf).
+ - 16/04/26 (qui) - Calculando probabilidade com base em tabelas de dupla entrada ([animais](praticas-R/205-prob-animais.R)).
+ - 17/04/26 (sex) - [Atividade prática: Lista 1 (item 8)](praticas-aula/200-probabilidade-solucao.pdf).
+
+**Semana 9**
+
+ - 20/04/26 (seg) - 
+ - 21/04/26 (ter) - **Feriado: Tiradentes.**
+ - 23/04/26 (qui) - [Atividade prática: Lista 2 (item 6 até item 10)](praticas-aula/pj-pospro.pdf)
+ - 24/04/26 (sex) - Mini-teste
+ 
+**Semana 10**
+
+ - 27/04/26 (seg) - Tira dúvidas.
+ - 28/04/26 (ter) - Tira dúvidas.
+ - 30/04/26 (qui) - **PROVA 2.**
+ - 01/05/26 (sex) - **Feriado: Dia do Trabalho.**
+
+---
+
+## Bloco 3: Variáveis Aleatórias e Distribuições de Probabilidade
+
+**Semana 11**
+
+ - 04/05/26 (seg) - [Variáveis aleatórias discretas e contínuas.](slides/300-variaveis-aleatorias.pdf) 
+ - 05/05/26 (ter) - [Atividade prática: variáveis aleatórias](praticas-aula/300-variaveis-aleatorias-enunciado.pdf). 
+ - 07/05/26 (qui) - 
+ - 08/05/26 (sex) - [Lista: Variáveis aleatórias](listas/202-exercicios-variaveis-aleatorias.pdf).
+
+**Semana 12**
+
+ - 11/05/27 (seg) - [Famílias de distribuições](slides/ProbVAs-2.pdf). 
+ - 12/05/26 (ter) - [Distribuições de probabilidade discretas](slides/301-distribuicoes-discretas.pdf). 
+ - 14/05/26 (qui) -
+ - 15/05/26 (sex) - [Lista: Distribuições de probabilidade discretas](listas/203-exercicios-distribuicoes.pdf).
+    
+**Semana 13**
+
+ - 18/05/26 (seg) - [Distribuições de probabilidade contínuas](slides/302-distribuicoes-continuas.pdf).
+ - 19/05/26 (ter) - [Lista: Distribuições de probabilidade contínuas](listas/203-exercicios-distribuicoes.pdf).
+ - 21/05/26 (qui) - [Prática em R (1).](praticas-R/vas.R) [Prática em R (2).](praticas-R/vasdists.R) [Variáveis aleatórias e distribuições de probabilidade no R.](praticas-R/300-distribuicoes.R)
+ - 22/05/26 (sex) - Mini-teste.
+
+**Semana 14**
+
+ - 25/05/26 (seg) - Tira dúvidas.
+ - 26/05/26 (ter) - Tira dúvidas. 
+ - 28/05/26 (qui) - **PROVA 3.**
+ - 29/05/26 (sex) - [Introdução à inferência.](slides/400-intro-inferencia.pdf) [Exercícios.](praticas-aula/400-intro-inferencia-dist-amostral-enunciado.pdf)
+
+---
+
+## Bloco 4: Inferência
+
+**Semana 15**
+
+ - 01/06/26 (seg) - [Estimação pontual e intervalar](slides/401-estimacao-pontual-intervalar.pdf)
+ - 02/06/26 (ter) - [Exercícios](praticas-aula/401-intervalo-de-confianca-enunciado.pdf).
+ - 04/06/26 (qui) - **Feriado: Corpus Christ**
+ - 05/06/26 (sex) - Recesso.
+
+**Semana 16**
+
+ - 08/06/26 (seg) - [Tamanho amostral.](slides/402-tamanho-amostral.pdf)  [Exercícios.](praticas-aula/402-tamanho-amostral-enunciado.pdf) 
+ - 09/06/26 (ter) - [Introdução aos testes de hipóteses, testes para uma população](slides/403-testes-de-hipoteses.pdf). 
+ - 11/06/26 (qui) - [Prática em R](praticas-R/401-exercicios-ic-tamanho-amostral.R).
+ - 12/06/26 (sex) - [Exercícios: testes de hipóteses.](praticas-aula/403-teste-de-hipoteses-enunciado.pdf)
+    
+**Semana 16**
+
+ - 15/06/26 (seg) - [Exercícios: revisão inferência.](praticas-aula/exercicios-revisao-inferencia.pdf)
+ - 16/06/26 (ter) - [Exercícios: revisão inferência.](praticas-aula/exercicios-revisao-inferencia.pdf)
+ - 18/06/26 (qui) - [Prática em R](praticas-R/402-ic-th.R). 
+ - 19/06/26 (sex) - Mini-teste.
+ 
+**Semana 17**
+
+ - 22/06/26 (seg) - Tira dúvidas.
+ - 23/06/26 (ter) - Tira dúvidas.
+ - 25/06/26 (qui) - **PROVA 4.**
+    
+**Exame**
+
+ - 02/07/26 (qui) - **EXAME.**
+
+---
+
+<center>
+
+<table><tr>
+
+<td> <img src="img/ufpr-transparent-600px.png" alt="Drawing" style="width: 200px;"/> </td>
+
+<td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td>
+
+<td> <img src="img/dest-texto-2.png" alt="Drawing" style="width: 250px;"/> </td>
+
+<td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td>
+
+<td> <img src="img/leg.png" alt="Drawing" style="width: 300px;"/> </td>
+
+</center>
+
+
+<div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>

@@ -1,0 +1,122 @@
+name: "CE301"
+
+output_dir: "."
+
+navbar:
+  type: inverse
+  title: "CE301 - Estatística Básica"
+
+  left:
+    - text: "Home"
+      icon: fa-home
+      href: index.html
+
+    - text: "Aulas"
+      icon: fa-calendar
+      href: aulas.html
+
+    - text: "Exercícios"
+      icon: fa-pencil
+      menu:
+
+        - text: "Elementos de matemática"
+          icon: fa-arrow-right
+          href: listas/000-matbas.pdf
+
+        - text: "Análise exploratória"
+          icon: fa-arrow-right
+          href: listas/100-exercicios-exploratoria.pdf
+
+        - text: "Análise exploratória com R"
+          icon: fa-arrow-right
+          href: praticas-R/atividade.html
+          
+        - text: "Probabilidade"
+          icon: fa-arrow-right
+          href: listas/201-exercicios-probabilidade.pdf
+        
+        - text: "Variáveis aleatórias"
+          icon: fa-arrow-right
+          href: listas/202-exercicios-variaveis-aleatorias.pdf
+
+        - text: "Distribuições de probabilidade"
+          icon: fa-arrow-right
+          href: listas/203-exercicios-distribuicoes.pdf
+          
+        - text: "Distribuição amostral e intervalos de confiança"
+          icon: fa-arrow-right
+          href: listas/301-exercicios-distribuicao-amostral-ic.pdf
+
+        - text: "Testes de hipóteses"
+          icon: fa-arrow-right
+          href: listas/302-exercicios-testes-de-hipoteses.pdf
+          
+    - text: "Tabelas e formulários"
+      icon: fa-table
+      menu:
+
+        - text: "Formulário"
+          icon: fa-arrow-right
+          href: tabelas/formulario2.pdf
+          
+        - text: "Tabela z (lado positivo)"
+          icon: fa-arrow-right
+          href: tabelas/tabela-z.pdf
+
+        - text: "Tabela z (completa)"
+          icon: fa-arrow-right
+          href: tabelas/tabela-z2.pdf
+        
+        - text: "Tabela t"
+          icon: fa-arrow-right
+          href: tabelas/tabela-t.pdf
+
+        - text: "Tabela Qui-quadrado"
+          icon: fa-arrow-right
+          href: tabelas/tabela-chi.pdf
+
+        - text: "Tabela F"
+          icon: fa-arrow-right
+          href: tabelas/tabela-f.pdf
+          
+    - text: "Notas e frequência"
+      icon: fa-square-poll-vertical
+      href: notas.html
+      
+  right:
+    - text: "Silvia E.S."
+      icon: fa-user 
+      href: https://est.ufpr.br/professores/19-silvia.html
+
+    - text: "Amanda M.F.M."
+      icon: fa-user 
+      href: https://est.ufpr.br/professores/00-amanda.html
+      
+    - text: "Paulo J.R.Jr."
+      icon: fa-user 
+      href: https://est.ufpr.br/professores/17-paulojus.html
+      
+      
+
+output:
+  html_document:
+    theme: default
+    # default
+    ## united
+    # cosmo
+    # yeti
+    highlight: textmate
+    #include:
+    #  after_body: footer.html
+    #css: styles.css
+
+    # THEMES
+    # default, cerulean, journal, 
+    # flatly, darkly, readable, 
+    # spacelab, united, cosmo, 
+    # lumen, paper, sandstone, 
+    # simplex, and yeti
+    includes:
+      
+      #before_body: header.html
+      

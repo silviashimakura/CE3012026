@@ -1,0 +1,331 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  11pt,
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[left=2cm,right=2cm,top=0.5cm,bottom=1.5cm]{geometry}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{hyphenat}
+\usepackage{float}
+\usepackage{placeins}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{natbib}
+\usepackage{arydshln}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{fancyhdr}
+\usepackage{multirow}
+\usepackage{comment}
+\newcommand{\R}{{\normalfont\textsf{R}}{}}
+\excludecomment{solucao}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={CE301 - Estatística Básica - Exame Final},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{CE301 - Estatística Básica - Exame Final}
+\author{}
+\date{\vspace{-2.5em}1o. Semestre 2025}
+
+\begin{document}
+\maketitle
+
+\noindent \textbf{Nome:} \underline{\hspace{16cm}}\\
+
+\textbf{Data:} \underline{\hspace{1cm}/\hspace{1cm}/\hspace{1cm}}
+\hspace{0.5cm} \textbf{GRR:} \underline{\hspace{3cm}} \hspace{0.5cm}
+\textbf{Assinatura:} \underline{\hspace{4.5cm}}
+
+\vspace{0.5cm}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\tightlist
+\item
+  (2,0 pts) Os números abaixo mostram as notas de um grupo de alunos em
+  duas avaliações:
+
+  \begin{center}
+  \begin{tabular}{l|ccccccccccccccc}
+  \hline
+  Aluno  & 1& 2& 3& 4& 5& 6& 7& 8& 9&10&11&12&13&14&15\\  
+  \hline
+  Prova 1&35&39&50&47&33&17&17&80&23&51& 2&21&20&12&81\\
+  Prova 2&65&63&80&72&65&35&62&72&50&60&32&59&40&68&79\\
+  \hline
+  \end{tabular}
+  \end{center}
+\end{enumerate}
+
+\begin{enumerate}
+\item[a)] Calcule média, variância e coeficiente de variação das notas em cada avaliação.
+\item[b)] Calcule quartis, amplitude e amplitude interquartílica de cada avaliação. Faça um diagrama \textit{box-plot} para comparar as notas das duas avaliações. 
+\item[c)] Usando as medidas e o gráfico acima, compare o rendimento dos alunos nas duas provas.
+\item[d)] Qual gráfico você faria para visualizar a relação (associação) entre os resultados das duas provas? Qual medida estatística poderia ser usada para quantificar a associação entre os resultados? Explique o que esta medida indicaria.
+\end{enumerate}
+
+\begin{solucao}
+\hrulefill
+
+\textbf{Solução}
+\begin{itemize}
+\item[a)] 
+\begin{enumerate}
+\item[i)] a população: todos os navios que transportam petróleo bruto para a refinaria,
+\item[ii)] a variável aleatória de interesse: a quantidade de carga transportada por cada navio,
+\item[iii)] o parâmetro de interesse: a média $\mu$ da quantidade de carga e a variância $\sigma^2$ da quantidade de carga,
+\item[iv)] a amostra: os 25 navios selecionados aleatoriamente,
+\item[v)] o estimador: $\bar{x}$ (média amostral) e $s^2$ (variância amostral),
+\item[iv)] a estimativa: $\bar{x} = 28000$ toneladas e $s^2 = 17640000$ toneladas$^2$,
+\item[vii)] a distribuição amostral: $\bar{X}$ segue distribuição $t$ de Student com $n-1=24$ graus de liberdade, pois a população é normal e o desvio-padrão populacional é desconhecido e $(n-1) s^2/\sigma^2$ segue distribuição $\chi^2$ com $n-1=24$ graus de liberdade.
+\end{enumerate}
+
+\item[b)] IC 95\% para $\mu$: [\ensuremath{2.8\times 10^{4}} $\pm$ 2.064 * 4200/5]= [\ensuremath{2.6266\times 10^{4}}; \ensuremath{2.9734\times 10^{4}}] toneladas. 
+
+\textbf{Interpretação}: Há 95\% de confiança de que este intervalo cobre a verdadeira média.
+
+\item[c)] Teste unilateral $H_0: \mu=30000$ vs $H_1:\mu<30000$
+
+\begin{itemize}
+\item Estatística de teste: $t_{calc}=$ -2.3809524
+\item $RC=\{t_{calc}\leq$ -1.711$\}$
+\item p-valor=0.0127759 $< 0,05 \rightarrow $ Rejeitamos $H_0$.  
+\end{itemize}
+
+\textbf{Conclusão}: Há evidência suficiente de que a média atual é menor que 30000 t.
+
+
+\item[d)] IC 95\% para $\sigma^2$: [$24 * 4200^2 / 39.36; 24 * 4200^2 / 12.4$] toneladas$^2$= [\ensuremath{1.0754984\times 10^{7}}; \ensuremath{3.4138769\times 10^{7}}] ton$^2$
+
+\textbf{Interpretação}: Há 95\% de confiança de que este intervalo cobre a verdadeira variância das cargas.
+
+\item[e)] \textbf{Tamanho amostral} p/ $ME = 500$ (99\% conf.): $n=(2.58 * 4200 / 500)^2$= 470 navios. 
+
+\textbf{Interpretação}: Para uma estimativa tão precisa, seria necessário uma amostra bem maior.
+
+
+\end{itemize}
+
+\end{solucao}
+\hrulefill
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  (3,0 pts) O Índice de Qualidade do Ar (IQA) é uma representação dos
+  níveis de concentração de poluição do ar, varia numa escala entre 0 e
+  400, e ajuda a determinar quando se espera que a qualidade do ar seja
+  prejudicial. Para efetuar o monitoramento de poluentes no ar em uma
+  determinada área foram coletadas amostras. Os níveis de concentração
+  de poluição do ar, medidos em IQA, são fornecidos a seguir.
+\end{enumerate}
+
+\begin{longtable}[]{@{}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 22\tabcolsep) * \real{0.0909}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 22\tabcolsep) * \real{0.0909}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 22\tabcolsep) * \real{0.0909}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 22\tabcolsep) * \real{0.0909}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 22\tabcolsep) * \real{0.0909}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 22\tabcolsep) * \real{0.0909}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 22\tabcolsep) * \real{0.0606}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 22\tabcolsep) * \real{0.0909}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 22\tabcolsep) * \real{0.0909}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 22\tabcolsep) * \real{0.0909}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 22\tabcolsep) * \real{0.0606}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 22\tabcolsep) * \real{0.0606}}@{}}
+\caption{Níveis de concentração de poluição do ar (IQA)}\tabularnewline
+\toprule\noalign{}
+\endfirsthead
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+203.3 & 166.9 & 225.4 & 182.1 & 189.9 & 125.2 & 171 & 183.6 & 174.9 &
+191.1 & 172 & 192 \\
+\end{longtable}
+
+\begin{enumerate}
+\item[a)] Caracterize o nível de poluição na área através de um resumo estatístico adequado dos dados.
+%\item[b)] Qual valor você escolheria para estimar o nível de poluição na área? 
+%\item[c)] Qual é a estimativa deste valor? Como você representaria a incerteza sobre esta estimativa?
+\item[b)] A legislação afirma que se o índice estiver acima de 200 IQA a qualidade do ar na área é considerada em nível de atenção e sujeita a intervenção para controle. Baseando-se nos dados, e um nível de significância de 5\%, você indicaria a intervenção na área?
+\end{enumerate}
+
+Num relatório foram reportadas análises dos dados (Tabela 1) que
+incluiam as informações a seguir:
+
+\textbf{O nível de poluição na área expresso pela média aritmética dos valores medidos nas amostras
+é de 181.45 $IQA$. A margem de erro é de 11.87 $IQA$ obtida pela expressão $z \cdot 25/\sqrt{12}$ com $z = 1.645$ obtido da distribuição normal, e  considerando-se que a variância dos índices é conhecida e igual a $25^2$ $IQA^2$}.
+
+Na análise estatística apresentada no relatório:
+
+\begin{enumerate}
+\item[c)] Qual a população, a variável aleatória e a amostra no contexto deste problema?
+%\item[f)] Qual o estimador escolhido e a estimativa pontual obtida?
+\item[d)] Qual a estimativa intervalar e seu nível de confiança?
+\item[e)] Quais as suposições utilizadas na análise?
+\item[f)] Como os resultados poderiam ser utilizados para determinar se deve ou não haver intervenção na área?
+%\item[g)] Qual deveria ser o tamanho da amostra para que a margem de erro fosse de no máximo $10 ~IQA$? 
+\end{enumerate}
+\hrulefill
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  (0,5 pt) Em um teste múltipla escolha há 5 questões e cada questão tem
+  5 alternativas das quais apenas uma é correta. Assumindo independência
+  entre as questões, qual é a probabilidade de um indivíduo acertar por
+  mero acaso alguma questão?
+\end{enumerate}
+
+\hrulefill
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  (1,0 pt) Acredita-se que numa certa população, 20\% de seus habitantes
+  sofrem de algum tipo de alergia medicamentosa e são classificados como
+  alérgicos. Sendo alérgico, a probabilidade de ter reação a um certo
+  antibiótico é 0.5. Dentre os não alérgicos essa probabilidade é de
+  apenas 0.05.
+
+  \begin{enumerate}
+  \item Qual a probabilidade de uma pessoa dessa população ter reação ao fazer uso do antibiótico? 
+  \item Uma pessoa dessa população teve reação ao fazer uso do antibótico. Qual é a probabilidade dela ser do grupo não alérgico? 
+  \end{enumerate}
+\end{enumerate}
+
+\hrulefill
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  (1,5 pts) Um fabricante afirma que sua vacina contra gripe imuniza
+  85\% dos sujeitos tomam a vacina. Uma amostra de 25 indivíduos entre
+  os que tomaram a vacina foi sorteada e testes foram feitos para
+  verificar a imunização ou não desses indivíduos.
+\end{enumerate}
+
+\begin{enumerate}
+\item[a)] Qual seria a estimativa pontual e a intervalar (com confiança de 90\%) da proporção $p$ de imunizados na população vacinada se fossem observados 18 imunizados dentre os 25 avaliados? 
+
+
+
+\item[b)] Se fossem observados 18 imunizados dentre os 25 vacinados, haveria evidência suficiente contra o fabricante e poderíamos concluir que o percentual de imunização é inferior a 85\% ao nível de significância de 5\%?  
+
+
+\item[c)] Qual deveria ser o tamanho da amostra em um novo estudo para que a margem de erro fosse de no máximo
+0,02 com 90\% de confiança? Use a estimativa pontual de $p$ obtida no item anterior. 
+
+
+
+
+
+
+\end{enumerate}
+
+\hrulefill
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  (2,0 pts) Um indivíduo vai participar de uma competição que consiste
+  em responder questões que são lhe são apresentadas sequencialmente.
+  Com o nível de conhecimento que possui, a chance de acertar uma
+  questão escolhida ao acaso é de 75\%. Neste contexto, para cada
+  diferente situação apresentada a seguir, defina a variável aleatória,
+  sua distribuição de probabilidades e indique sem fazer os cálculos
+  como você obteria a probabilidade solicitada. Se preciso, faça
+  suposições necessárias e adequadas em cada caso.
+
+  \begin{enumerate}
+  \item Se for responder até errar uma pergunta, qual a probabilidade de conseguir acertar quatro ou mais questões?
+  \item Se for responder cinco perguntas, qual a probabilidade de
+  acertar quatro ou mais?
+  \item Se for responder até acertar a terceira pergunta, qual a probabilidade de errar apenas uma?
+  \item Se o candidato selecionar aleatoriamente seis questões de um banco de 40 questões das quais o candidato sabe a resposta de 30 delas (75\%), qual a probabilidade de acertar ao menos cinco delas.
+  \end{enumerate}
+\end{enumerate}
+
+\hrulefill
+
+\end{document}

@@ -1,0 +1,202 @@
+---
+title: "Estatística básica"
+subtitle: |
+  | Prof. Dra. Silvia Emiko Shimakura
+  | Prof. Dra. Amanda Merian Freitas Mendes
+  | Prof. Dr. Paulo Justiniano Ribeiro Junior
+author: |
+  |
+  | 2026/01 - Estatística e Ciência de Dados
+output:
+  html_document:                    
+    #toc: true                       
+    #toc_depth: 3                    
+    #toc_float:                      
+    #  collapsed: true
+    #  smooth_scroll: true
+    #number_sections: true           
+    #theme: default
+    #spacelab
+    #default,cerulean,journal,flatly,readable,spacelab,
+    #united,cosmo,lumen,paper,sandstone,simplex,yeti
+    
+    highlight: espresso
+    #default, tango, pygments, kate, monochrome, espresso, zenburn, haddock, and textmate
+    #css: styles.css                
+    fig_width: 7                    
+    fig_height: 6                   
+    fig_caption: true               
+    fig_align: 'center'
+    #code_folding: hide              
+#    keep_md: true
+---
+
+---
+
+# {.tabset .tabset-fade .tabset-pills}
+
+## Detalhes da oferta
+
+**Disciplina**: CE301 - Estatística Básica.
+
+**Curso**: Estatística e Ciência de Dados.
+
+**Período**: Primeiro semestre de 2026.
+
+**Locais e horários**:
+
+  - Segunda, 20:45 - 22:15, PA-08.
+  - Terça, 19:00 - 20:30, PA-08.
+  - Quinta, 20:45 - 22:15, PA-08 ou Lab 1-2 Dinf.
+  - Sexta, 19:00 - 20:30, PA-08.
+
+**Horários de atendimento**: a combinar.
+
+**Frequência**: 
+
+  - De acordo com as normas da Universidade, mínimo de 75%.
+  - Cada dia de aula corresponde a duas presenças.
+  - 25% de faltas correspondem a 15 dias.
+
+**Datas importantes**:
+
+  - **02/02/26**: início do período letivo.
+  - **27/06/26**: término do período letivo.
+  - **29/06/26 a 04/07/26**: semana de exames finais.
+
+---
+
+## Informações de contato
+
+**Professores responsáveis**: 
+
+  - Silvia Emiko Shimakura.
+  - Amanda Merian Freitas Mendes.
+  - Paulo Justiniano Ribeiro Junior.
+
+**Comunicação**: 
+
+  - Como plataforma de comunicação será utilizado o Microsoft Teams da UFPR.
+  - Para conversas particulares contatar via chat privado do Teams ou pelo e-mail (silvia.shimakura@ufpr.br e amandamerian@ufpr.br).
+
+**Salas dos professores**:
+
+  - Centro Politécnico.
+  - Prédio do setor de ciências exatas (PA).
+  - Departamento de Estatística (2º andar).
+  - Silvia: sala 203.
+  - Amanda: sala 223.
+  - Paulo: sala LEG.
+
+**Monitoria**:
+
+ - Monitor: A definir
+ - Dias e horários de atendimento: A definir
+ - Local: 
+    - Centro politécnico.
+    - Prédio do setor de ciências exatas (PA).
+    - Departamento de Estatística (2º andar).
+    - Sala de monitoria (217).
+
+---
+
+## Avaliações, notas e critérios
+
+---
+
+**Avaliações**
+
+As atividades avaliativas serão em dois formatos:
+
+1. **Provas remotas via UFPR Virtual**:
+    - Questões sobre o conteúdo de determinado período.
+    - Os alunos serão notificados quanto à disponibilidade, período de abertura e fechamento das atividades.
+    - Não há segunda chamada de provas remotas.
+    - Ao perder uma prova remota, a nota é automaticamente 0.
+    
+2. **Provas presenciais**:
+    - Avaliações presenciais referente à partes do conteúdo.
+    - Os alunos serão notificados quanto às datas e materiais permitidos durante a avaliação.
+    - Caso o aluno não possa comparecer no dia da prova e possua justificativa, deve solicitar segunda chamada em até 5 dias úteis após a data da prova regular.
+
+---
+
+**Pesos das atividades avaliativas**
+
+ - Estão planejadas 4 atividades remotas e 4 provas presenciais.
+ - A nota final será calculada por: Nota final = Média provas presenciais $\times 0,9$+ Média provas remotas $\times 0,1$.
+
+---
+
+**Critérios para aprovação**
+
+ - Será considerado aprovado sem exame o aluno com nota igual ou superior a 70 com presença igual ou superior a 75%.
+ - Será considerado reprovado sem direito a exame o aluno com nota inferior a 40 E/OU presença menor que 25%.
+ - Terá direito a exame o aluno com nota maior ou igual a 40 e menor que 70 e presença superior a 75%.  
+ - A nota final do aluno que realizou exame é a média do período regular e da nota do exame. Se esta média for superior a 50 o aluno é aprovado por exame.
+        
+---
+
+## Programa e objetivos
+
+O objetivo da disciplina é capacitar os alunos em conceitos básicos de Estatística que permitam a interpretação crítica de resultados de análises e procedimentos estatísticos, bem como a execução de procedimentos e análises estatísticas básicas. 
+
+O curso compreende quatro grandes tópicos:
+
+ 1. Análise descritiva e exploratória de dados.
+ 2. Noções de probabilidades
+ 3. Distribuições de probabilidades.
+ 4. Introdução à procedimentos de inferência estatística.
+
+---
+
+## Referências bibliográficas
+
+### Material de apoio
+
+Playlist de Estatística Básica do Departamento de Estatística: http://www.leg.ufpr.br/~paulojus/estbas/.
+    
+  - Recomendamos fortemente o consumo das vídeo aulas.
+
+### Referências básicas
+
+ - Bussab, WO; Morettin, PA. Estatística Básica. São Paulo: Editora Saraiva, 2017 (9ª Edição).
+
+ - Magalhães, MN; Lima, ACP. Noções de Probabilidade e Estatística. São Paulo: EDUSP, 2015 (7ª edição).
+
+ - Montgomery, DC; Runger, GC. Estatística aplicada e probabilidade para engenheiros. Rio de Janeiro: LTC Editora, 2012 (5ª Edição).
+
+### Referências complementares
+ 
+ - Andrade, DF; Ogliari, PJ. Estatística para as ciências agrárias e biológicas, com noções de experimentação. Florianópolis: Editora da UFSC, 2013.
+
+ - Dantas, CAB. Probabilidade: um curso introdutório. São Paulo: EDUSP, 2008.
+
+ - Morettin, LG. Estatística básica: probabilidade e inferência. São Paulo: Pearson, 2010.
+
+ - Navidi, W. Probabilidade e estatística para ciências exatas. Porto Alegre: Bookman, 2012.
+
+ - Spiegel, MR; Schiller, J; Srinivasan, A. Probabilidade e estatística. Porto Alegre: Bookman, 2013.
+
+---
+
+# 
+
+<center>
+
+<table><tr>
+
+<td> <img src="img/ufpr-transparent-600px.png" alt="Drawing" style="width: 200px;"/> </td>
+
+<td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td>
+
+<td> <img src="img/dest-texto-2.png" alt="Drawing" style="width: 250px;"/> </td>
+
+<td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td>
+
+<td> <img src="img/leg.png" alt="Drawing" style="width: 300px;"/> </td>
+
+</center>
+
+
+<div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>

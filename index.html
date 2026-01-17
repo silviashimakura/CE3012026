@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Estatística básica</title>
+
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">CE301 - Estatística Básica</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li>
+  <a href="aulas.html">
+    <span class="fa fa-calendar"></span>
+     
+    Aulas
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-pencil"></span>
+     
+    Exercícios
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="listas/000-matbas.pdf">
+        <span class="fa fa-arrow-right"></span>
+         
+        Elementos de matemática
+      </a>
+    </li>
+    <li>
+      <a href="listas/100-exercicios-exploratoria.pdf">
+        <span class="fa fa-arrow-right"></span>
+         
+        Análise exploratória
+      </a>
+    </li>
+    <li>
+      <a href="praticas-R/atividade.html">
+        <span class="fa fa-arrow-right"></span>
+         
+        Análise exploratória com R
+      </a>
+    </li>
+    <li>
+      <a href="listas/201-exercicios-probabilidade.pdf">
+        <span class="fa fa-arrow-right"></span>
+         
+        Probabilidade
+      </a>
+    </li>
+    <li>
+      <a href="listas/202-exercicios-variaveis-aleatorias.pdf">
+        <span class="fa fa-arrow-right"></span>
+         
+        Variáveis aleatórias
+      </a>
+    </li>
+    <li>
+      <a href="listas/203-exercicios-distribuicoes.pdf">
+        <span class="fa fa-arrow-right"></span>
+         
+        Distribuições de probabilidade
+      </a>
+    </li>
+    <li>
+      <a href="listas/301-exercicios-distribuicao-amostral-ic.pdf">
+        <span class="fa fa-arrow-right"></span>
+         
+        Distribuição amostral e intervalos de confiança
+      </a>
+    </li>
+    <li>
+      <a href="listas/302-exercicios-testes-de-hipoteses.pdf">
+        <span class="fa fa-arrow-right"></span>
+         
+        Testes de hipóteses
+      </a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-table"></span>
+     
+    Tabelas e formulários
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="tabelas/formulario2.pdf">
+        <span class="fa fa-arrow-right"></span>
+         
+        Formulário
+      </a>
+    </li>
+    <li>
+      <a href="tabelas/tabela-z.pdf">
+        <span class="fa fa-arrow-right"></span>
+         
+        Tabela z (lado positivo)
+      </a>
+    </li>
+    <li>
+      <a href="tabelas/tabela-z2.pdf">
+        <span class="fa fa-arrow-right"></span>
+         
+        Tabela z (completa)
+      </a>
+    </li>
+    <li>
+      <a href="tabelas/tabela-t.pdf">
+        <span class="fa fa-arrow-right"></span>
+         
+        Tabela t
+      </a>
+    </li>
+    <li>
+      <a href="tabelas/tabela-chi.pdf">
+        <span class="fa fa-arrow-right"></span>
+         
+        Tabela Qui-quadrado
+      </a>
+    </li>
+    <li>
+      <a href="tabelas/tabela-f.pdf">
+        <span class="fa fa-arrow-right"></span>
+         
+        Tabela F
+      </a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="notas.html">
+    <span class="fa fa-square-poll-vertical"></span>
+     
+    Notas e frequência
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://est.ufpr.br/professores/19-silvia.html">
+    <span class="fa fa-user"></span>
+     
+    Silvia E.S.
+  </a>
+</li>
+<li>
+  <a href="https://est.ufpr.br/professores/00-amanda.html">
+    <span class="fa fa-user"></span>
+     
+    Amanda M.F.M.
+  </a>
+</li>
+<li>
+  <a href="https://est.ufpr.br/professores/17-paulojus.html">
+    <span class="fa fa-user"></span>
+     
+    Paulo J.R.Jr.
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Estatística básica</h1>
+<h3 class="subtitle"><div class="line-block">Prof. Dra. Silvia Emiko
+Shimakura<br />
+Prof. Dra. Amanda Merian Freitas Mendes<br />
+Prof. Dr. Paulo Justiniano Ribeiro Junior</div></h3>
+<h4 class="author"><div class="line-block"><br />
+2026/01 - Estatística e Ciência de Dados</div></h4>
+
+</div>
+
+
+<hr />
+<div id="section"
+class="section level1 tabset tabset-fade tabset-pills">
+<h1 class="tabset tabset-fade tabset-pills"></h1>
+<div id="detalhes-da-oferta" class="section level2">
+<h2>Detalhes da oferta</h2>
+<p><strong>Disciplina</strong>: CE301 - Estatística Básica.</p>
+<p><strong>Curso</strong>: Estatística e Ciência de Dados.</p>
+<p><strong>Período</strong>: Primeiro semestre de 2026.</p>
+<p><strong>Locais e horários</strong>:</p>
+<ul>
+<li>Segunda, 20:45 - 22:15, PA-08.</li>
+<li>Terça, 19:00 - 20:30, PA-08.</li>
+<li>Quinta, 20:45 - 22:15, PA-08 ou Lab 1-2 Dinf.</li>
+<li>Sexta, 19:00 - 20:30, PA-08.</li>
+</ul>
+<p><strong>Horários de atendimento</strong>: a combinar.</p>
+<p><strong>Frequência</strong>:</p>
+<ul>
+<li>De acordo com as normas da Universidade, mínimo de 75%.</li>
+<li>Cada dia de aula corresponde a duas presenças.</li>
+<li>25% de faltas correspondem a 15 dias.</li>
+</ul>
+<p><strong>Datas importantes</strong>:</p>
+<ul>
+<li><strong>02/02/26</strong>: início do período letivo.</li>
+<li><strong>27/06/26</strong>: término do período letivo.</li>
+<li><strong>29/06/26 a 04/07/26</strong>: semana de exames finais.</li>
+</ul>
+<hr />
+</div>
+<div id="informações-de-contato" class="section level2">
+<h2>Informações de contato</h2>
+<p><strong>Professores responsáveis</strong>:</p>
+<ul>
+<li>Silvia Emiko Shimakura.</li>
+<li>Amanda Merian Freitas Mendes.</li>
+<li>Paulo Justiniano Ribeiro Junior.</li>
+</ul>
+<p><strong>Comunicação</strong>:</p>
+<ul>
+<li>Como plataforma de comunicação será utilizado o Microsoft Teams da
+UFPR.</li>
+<li>Para conversas particulares contatar via chat privado do Teams ou
+pelo e-mail (<a href="mailto:silvia.shimakura@ufpr.br"
+class="email">silvia.shimakura@ufpr.br</a> e <a
+href="mailto:amandamerian@ufpr.br"
+class="email">amandamerian@ufpr.br</a>).</li>
+</ul>
+<p><strong>Salas dos professores</strong>:</p>
+<ul>
+<li>Centro Politécnico.</li>
+<li>Prédio do setor de ciências exatas (PA).</li>
+<li>Departamento de Estatística (2º andar).</li>
+<li>Silvia: sala 203.</li>
+<li>Amanda: sala 223.</li>
+<li>Paulo: sala LEG.</li>
+</ul>
+<p><strong>Monitoria</strong>:</p>
+<ul>
+<li>Monitor: A definir</li>
+<li>Dias e horários de atendimento: A definir</li>
+<li>Local:
+<ul>
+<li>Centro politécnico.</li>
+<li>Prédio do setor de ciências exatas (PA).</li>
+<li>Departamento de Estatística (2º andar).</li>
+<li>Sala de monitoria (217).</li>
+</ul></li>
+</ul>
+<hr />
+</div>
+<div id="avaliações-notas-e-critérios" class="section level2">
+<h2>Avaliações, notas e critérios</h2>
+<hr />
+<p><strong>Avaliações</strong></p>
+<p>As atividades avaliativas serão em dois formatos:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Provas remotas via UFPR Virtual</strong>:
+<ul>
+<li>Questões sobre o conteúdo de determinado período.</li>
+<li>Os alunos serão notificados quanto à disponibilidade, período de
+abertura e fechamento das atividades.</li>
+<li>Não há segunda chamada de provas remotas.</li>
+<li>Ao perder uma prova remota, a nota é automaticamente 0.</li>
+</ul></li>
+<li><strong>Provas presenciais</strong>:
+<ul>
+<li>Avaliações presenciais referente à partes do conteúdo.</li>
+<li>Os alunos serão notificados quanto às datas e materiais permitidos
+durante a avaliação.</li>
+<li>Caso o aluno não possa comparecer no dia da prova e possua
+justificativa, deve solicitar segunda chamada em até 5 dias úteis após a
+data da prova regular.</li>
+</ul></li>
+</ol>
+<hr />
+<p><strong>Pesos das atividades avaliativas</strong></p>
+<ul>
+<li>Estão planejadas 4 atividades remotas e 4 provas presenciais.</li>
+<li>A nota final será calculada por: Nota final = Média provas
+presenciais <span class="math inline">\(\times 0,9\)</span>+ Média
+provas remotas <span class="math inline">\(\times 0,1\)</span>.</li>
+</ul>
+<hr />
+<p><strong>Critérios para aprovação</strong></p>
+<ul>
+<li>Será considerado aprovado sem exame o aluno com nota igual ou
+superior a 70 com presença igual ou superior a 75%.</li>
+<li>Será considerado reprovado sem direito a exame o aluno com nota
+inferior a 40 E/OU presença menor que 25%.</li>
+<li>Terá direito a exame o aluno com nota maior ou igual a 40 e menor
+que 70 e presença superior a 75%.<br />
+</li>
+<li>A nota final do aluno que realizou exame é a média do período
+regular e da nota do exame. Se esta média for superior a 50 o aluno é
+aprovado por exame.</li>
+</ul>
+<hr />
+</div>
+<div id="programa-e-objetivos" class="section level2">
+<h2>Programa e objetivos</h2>
+<p>O objetivo da disciplina é capacitar os alunos em conceitos básicos
+de Estatística que permitam a interpretação crítica de resultados de
+análises e procedimentos estatísticos, bem como a execução de
+procedimentos e análises estatísticas básicas.</p>
+<p>O curso compreende quatro grandes tópicos:</p>
+<ol style="list-style-type: decimal">
+<li>Análise descritiva e exploratória de dados.</li>
+<li>Noções de probabilidades</li>
+<li>Distribuições de probabilidades.</li>
+<li>Introdução à procedimentos de inferência estatística.</li>
+</ol>
+<hr />
+</div>
+<div id="referências-bibliográficas" class="section level2">
+<h2>Referências bibliográficas</h2>
+<div id="material-de-apoio" class="section level3">
+<h3>Material de apoio</h3>
+<p>Playlist de Estatística Básica do Departamento de Estatística: <a
+href="http://www.leg.ufpr.br/~paulojus/estbas/"
+class="uri">http://www.leg.ufpr.br/~paulojus/estbas/</a>.</p>
+<ul>
+<li>Recomendamos fortemente o consumo das vídeo aulas.</li>
+</ul>
+</div>
+<div id="referências-básicas" class="section level3">
+<h3>Referências básicas</h3>
+<ul>
+<li><p>Bussab, WO; Morettin, PA. Estatística Básica. São Paulo: Editora
+Saraiva, 2017 (9ª Edição).</p></li>
+<li><p>Magalhães, MN; Lima, ACP. Noções de Probabilidade e Estatística.
+São Paulo: EDUSP, 2015 (7ª edição).</p></li>
+<li><p>Montgomery, DC; Runger, GC. Estatística aplicada e probabilidade
+para engenheiros. Rio de Janeiro: LTC Editora, 2012 (5ª
+Edição).</p></li>
+</ul>
+</div>
+<div id="referências-complementares" class="section level3">
+<h3>Referências complementares</h3>
+<ul>
+<li><p>Andrade, DF; Ogliari, PJ. Estatística para as ciências agrárias e
+biológicas, com noções de experimentação. Florianópolis: Editora da
+UFSC, 2013.</p></li>
+<li><p>Dantas, CAB. Probabilidade: um curso introdutório. São Paulo:
+EDUSP, 2008.</p></li>
+<li><p>Morettin, LG. Estatística básica: probabilidade e inferência. São
+Paulo: Pearson, 2010.</p></li>
+<li><p>Navidi, W. Probabilidade e estatística para ciências exatas.
+Porto Alegre: Bookman, 2012.</p></li>
+<li><p>Spiegel, MR; Schiller, J; Srinivasan, A. Probabilidade e
+estatística. Porto Alegre: Bookman, 2013.</p></li>
+</ul>
+<hr />
+</div>
+</div>
+</div>
+<div id="section-1" class="section level1">
+<h1></h1>
+<center>
+<table>
+<tr>
+<td>
+<img src="img/ufpr-transparent-600px.png" alt="Drawing" style="width: 200px;"/>
+</td>
+<td>
+           
+</td>
+<td>
+<img src="img/dest-texto-2.png" alt="Drawing" style="width: 250px;"/>
+</td>
+<td>
+           
+</td>
+<td>
+<img src="img/leg.png" alt="Drawing" style="width: 300px;"/>
+</td>
+</center>
+<div class="tocify-extend-page" data-unique="tocify-extend-page"
+style="height: 0;">
+
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
