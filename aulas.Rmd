@@ -120,20 +120,20 @@ output:
  - 04/05/26 (seg) - [Variáveis aleatórias discretas e contínuas.](slides/300-variaveis-aleatorias.pdf) 
  - 05/05/26 (ter) - [Atividade prática: variáveis aleatórias](praticas-aula/300-variaveis-aleatorias-enunciado.pdf). 
  - 07/05/26 (qui) - [Lista: Variáveis aleatórias](listas/202-exercicios-variaveis-aleatorias.pdf).
- - 08/05/26 (sex) - 
+ - 08/05/26 (sex) - [Prática em R.](praticas-R/vas.R) 
 
 **Semana 12**
 
  - 11/05/27 (seg) - [Famílias de distribuições](slides/ProbVAs-2.pdf). 
  - 12/05/26 (ter) - [Distribuições de probabilidade discretas](slides/301-distribuicoes-discretas.pdf). 
  - 14/05/26 (qui) - [Lista: Distribuições de probabilidade discretas](listas/203-exercicios-distribuicoes.pdf).
- - 15/05/26 (sex) - 
+ - 15/05/26 (sex) - [Prática em R.](praticas-R/vasdists.R)
     
 **Semana 13**
 
  - 18/05/26 (seg) - [Distribuições de probabilidade contínuas](slides/302-distribuicoes-continuas.pdf).
  - 19/05/26 (ter) - [Lista: Distribuições de probabilidade contínuas](listas/203-exercicios-distribuicoes.pdf).
- - 21/05/26 (qui) - [Prática em R (1).](praticas-R/vas.R) [Prática em R (2).](praticas-R/vasdists.R) [Variáveis aleatórias e distribuições de probabilidade no R.](praticas-R/300-distribuicoes.R)
+ - 21/05/26 (qui) - [Variáveis aleatórias e distribuições de probabilidade no R.](praticas-R/300-distribuicoes.R)
  - 22/05/26 (sex) - Mini-teste.
 
 **Semana 14**
