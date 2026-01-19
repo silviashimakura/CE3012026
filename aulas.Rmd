@@ -48,22 +48,22 @@ output:
 
  - 02/03/26 (seg) - [Revisão matemática.](slides/000-revisao-matematica.pdf)
  - 03/03/26 (ter) - Revisão matemática.
- - 05/03/26 (qui) - Introdução ao R ([slides](slides/000-introducao-ao-r.pdf), [script](praticas-R/000-ambientacao-ao-R.R))
- - 06/03/26 (sex) - Revisão matemática.
+ - 05/03/26 (qui) - Revisão matemática.
+ - 06/03/26 (sex) - Introdução ao R ([slides](slides/000-introducao-ao-r.pdf), [script](praticas-R/000-ambientacao-ao-R.R))
     
 **Semana 3**
 
  - 09/03/26 (seg) - [Dados e amostragem.](slides/101-dados-e-amostragem.pdf) [Atividade prática: tipos de variáveis, tipos de estudos e amostragem](praticas-aula/100-variaveis-estudos-amostragem-enunciados.pdf). [Revisão: amostragem estratificada e por conglomerados](slides/Revisão_Amostragem_estratificada_e_por_conglomerados.pdf).
  - 10/03/26 (ter) - [Gráficos e tabelas para variáveis qualitativas.](slides/102-exploratoria-quali-uni-tabelas-graficos.pdf) [Gráficos e tabelas para variáveis quantitativas.](slides/103-exploratoria-quant-uni-tabelas-graficos.pdf)
- - 12/03/26 (qui) - [Gráficos e tabelas no R.](praticas-R/100-graficos-tabelas-uni.R) 
- - 13/03/26 (sex) - [Atividade prática: gráficos e tabelas](praticas-aula/101-tabelas-graficos-quali-quant-solucao.pdf).
+ - 12/03/26 (qui) - [Atividade prática: gráficos e tabelas](praticas-aula/101-tabelas-graficos-quali-quant-solucao.pdf).
+ - 13/03/26 (sex) - [Gráficos e tabelas no R.](praticas-R/100-graficos-tabelas-uni.R) 
     
 **Semana 4**
 
  - 16/03/26 (seg) - [Resumos numéricos - medidas de posição.](slides/104-exploratoria-medidas-posicao.pdf)
  - 17/03/26 (ter) - [Resumos numéricos - medidas de dispersão.](slides/105-exploratoria-medidas-dispersao.pdf)
- - 19/03/26 (qui) - [Medidas de posição e dispersão no R.](praticas-R/101-medidas-uni.R) [Resumos numéricos](praticas-R/milsa.R).
- - 20/03/26 (sex) - [Atividade prática: medidas de posição e dispersão](praticas-aula/102-medidas-posicao-dispersao-solucao.pdf).
+ - 19/03/26 (qui) - [Atividade prática: medidas de posição e dispersão](praticas-aula/102-medidas-posicao-dispersao-solucao.pdf).
+ - 20/03/26 (sex) - [Medidas de posição e dispersão no R.](praticas-R/101-medidas-uni.R) [Resumos numéricos](praticas-R/milsa.R).
     
 **Semana 5**
 
@@ -87,15 +87,15 @@ output:
 
  - 06/04/26 (seg) - [Motivando probabilidades](slides/IntroProb.pdf). [Pré-Prob](praticas-aula/preprobSOL1a7.pdf).
  - 07/04/26 (ter) - [Introdução a probabilidade](slides/200-intro-prob.pdf). [Atividade prática: Lista 1 (item 1 ao item 3)](praticas-aula/200-probabilidade-solucao.pdf). 
- - 09/04/26 (qui) - Obtendo probabilidades da forma frequentista ([moeda](praticas-R/201-moeda.R), [dado](praticas-R/202-dado.R), [chavalier 1](praticas-R/203-chavalier1.R), [chavalier 2](praticas-R/204-chavalier2.R)). 
- - 10/04/26 (sex) - [Operações com probabilidades](slides/201-operacoes-com-probabilidades.pdf).
+ - 09/04/26 (qui) - [Operações com probabilidades](slides/201-operacoes-com-probabilidades.pdf).
+ - 10/04/26 (sex) - Obtendo probabilidades da forma frequentista ([moeda](praticas-R/201-moeda.R), [dado](praticas-R/202-dado.R), [chavalier 1](praticas-R/203-chavalier1.R), [chavalier 2](praticas-R/204-chavalier2.R)). 
    
 **Semana 8**
 
  - 13/04/26 (seg) - [Atividade prática: Lista 1 (item 4 ao item 7)](praticas-aula/200-probabilidade-solucao.pdf), [Lista 2 (item 1 ao item 5).](praticas-aula/pj-pospro.pdf)
  - 14/04/26 (ter) - [Teorema de Bayes](slides/202-teorema-de-bayes.pdf).
- - 16/04/26 (qui) - Calculando probabilidade com base em tabelas de dupla entrada ([animais](praticas-R/205-prob-animais.R)).
- - 17/04/26 (sex) - [Atividade prática: Lista 1 (item 8)](praticas-aula/200-probabilidade-solucao.pdf).
+ - 16/04/26 (qui) - [Atividade prática: Lista 1 (item 8)](praticas-aula/200-probabilidade-solucao.pdf).
+ - 17/04/26 (sex) - Calculando probabilidade com base em tabelas de dupla entrada ([animais](praticas-R/205-prob-animais.R)).
 
 **Semana 9**
 
@@ -119,15 +119,15 @@ output:
 
  - 04/05/26 (seg) - [Variáveis aleatórias discretas e contínuas.](slides/300-variaveis-aleatorias.pdf) 
  - 05/05/26 (ter) - [Atividade prática: variáveis aleatórias](praticas-aula/300-variaveis-aleatorias-enunciado.pdf). 
- - 07/05/26 (qui) - 
- - 08/05/26 (sex) - [Lista: Variáveis aleatórias](listas/202-exercicios-variaveis-aleatorias.pdf).
+ - 07/05/26 (qui) - [Lista: Variáveis aleatórias](listas/202-exercicios-variaveis-aleatorias.pdf).
+ - 08/05/26 (sex) - 
 
 **Semana 12**
 
  - 11/05/27 (seg) - [Famílias de distribuições](slides/ProbVAs-2.pdf). 
  - 12/05/26 (ter) - [Distribuições de probabilidade discretas](slides/301-distribuicoes-discretas.pdf). 
- - 14/05/26 (qui) -
- - 15/05/26 (sex) - [Lista: Distribuições de probabilidade discretas](listas/203-exercicios-distribuicoes.pdf).
+ - 14/05/26 (qui) - [Lista: Distribuições de probabilidade discretas](listas/203-exercicios-distribuicoes.pdf).
+ - 15/05/26 (sex) - 
     
 **Semana 13**
 
@@ -158,8 +158,8 @@ output:
 
  - 08/06/26 (seg) - [Tamanho amostral.](slides/402-tamanho-amostral.pdf)  [Exercícios.](praticas-aula/402-tamanho-amostral-enunciado.pdf) 
  - 09/06/26 (ter) - [Introdução aos testes de hipóteses, testes para uma população](slides/403-testes-de-hipoteses.pdf). 
- - 11/06/26 (qui) - [Prática em R](praticas-R/401-exercicios-ic-tamanho-amostral.R).
- - 12/06/26 (sex) - [Exercícios: testes de hipóteses.](praticas-aula/403-teste-de-hipoteses-enunciado.pdf)
+ - 11/06/26 (qui) - [Exercícios: testes de hipóteses.](praticas-aula/403-teste-de-hipoteses-enunciado.pdf)
+ - 12/06/26 (sex) - [Prática em R](praticas-R/401-exercicios-ic-tamanho-amostral.R).
     
 **Semana 16**
 
