@@ -40,7 +40,7 @@ output:
 ## Bloco 1: Análise Exploratória
 
 <div style="text-align: center;">
-  <p><strong>Ouça o episódio 1 do podcast:</strong></p>
+  <p><strong>Episódio 1: Por que a média esconde a verdade.</strong></p>
   <audio controls>
     <source src="notebookLM/podcasts/100-Por_que_a_média_esconde_a_verdade.m4a" type="audio/mp4">
   </audio>
@@ -52,7 +52,7 @@ output:
 ## Bloco 2: Probabilidades
 
 <div style="text-align: center;">
-  <p><strong>Ouça o episódio 2 do podcast:</strong></p>
+  <p><strong>Episódio 2: A matemática do prejuízo no jogo de dados.</strong></p>
   <audio controls>
     <source src="notebookLM/podcasts/200-A_matemática_do_prejuízo_no_jogo_de_dados.m4a" type="audio/mp4">
   </audio>
@@ -63,7 +63,7 @@ output:
 ## Bloco 3: Variáveis Aleatórias e Distribuições de Probabilidade
 
 <div style="text-align: center;">
-  <p><strong>Ouça o episódio 3 do podcast:</strong></p>
+  <p><strong>Episódio 3: Medindo a incerteza com esperança e variância.</strong></p>
   <audio controls>
     <source src="notebookLM/podcasts/300-301-302-Medindo_a_incerteza_com_esperança_e_variância.m4a" type="audio/mp4">
   </audio>
@@ -74,7 +74,7 @@ output:
 ## Bloco 4: Inferência
 
 <div style="text-align: center;">
-  <p><strong>Ouça o episódio 4 do podcast:</strong></p>
+  <p><strong>Episódio 4: Inferência e o Teorema Central do Limite.</strong></p>
   <audio controls>
   <source src="notebookLM/podcasts/400-Inferência_e_o_Teorema_Central_do_Limite.m4a" type="audio/mp4">
   </audio>
@@ -82,7 +82,7 @@ output:
 
 
 <div style="text-align: center;">
-  <p><strong>Ouça o episódio 5 do podcast:</strong></p>
+  <p><strong>Episódio 5: Da Estimativa Pontual ao Intervalo de Confiança.</strong></p>
   <audio controls>
   <source src="notebookLM/podcasts/401-Da_Estimativa_Pontual_ao_Intervalo_de_Confiança.m4a" type="audio/mp4">
 </audio>
@@ -90,7 +90,7 @@ output:
 
 
 <div style="text-align: center;">
-  <p><strong>Ouça o episódio 6 do podcast:</strong></p>
+  <p><strong>Episódio 6: Quantas pessoas entrevistar para ter dados confiáveis.</strong></p>
   <audio controls>
   <source src="notebookLM/podcasts/402-Quantas_pessoas_entrevistar_para_ter_dados_confiáveis.m4a" type="audio/mp4">
   </audio>
@@ -98,7 +98,7 @@ output:
 
 
 <div style="text-align: center;">
-  <p><strong>Ouça o episódio 7 do podcast:</strong></p>
+  <p><strong>Episódio 7: O veredito dos dados no teste de hipóteses.</strong></p>
   <audio controls>
   <source src="notebookLM/podcasts/403-O_veredito_dos_dados_no_teste_de_hipóteses.m4a" type="audio/mp4">
   </audio>
