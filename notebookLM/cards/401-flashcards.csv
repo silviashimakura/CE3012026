@@ -1,0 +1,47 @@
+"Em inferência estatística, o que é um 'parâmetro'?","É uma medida numérica que descreve uma característica de interesse em toda a população (ex: média $\mu$, proporção $p$)."
+Qual a diferença entre um 'parâmetro' e uma 'estatística' (ou estimativa)?,"O parâmetro descreve a população e é um valor fixo e desconhecido, enquanto a estatística descreve a amostra e é um valor calculado e variável."
+O que é uma 'distribuição amostral'?,É a distribuição de probabilidades de uma estatística (como a média amostral) calculada a partir de todas as amostras possíveis de mesmo tamanho de uma população.
+Qual é a principal limitação de uma 'estimativa pontual'?,"Ela fornece apenas um único valor para o parâmetro, sem levar em conta a incerteza associada ao processo de amostragem."
+Como uma 'estimativa intervalar' (intervalo de confiança) supera a limitação da estimativa pontual?,"Ela fornece uma faixa de valores plausíveis para o parâmetro, incorporando a incerteza da amostragem com um certo nível de confiança."
+Quais são as três características desejáveis de um bom estimador?,"Ser não viciado (ou não viesado), consistente e eficiente."
+O que significa um estimador ser 'não viciado' (não viesado)?,Significa que o valor esperado do estimador é exatamente igual ao verdadeiro valor do parâmetro que ele se propõe a estimar.
+Qual é a condição matemática para um estimador $\hat{\theta}$ ser não viciado para o parâmetro $\theta$?,A condição é que $E(\hat{\theta}) = \theta$.
+A propriedade de um estimador ser não viciado depende do tamanho da amostra?,"Não, essa propriedade deve ser válida independentemente do tamanho amostral."
+O que significa um estimador ser 'consistente'?,"Significa que, à medida que o tamanho da amostra aumenta, a estimativa converge para o verdadeiro valor do parâmetro."
+Quais são as duas condições matemáticas para um estimador $\hat{\theta}$ ser consistente?,1. $\lim_{n\to\infty} E(\hat{\theta}) = \theta$ e 2. $\lim_{n\to\infty} Var(\hat{\theta}) = 0$.
+"A propriedade de _____ está diretamente ligada ao aumento do tamanho amostral, diferentemente do conceito de vício.",consistência
+O que significa dizer que um estimador $\hat{\theta}_1$ é mais 'eficiente' que outro estimador $\hat{\theta}_2$?,"Significa que, sendo ambos não viciados, $\hat{\theta}_1$ tem uma variância menor que $\hat{\theta}_2$ ($Var(\hat{\theta}_1) < Var(\hat{\theta}_2)$)."
+"O estimador da média populacional, $\hat{\mu} = \bar{Y}$, é viciado ou não viciado?",É não viciado e também consistente.
+"O estimador da proporção populacional, $\hat{p}$, é viciado ou não viciado?",É não viciado e também consistente.
+Qual a diferença fundamental entre os estimadores de variância $S^2 = \frac{1}{n-1}\sum(Y_i - \bar{Y})^2$ e $\hat{\sigma}^2 = \frac{1}{n}\sum(Y_i - \bar{Y})^2$?,"$S^2$ (com denominador $n-1$) é um estimador não viciado, enquanto $\hat{\sigma}^2$ (com denominador $n$) é um estimador viciado."
+"Se a variância populacional $\sigma^2$ é conhecida, qual é a distribuição amostral da média amostral $\hat{\mu}$?","A distribuição é Normal: $\hat{\mu} \sim N(\mu, \frac{\sigma^2}{n})$."
+"Se a variância populacional $\sigma^2$ é desconhecida, qual é a distribuição da estatística $\frac{(\hat{\mu} - \mu)}{(S/\sqrt{n})}$?",Segue uma distribuição t-Student com $n-1$ graus de liberdade ($t_{n-1}$).
+Qual é a distribuição amostral aproximada do estimador de proporção $\hat{p}$?,"É aproximadamente Normal: $\hat{p} \sim N(p, \frac{p(1-p)}{n})$."
+Qual é a distribuição amostral da estatística $\frac{(n-1)S^2}{\sigma^2}$?,Segue uma distribuição Qui-quadrado com $n-1$ graus de liberdade ($\chi^2_{n-1}$).
+O que representa o 'nível de confiança' ($1-\alpha$) de um intervalo de confiança?,"Representa a probabilidade de que o intervalo de confiança, construído a partir de uma amostra aleatória, contenha o verdadeiro valor do parâmetro populacional."
+Interpretação CORRETA de um IC de 95%: Temos 95% de confiança de que o _____ contém o _____.,"intervalo, parâmetro"
+Interpretação ERRADA de um IC de 95%: Temos 95% de confiança de que o _____ está no _____.,"parâmetro, intervalo"
+Explique a interpretação frequentista de um intervalo de confiança de 95%.,"Se coletássemos 100 amostras diferentes e calculássemos um intervalo de 95% para cada uma, esperaríamos que cerca de 95 desses intervalos contivessem o verdadeiro valor do parâmetro."
+O que acontece com a amplitude de um intervalo de confiança se aumentarmos o nível de confiança (ex: de 95% para 99%)?,"A amplitude do intervalo aumenta, tornando-o mais largo e menos preciso."
+Por que não usamos um nível de confiança de 100%?,"Porque um intervalo com 100% de confiança seria infinitamente largo (ex: de $-\infty$ a $+\infty$), o que não forneceria nenhuma informação útil."
+Quais são as condições para se construir um intervalo de confiança para a média ($\\mu$) com variância populacional ($\\sigma^2$) conhecida?,"A amostra deve ser aleatória, $\sigma$ deve ser conhecido, e a população deve ser Normal ou o tamanho da amostra ser grande ($n > 30$)."
+Qual é a fórmula geral para um intervalo de confiança para a média ($\\mu$) com $\\sigma^2$ conhecida?,$IC(1-\alpha)(\mu) = \bar{y} \pm z_{\alpha/2} \frac{\sigma}{\sqrt{n}}$
+Quais são as condições para se construir um intervalo de confiança para a média ($\\mu$) com variância populacional ($\\sigma^2$) desconhecida?,"A amostra deve ser aleatória, $\sigma$ é desconhecido, e a população deve ser Normal ou o tamanho da amostra ser grande ($n > 30$)."
+Qual é a fórmula geral para um intervalo de confiança para a média ($\\mu$) com $\\sigma^2$ desconhecida?,"$IC(1-\alpha)(\mu) = \bar{y} \pm t_{\alpha/2, n-1} \frac{s}{\sqrt{n}}$"
+"Na fórmula do IC para a média com variância desconhecida, o que representa $t_{\alpha/2, n-1}$?",É o valor crítico da distribuição t-Student com $n-1$ graus de liberdade que deixa uma área de $\alpha/2$ na cauda superior.
+Quais são as condições para construir um intervalo de confiança para a proporção ($p$)?,"A amostra é aleatória, a variável é binária, as tentativas são independentes e $np \ge 5$ e $np(1-p) \ge 5$ (aproximação Normal)."
+"Qual é o problema na fórmula teórica do IC para proporção, $IC(p) = \hat{p} \pm z_{\alpha/2} \sqrt{\frac{p(1-p)}{n}}$?","O cálculo da margem de erro depende do próprio valor do parâmetro $p$, que é desconhecido."
+Como a abordagem 'otimista' resolve o problema da fórmula do IC para proporção?,"Ela substitui o $p$ desconhecido dentro da raiz quadrada pela sua estimativa pontual, $\hat{p}$."
+Como a abordagem 'conservativa' resolve o problema da fórmula do IC para proporção?,"Ela substitui o termo $p(1-p)$ pelo valor que maximiza a variância, que ocorre quando $p=0.5$."
+A abordagem _____ para o IC de proporção sempre resultará no intervalo de maior amplitude possível.,conservativa
+Qual é a fórmula para o intervalo de confiança para a variância populacional ($\\sigma^2$)?,"$IC(1-\alpha)(\sigma^2) = \left( \frac{(n-1)S^2}{\chi^2_{\alpha/2, n-1}} , \frac{(n-1)S^2}{\chi^2_{1-\alpha/2, n-1}} \right)$"
+Por que o intervalo de confiança para a variância não é simétrico em torno da estimativa pontual $S^2$?,"Porque a sua distribuição amostral, a Qui-quadrado ($\chi^2$), não é uma distribuição simétrica."
+"Problema: Estimar o peso médio de recém-nascidos. Amostra de 156 bebês, média amostral de 3249g. Desvio padrão populacional conhecido de 973g. Que tipo de IC deve ser construído?","Um intervalo de confiança para a média com variância populacional conhecida, utilizando a distribuição Normal (Z)."
+"No problema do peso dos recém-nascidos ($\bar{y}=3249$, $\sigma=973$, $n=156$), o IC de 90% foi [3121.24; 3376.76]. Interprete este resultado.",Temos 90% de confiança de que o intervalo entre 3121.24g e 3376.76g contém o verdadeiro peso médio de todos os recém-nascidos.
+"Problema: Estimar a pulsação média em repouso. Amostra de 121 pessoas, média de 72.9 bpm, desvio padrão amostral de 11.0 bpm. Que tipo de IC deve ser construído?","Um intervalo de confiança para a média com variância populacional desconhecida, utilizando a distribuição t-Student."
+"No problema da pulsação em repouso ($\bar{y}=72.9$, $s=11.0$, $n=121$), o IC de 95% foi [70.92; 74.88]. Interprete este resultado.",Temos 95% de confiança de que o intervalo entre 70.92 bpm e 74.88 bpm contém a verdadeira pulsação média em repouso de pessoas sadias.
+"Problema: Estimar a proporção de cura de um medicamento. Amostra de 200 pacientes, 163 foram curados. Qual é a estimativa pontual da proporção de cura ($\\hat{p}$)?",A estimativa pontual é $\hat{p} = \frac{163}{200} = 0.815$ ou 81.5%.
+"Para o problema da proporção de cura ($\hat{p}=0.815, n=200$), ao construir um IC 'otimista', qual valor de $p$ usamos sob a raiz quadrada?","Usamos o valor da estimativa pontual, $\hat{p} = 0.815$."
+"Para o problema da proporção de cura ($\hat{p}=0.815, n=200$), ao construir um IC 'conservativo', qual valor de $p$ usamos sob a raiz quadrada?","Usamos o valor que maximiza a variância, $p = 0.5$."
+"Problema: Avaliar a variabilidade do peso de um componente. Amostra de 41 itens, variância amostral de 8. A população segue distribuição Normal. Que tipo de IC deve ser construído?","Um intervalo de confiança para a variância, utilizando a distribuição Qui-quadrado ($\chi^2$)."
+"No IC para variância, o que representam $\chi^2_{\alpha/2, n-1}$ e $\chi^2_{1-\alpha/2, n-1}$?","São os quantis da distribuição Qui-quadrado com $n-1$ graus de liberdade que delimitam as caudas direita e esquerda da distribuição, respectivamente."
