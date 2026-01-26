@@ -106,15 +106,9 @@ output:
 
 **Avaliações**
 
-As atividades avaliativas serão em dois formatos:
+As atividades avaliativas serão em formato de:
 
-1. **Provas remotas via UFPR Virtual**:
-    - Questões sobre o conteúdo de determinado período.
-    - Os alunos serão notificados quanto à disponibilidade, período de abertura e fechamento das atividades.
-    - Não há segunda chamada de provas remotas.
-    - Ao perder uma prova remota, a nota é automaticamente 0.
-    
-2. **Provas presenciais**:
+- **Provas presenciais**:
     - Avaliações presenciais referente à partes do conteúdo.
     - Os alunos serão notificados quanto às datas e materiais permitidos durante a avaliação.
     - Caso o aluno não possa comparecer no dia da prova e possua justificativa, deve solicitar segunda chamada em até 5 dias úteis após a data da prova regular.
@@ -123,8 +117,7 @@ As atividades avaliativas serão em dois formatos:
 
 **Pesos das atividades avaliativas**
 
- - Estão planejadas 4 atividades remotas e 4 provas presenciais.
- - A nota final será calculada por: Nota final = Média provas presenciais $\times 0,9$+ Média provas remotas $\times 0,1$.
+ - A nota final será calculada pela média aritmética simples das quatro provas presenciais.
 
 ---
 
