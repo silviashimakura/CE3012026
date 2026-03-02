@@ -85,7 +85,7 @@ output:
   - Prédio do setor de ciências exatas (PA).
   - Departamento de Estatística (2º andar).
   - Silvia: sala 203.
-  - Amanda: sala 222.
+  - Amanda: sala 212.
   - Paulo: sala LEG.
 
 **Monitoria**:
