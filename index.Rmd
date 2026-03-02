@@ -45,10 +45,10 @@ output:
 
 **Locais e horários**:
 
-  - Segunda, 20:45 - 22:15, PA-08.
-  - Terça, 19:00 - 20:30, PA-08.
-  - Quinta, 20:45 - 22:15, PA-08 ou Lab 1-2 Dinf.
-  - Sexta, 19:00 - 20:30, PA-08.
+  - Segunda, 20:45 - 22:15, PA-09.
+  - Terça, 19:00 - 20:30, PA-09.
+  - Quinta, 20:45 - 22:15, PA-09 ou Lab 1-2 Dinf.
+  - Sexta, 19:00 - 20:30, PA-09.
 
 **Horários de atendimento**: a combinar.
 
@@ -85,7 +85,7 @@ output:
   - Prédio do setor de ciências exatas (PA).
   - Departamento de Estatística (2º andar).
   - Silvia: sala 203.
-  - Amanda: sala 223.
+  - Amanda: sala 222.
   - Paulo: sala LEG.
 
 **Monitoria**:
