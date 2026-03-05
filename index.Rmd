@@ -90,13 +90,13 @@ output:
 
 **Monitoria**:
 
- - Monitor: A definir
- - Dias e horários de atendimento: A definir
+ - Monitores: João Victor Pietchaki Gonçalves / Italo Lopes Simas
+ - Dias e horários de atendimento: segundas e quartas das 16h30 até as 19h.
  - Local: 
-    - Centro politécnico.
-    - Prédio do setor de ciências exatas (PA).
-    - Departamento de Estatística (2º andar).
     - Sala de monitoria (217).
+    - Prédio do setor de Ciências Exatas (PA).
+    - Departamento de Estatística (2º andar).
+    - Centro politécnico.
 
 ---
 
