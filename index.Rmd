@@ -94,8 +94,8 @@ output:
      - João Victor Pietchaki Gonçalves
      - Italo Lopes Simas
  - Dias e horários de atendimento: 
-     - segunda e quarta das 16h30 às 19h.
-     - terça, quinta e sexta das 17h às 18h30.
+     - segunda e quarta das 16h30 às 19h; sexta 18h às 19h. (João)
+     - terça, quinta e sexta das 16h às 18h. (Italo)
  - Local: 
     - Sala de monitoria (217).
     - Prédio do setor de Ciências Exatas (PA).
