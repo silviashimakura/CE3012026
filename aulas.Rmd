@@ -60,7 +60,7 @@ output:
     
 **Semana 4**
 
- - 16/03/26 (seg) - [Resumos numéricos - medidas de posição.](slides/104-exploratoria-medidas-posicao.pdf)
+ - 16/03/26 (seg) - [Resumos numéricos - medidas de posição.](slides/104-exploratoria-medidas-posicao.pdf) [Exemplos no R.](praticas-aula/exploratoria.R)
  - 17/03/26 (ter) - [Resumos numéricos - medidas de dispersão.](slides/105-exploratoria-medidas-dispersao.pdf)
  - 19/03/26 (qui) - [Medidas de posição e dispersão no R.](praticas-R/101-medidas-uni.R) [Resumos numéricos](praticas-R/milsa.R).
  - 20/03/26 (sex) - [Atividade prática: medidas de posição e dispersão](praticas-aula/102-medidas-posicao-dispersao-solucao.pdf).
