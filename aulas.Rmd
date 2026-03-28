@@ -70,7 +70,7 @@ output:
  - 23/03/26 (seg) - [Análises bivariadas.](slides/106-exploratoria-bivariada.pdf) [Atividade prática: análises bivariadas](praticas-aula/103-analises-bivariadas-solucao.pdf).
  - 24/03/26 (ter) - Análises bivariadas.
  - 26/03/26 (qui) - [Análises bivariadas no R.](praticas-R/102-analises-bivariadas.R)
- - 27/03/26 (sex) - Mini-teste.
+ - 27/03/26 (sex) - [Mini-teste.](provas/Mini_teste_1_solucoes.pdf)
 
 **Semana 6**
 
