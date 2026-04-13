@@ -92,7 +92,7 @@ output:
    
 **Semana 8**
 
- - 13/04/26 (seg) - [Atividade prática: Lista 1 (item 4 ao item 7)](praticas-aula/200-probabilidade-solucao.pdf), [Lista 2 (item 1 ao item 5).](praticas-aula/pj-pospro.pdf)
+ - 13/04/26 (seg) - [Atividade prática: Lista 1 (item 4 ao item 7)](praticas-aula/200-probabilidade-solucao.pdf), [Lista 2 (item 1 ao item 5).](praticas-aula/posprob.pdf)
  - 14/04/26 (ter) - [Teorema de Bayes](slides/202-teorema-de-bayes.pdf).
  - 16/04/26 (qui) - Calculando probabilidade com base em tabelas de dupla entrada ([animais](praticas-R/205-prob-animais.R)).
  - 17/04/26 (sex) - [Atividade prática: Lista 1 (item 8)](praticas-aula/200-probabilidade-solucao.pdf).
