@@ -85,7 +85,7 @@ output:
 
 **Semana 7**
 
- - 06/04/26 (seg) - [Motivando probabilidades](slides/IntroProb.pdf). [Pré-Prob](praticas-aula/preprob.pdf).
+ - 06/04/26 (seg) - [Motivando probabilidades](slides/IntroProb.pdf). [Pré-Prob](praticas-aula/preprobSOL1a7.pdf).
  - 07/04/26 (ter) - [Introdução a probabilidade](slides/200-intro-prob.pdf). [Atividade prática: Lista 1 (item 1 ao item 3)](praticas-aula/200-probabilidade-solucao.pdf). 
  - 09/04/26 (qui) - Obtendo probabilidades da forma frequentista ([moeda](praticas-R/201-moeda.R), [dado](praticas-R/202-dado.R), [chavalier 1](praticas-R/203-chavalier1.R), [chavalier 2](praticas-R/204-chavalier2.R)). 
  - 10/04/26 (sex) - [Operações com probabilidades](slides/201-operacoes-com-probabilidades.pdf).
