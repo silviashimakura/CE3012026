@@ -117,7 +117,7 @@ output:
 
 **Semana 11**
 
- - 04/05/26 (seg) - [Variáveis aleatórias: introdução.](slides/ProbVAs01.pdf) 
+ - 04/05/26 (seg) - [Variáveis aleatórias: introdução.](slides/ProbVAs01-1.pdf) 
  - 05/05/26 (ter) - [Variáveis aleatórias discretas e contínuas.](slides/300-variaveis-aleatorias.pdf) [Atividade prática: variáveis aleatórias](praticas-aula/300-variaveis-aleatorias-enunciado.pdf). 
  - 07/05/26 (qui) - [Prática em R.](praticas-R/vas.R)
  - 08/05/26 (sex) - [Lista: Variáveis aleatórias](listas/202-exercicios-variaveis-aleatorias.pdf). 
