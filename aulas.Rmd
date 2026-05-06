@@ -124,7 +124,7 @@ output:
 
 **Semana 12**
 
- - 11/05/27 (seg) - [Famílias de distribuições](slides/ProbVAs-2.pdf). 
+ - 11/05/27 (seg) - [Famílias de distribuições](slides/ProbVAs02.pdf). 
  - 12/05/26 (ter) - [Distribuições de probabilidade discretas](slides/301-distribuicoes-discretas.pdf). 
  - 14/05/26 (qui) - [Prática em R.](praticas-R/vasdists.R)
  - 15/05/26 (sex) - [Lista: Distribuições de probabilidade discretas](listas/203-exercicios-distribuicoes.pdf).
