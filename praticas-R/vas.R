@@ -2,7 +2,7 @@
 ## Exemplo 1
 ##
 ## fonte:
-## https://silviashimakura.github.io/CE3012025/listas/202-exercicios-variaveis-aleatorias.pdf
+## https://silviashimakura.github.io/CE3012026/listas/202-exercicios-variaveis-aleatorias.pdf
 ## Exercício 5
 
 tempo <- 3:9
@@ -93,7 +93,7 @@ rm(tempo, Ptempo, Ftempo, Etempo, Vtempo, pontos, Ppontos, Epontos, Vpontos)
 ## Exemplo 2
 ##
 ## fonte:
-## https://silviashimakura.github.io/CE3012025/listas/202-exercicios-variaveis-aleatorias.pdf
+## https://silviashimakura.github.io/CE3012026/listas/202-exercicios-variaveis-aleatorias.pdf
 ## Exercício 13
 fy <- function(y){
     res <- numeric(length(y))

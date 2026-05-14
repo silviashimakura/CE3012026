@@ -2,8 +2,8 @@
 ## Exemplo 1
 ##
 ## fonte:
-## https://silviashimakura.github.io/CE3012025/listas/203-exercicios-distribuicoes.pdf
-
+## https://silviashimakura.github.io/CE3012026/listas/203-exercicios-distribuicoes.pdf
+## Exercício 4
 
 ## Y ~ Bin(n = 15, p = 0.80)
 
@@ -125,7 +125,8 @@ rm(ys, Pys, Fys, EY, VY, ysim, Psim, ysimf, Psimf)
 ## Exemplo 2
 ##
 ## fonte:
-## https://silviashimakura.github.io/CE3012025/listas/203-exercicios-distribuicoes.pdf
+## https://silviashimakura.github.io/CE3012026/listas/203-exercicios-distribuicoes.pdf
+## Exercício 19
 
 ## Y ~ Exp(1)
 args(dexp)
