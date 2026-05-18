@@ -69,7 +69,7 @@ navbar:
 
         - text: "Tabela z (completa)"
           icon: fa-arrow-right
-          href: tabelas/tabela-z2.pdf
+          href: tabelas/Tabela_da_Distribuicao_Normal.pdf
         
         - text: "Tabela t"
           icon: fa-arrow-right
