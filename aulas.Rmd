@@ -149,21 +149,21 @@ output:
 
 **Semana 15**
 
- - 01/06/26 (seg) - [Introdução à inferência.](slides/400-intro-inferencia.pdf) [Exercícios.](praticas-aula/400-intro-inferencia-dist-amostral-enunciado.pdf)
- - 02/06/26 (ter) - [Estimação pontual e intervalar](slides/401-estimacao-pontual-intervalar.pdf) [Exercícios](praticas-aula/401-intervalo-de-confianca-enunciado.pdf).
+ - 01/06/26 (seg) - [Introdução à inferência.](slides/400-intro-inferencia.pdf) 
+ - 02/06/26 (ter) - [Exercícios.](praticas-aula/400-intro-inferencia-dist-amostral-enunciado.pdf)
  - 04/06/26 (qui) - **Feriado: Corpus Christ**
  - 05/06/26 (sex) - Recesso.
 
 **Semana 16**
 
- - 08/06/26 (seg) - [Tamanho amostral.](slides/402-tamanho-amostral.pdf)  [Exercícios.](praticas-aula/402-tamanho-amostral-enunciado.pdf) 
- - 09/06/26 (ter) - [Introdução aos testes de hipóteses, testes para uma população](slides/403-testes-de-hipoteses.pdf). 
+ - 08/06/26 (seg) - [Estimação pontual e intervalar.](slides/401-estimacao-pontual-intervalar.pdf) [Exercícios](praticas-aula/401-intervalo-de-confianca-enunciado.pdf).   
+ - 09/06/26 (ter) - [Tamanho amostral.](slides/402-tamanho-amostral.pdf) [Exercícios.](praticas-aula/402-tamanho-amostral-enunciado.pdf)
  - 11/06/26 (qui) - [Prática em R](praticas-R/401-exercicios-ic-tamanho-amostral.R).
- - 12/06/26 (sex) - [Exercícios: testes de hipóteses.](praticas-aula/403-teste-de-hipoteses-enunciado.pdf)
+ - 12/06/26 (sex) - [Exercícios.](praticas-aula/402-tamanho-amostral-enunciado.pdf)
     
 **Semana 16**
 
- - 15/06/26 (seg) - [Exercícios: revisão inferência.](praticas-aula/exercicios-revisao-inferencia.pdf)
+ - 15/06/26 (seg) - [Introdução aos testes de hipóteses, testes para uma população](slides/403-testes-de-hipoteses.pdf). [Exercícios: testes de hipóteses.](praticas-aula/403-teste-de-hipoteses-enunciado.pdf) 
  - 16/06/26 (ter) - [Exercícios: revisão inferência.](praticas-aula/exercicios-revisao-inferencia.pdf)
  - 18/06/26 (qui) - [Prática em R](praticas-R/402-ic-th.R). 
  - 19/06/26 (sex) - Mini-teste.
