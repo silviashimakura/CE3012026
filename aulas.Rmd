@@ -163,7 +163,7 @@ output:
     
 **Semana 16**
 
- - 15/06/26 (seg) - [Introdução aos testes de hipóteses, testes para uma população](slides/403-testes-de-hipoteses.pdf). [Exercícios: testes de hipóteses.](praticas-aula/403-teste-de-hipoteses-enunciado.pdf) 
+ - 15/06/26 (seg) - [Introdução aos testes de hipóteses, testes para uma população](slides/403-testes-de-hipoteses-novo.pdf). [Exercícios: testes de hipóteses.](praticas-aula/403-teste-de-hipoteses-enunciado.pdf) 
  - 16/06/26 (ter) - [Exercícios: revisão inferência.](praticas-aula/exercicios-revisao-inferencia.pdf)
  - 18/06/26 (qui) - [Prática em R](praticas-R/402-ic-th.R). 
  - 19/06/26 (sex) - Mini-teste.
