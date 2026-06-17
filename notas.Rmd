@@ -146,7 +146,7 @@ notas$`SITUAÇÃO FINAL` <-
 #               editable = F
 #               )
 
-knitr::kable(notas[,c(2,3,4,46)])
+knitr::kable(notas[,c(2,3,4,5,46)])
 
 ```
 
