@@ -76,7 +76,7 @@ output:
 
  - 30/03/26 (seg) - Tira dúvidas.
  - 31/03/26 (ter) - Tira dúvidas.
- - 02/04/26 (qui) - **PROVA 1**
+ - 02/04/26 (qui) - [**PROVA 1**](provas2026/prova1.pdf)
  - 03/04/26 (sex) - **Feriado: Paixão**
     
 ---
@@ -108,7 +108,7 @@ output:
 
  - 27/04/26 (seg) - Tira dúvidas.
  - 28/04/26 (ter) - Tira dúvidas.
- - 30/04/26 (qui) - **PROVA 2.**
+ - 30/04/26 (qui) - [**PROVA 2**](provas2026/prova2.pdf)
  - 01/05/26 (sex) - **Feriado: Dia do Trabalho.**
 
 ---
@@ -140,7 +140,7 @@ output:
 
  - 25/05/26 (seg) - Tira dúvidas.
  - 26/05/26 (ter) - Tira dúvidas. 
- - 28/05/26 (qui) - **PROVA 3.**
+ - 28/05/26 (qui) - [**PROVA 3**](provas2026/prova3.pdf)
  - 29/05/26 (sex) - **Evento comemorativo: Dia do Estatístico**.
 
 ---
@@ -172,7 +172,7 @@ output:
 
  - 22/06/26 (seg) - Tira dúvidas.
  - 23/06/26 (ter) - Tira dúvidas.
- - 25/06/26 (qui) - **PROVA 4.**
+ - 25/06/26 (qui) - [**PROVA 4**](provas2026/prova4.pdf)
     
 **Exame**
 
