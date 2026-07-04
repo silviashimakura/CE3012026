@@ -147,7 +147,8 @@ notas$`SITUAÇÃO FINAL` <-
 #               )
 
 #knitr::kable(notas[,c(2,3,4,5,6,7,80)])
-knitr::kable(notas[,c(2,3,4,5,6,7,80,81)])
+#knitr::kable(notas[,c(2,3,4,5,6,7,80,81,82,83)])
+knitr::kable(notas[,c(2,7,80,81,8,82,83)])
 
 ```
 
