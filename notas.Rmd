@@ -61,7 +61,7 @@ dispersao <- function(vetor){
 
 #----------------------------------------------------------------------
 
-notas <- readxl::read_xls('notas-chamada.xls')
+notas <- readxl::read_xlsx('notas-chamada.xlsx')
 
 notas$`PROVA 1` <- round(as.numeric(notas$`PROVA 1`),1)
 notas$`PROVA 2` <- round(as.numeric(notas$`PROVA 2`),1)
